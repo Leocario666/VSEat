@@ -6,7 +6,8 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Console.WriteLine("Remplir sa db avec nos propre restaurant / villes ? OUI =D" +
+                "on doit avoir la possibiliter d'ajouter de nouvelles villes / nouveaux resto ? NON");
         }
     }
 }
