@@ -4,9 +4,9 @@ using System.Text;
 
 namespace DTO
 {
-    class Cities
+    class cities
     {
-        public int code { get;  }
+        public int code { get; }
         public String name { get; }
 
         public override string ToString()
