@@ -11,5 +11,10 @@ namespace DTO
         public int quantity { get; }
         public int delivery_staff_id { get; }
         public float price { get; }
+
+        public override string ToString()
+        {
+            return $"{order_id}|{dishes_id}|{quantity}|{delivery_staff_id}|{price}";
+        }
     }
 }

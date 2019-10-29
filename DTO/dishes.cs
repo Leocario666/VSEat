@@ -6,7 +6,7 @@ namespace DTO
 {
     class dishes
     {
-        public int code { get; }
+        public int id { get; }
         public String name { get; }
         public float price { get; }
         public String status { get; }
@@ -15,7 +15,7 @@ namespace DTO
 
         public override string ToString()
         {
-            return $"{code}|{name}|{price}|{status}|{created_at}|{restaurant_id}";
+            return $"{id}|{name}|{price}|{status}|{created_at}|{restaurant_id}";
         }
     }
 }
