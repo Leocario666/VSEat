@@ -4,7 +4,7 @@ using System.Text;
 
 namespace DTO
 {
-    class customers
+    class Customers
     {
 
         protected int id { get; }

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace DTO
 {
-    class dishes
+    class Dishes
     {
         public int id { get; }
         public String name { get; }

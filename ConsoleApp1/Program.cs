@@ -1,13 +1,23 @@
-﻿using System;
+﻿using Microsoft.Extensions.Configuration;
+using System;
+using System.IO;
+using DTO;
+
 
 namespace ConsoleApp1
 {
     class Program
     {
+        public static IConfiguration Configuration { get; } = new ConfigurationBuilder()
+        .SetBasePath(Directory.GetCurrentDirectory())
+        .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+        .Build();
+
         static void Main(string[] args)
         {
-            Console.WriteLine("Remplir sa db avec nos propre restaurant / villes ? OUI =D" +
-                "on doit avoir la possibiliter d'ajouter de nouvelles villes / nouveaux resto ? NON");
+
         }
-    }
+
 }
+}
+
