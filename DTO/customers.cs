@@ -7,16 +7,15 @@ namespace DTO
     public class Customers
     {
 
-        protected int id { get; }
+        public int id { get; set; }
         public string first_name { get; set; }
         public string last_name { get; set; }
-        public DateTime created_at { get; }
-        public int city_code { get; }
+        public int city_code { get; set; }
         public string login { get; set; }
         public string password { get; set; }
         public override string ToString()
         {
-            return $"{id}|{first_name}|{last_name}|{created_at}|{city_code}|{login}|{password}";
+            return $"{id}|{first_name}|{last_name}|{city_code}|{login}|{password}";
         }
     }
    

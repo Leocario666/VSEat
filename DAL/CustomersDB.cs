@@ -22,7 +22,7 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "Select * FROM Hotels";
+                    string query = "Select * FROM customers";
                     SqlCommand cmd = new SqlCommand(query, cn);
 
 
@@ -36,24 +36,18 @@ namespace DAL
                                 results = new List<Customers>();
 
 
-                            Hotel hotel = new Hotel();
+                            Customers customer = new Customers();
 
-                            hotel.IdHotel = (int)dr["idHotel"];
-                            hotel.Name = (string)dr["Name"];
-                            hotel.Description = (string)dr["Name"];
-                            hotel.Location = (string)dr["Location"];
-                            hotel.Category = (int)dr["Category"];
-                            hotel.HasWifi = (bool)dr["HasWifi"];
-                            hotel.HasParking = (bool)dr["HasParking"];
+                            customer.id = (int)dr["idCustomer"];
+                            customer.first_name = (string)dr["first_name"];
+                            customer.last_name = (string)dr["last_name"];
+                            customer.login = (string)dr["login"];
+                            customer.password = (string)dr["password"];
+                            customer.city_code = (int)dr["city_code"];
 
-                            if (dr["Phone"] != null)
-                                hotel.Phone = (string)dr["Phone"];
-                            if (dr["Email"] != null)
-                                hotel.Email = (string)dr["Email"];
-                            if (dr["Website"] != null)
-                                hotel.Website = (string)dr["Website"];
+                            
 
-                            results.Add(hotel);
+                            results.Add(customer);
                         }
                     }
                 }
@@ -65,6 +59,135 @@ namespace DAL
 
             return results;
 
+        }
+
+        public Customers GetCustomer(int id)
+        {
+            Customers customer = null;
+            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+                    string query = "SELECT * FROM customers WHERE id = @id";
+                    SqlCommand cmd = new SqlCommand(query, cn);
+                    cmd.Parameters.AddWithValue("@id", id);
+
+
+                    cn.Open();
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        if (dr.Read())
+                        {
+                            customer = new Customers();
+
+                            customer.id = (int)dr["id"];
+                            customer.first_name = (string)dr["first_name"];
+                            customer.last_name = (string)dr["last_name"];
+                            customer.login = (string)dr["login"];
+                            customer.password = (string)dr["password"];
+                            customer.city_code = (int)dr["city_code"];
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return customer;
+        }
+
+        public Customers AddCustomer(Customers customer)
+        {
+            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+                    string query = "INSERT INTO customers(first_name,last_name,login,password,city_code) values(@first_name,@last_name,@login,@password,@city_code); SELECT SCOPE_IDENTITY()";
+                    SqlCommand cmd = new SqlCommand(query, cn);
+
+                    cmd.Parameters.AddWithValue("@first_name", customer.first_name);
+                    cmd.Parameters.AddWithValue("@last_name", customer.last_name);
+                    cmd.Parameters.AddWithValue("@login", customer.login);
+                    cmd.Parameters.AddWithValue("@password", customer.password);
+                    cmd.Parameters.AddWithValue("@city_code", customer.city_code);
+                    
+
+                    cn.Open();
+
+                    customer.id = Convert.ToInt32(cmd.ExecuteScalar());
+
+
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return customer;
+        }
+        public int UpdateCustomer(Customers customer)
+        {
+            int result = 0;
+            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+                    string query = "UPDATE customers Set first_name=@first_name, last_name=@last_name, login=@login, password=@password, city_code=@city_code WHERE id = @id";
+                    SqlCommand cmd = new SqlCommand(query, cn);
+
+                    cmd.Parameters.AddWithValue("@id", customer.id);
+                    cmd.Parameters.AddWithValue("@first_name", customer.first_name);
+                    cmd.Parameters.AddWithValue("@last_name", customer.last_name);
+                    cmd.Parameters.AddWithValue("@login", customer.login);
+                    cmd.Parameters.AddWithValue("@password", customer.password);
+                    cmd.Parameters.AddWithValue("@city_code", customer.city_code);
+
+                    cn.Open();
+
+
+                    result = cmd.ExecuteNonQuery();
+
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return result;
+        }
+
+        public int DeleteCustomer(int id)
+        {
+            int result = 0;
+            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+                    string query = "DELETE FROM customers WHERE id = @id";
+                    SqlCommand cmd = new SqlCommand(query, cn);
+                    cmd.Parameters.AddWithValue("@id", id);
+                    cn.Open();
+
+                    result = cmd.ExecuteNonQuery();
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return result;
         }
     }
 }
