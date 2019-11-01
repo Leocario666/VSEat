@@ -21,9 +21,9 @@ namespace BLL
             return OrdersDb.GetOrders(idCustomer);
         }
 
-        public Orders GetOrder(int code)
+        public Orders GetOrder(int id)
         {
-            return OrdersDb.GetOrder(code);
+            return OrdersDb.GetOrder(id);
         }
 
         public Orders AddOrder(Orders order)

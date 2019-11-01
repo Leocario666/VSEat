@@ -10,7 +10,7 @@ namespace BLL
     {
         IOrdersDB OrdersDb { get; }
         List<Orders> GetOrders(int idCustomer);
-        Orders GetOrder(int code);
+        Orders GetOrder(int id);
         Orders AddOrder(Orders order);
         int UpdateOrder(Orders order);
         int DeleteOrder(int id);
