@@ -18,12 +18,12 @@ namespace BLL
             CitiesDB = new CitiesDB(configuration);
         }
 
-        public List<Cities> GetHotels()
+        public List<Cities> GetCities()
         {
             return CitiesDB.GetCities();
         }
 
-        public Cities GetHotel(int code)
+        public Cities GetCity(int code)
         {
             return CitiesDB.GetCity(code);
         }

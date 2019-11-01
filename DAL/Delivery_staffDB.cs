@@ -1,31 +1,30 @@
 ﻿using Microsoft.Extensions.Configuration;
-using System.Data.SqlClient;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Text;
 using DTO;
 
 namespace DAL
 {
-    public class CitiesDB : ICitiesDB
+    public class Delivery_staffDB
     {
         public IConfiguration Configuration { get; }
-
-        public CitiesDB(IConfiguration configuration)
+        public Delivery_staffDB(IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
-        public List<Cities> GetCities()
+        public List<Delivery_staff> GetDelivery_Staffs()
         {
-            List<Cities> results = null;
+            List<Delivery_staff> results = null;
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "SELECT * FROM cities";
+                    string query = "SELECT * FROM delivery_staff";
                     SqlCommand cmd = new SqlCommand(query, cn);
 
                     cn.Open();
@@ -35,17 +34,20 @@ namespace DAL
                         while (dr.Read())
                         {
                             if (results == null)
-                                results = new List<Cities>();
+                                results = new List<Delivery_staff>();
 
-                            Cities city = new Cities();
+                            Delivery_staff ds = new Delivery_staff();
 
-                            city.code = (int)dr["code"];
-                            city.name = (string)dr["name"];
-
-                            results.Add(city);
+                            ds.id = (int)dr["id"];
+                            ds.first_name = (string)dr["first_name"];
+                            ds.last_name = (string)dr["last_name"];
+                            ds.login = (string)dr["login"];
+                            ds.password = (string)dr["password"];
+                            ds.city_code = (int)dr["code"];
                         }
                     }
                 }
+
             }
             catch (Exception e)
             {
@@ -53,21 +55,21 @@ namespace DAL
             }
 
             return results;
+
         }
 
-        public Cities GetCity(int code)
+        public Delivery_staff GetDelivery_staff(int id)
         {
-
-            Cities city = null;
+            Delivery_staff Delivery_staff = null;
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "SELECT * FROM Cities WHERE code = @code";
+                    string query = "SELECT * FROM delivery_staff WHERE id = @id";
                     SqlCommand cmd = new SqlCommand(query, cn);
-                    cmd.Parameters.AddWithValue("@code", code);
+                    cmd.Parameters.AddWithValue("@id", id);
 
 
                     cn.Open();
@@ -76,10 +78,14 @@ namespace DAL
                     {
                         if (dr.Read())
                         {
-                            city = new Cities();
+                            Delivery_staff = new Delivery_staff();
 
-                            city.code = (int)dr["code"];
-                            city.name = (string)dr["name"];
+                            Delivery_staff.id = (int)dr["id"];
+                            Delivery_staff.first_name = (string)dr["first_name"];
+                            Delivery_staff.last_name = (string)dr["last_name"];
+                            Delivery_staff.login = (string)dr["login"];
+                            Delivery_staff.password = (string)dr["password"];
+                            Delivery_staff.city_code = (int)dr["city_code"];
                         }
                     }
                 }
@@ -89,7 +95,9 @@ namespace DAL
                 throw e;
             }
 
-            return city;
+            return Delivery_staff;
         }
+
     }
+
 }
