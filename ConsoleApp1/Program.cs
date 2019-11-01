@@ -3,6 +3,7 @@ using System;
 using System.IO;
 using DTO;
 using BLL;
+using DAL;
 
 namespace ConsoleApp1
 {
@@ -15,14 +16,7 @@ namespace ConsoleApp1
 
         static void Main(string[] args)
         {
-            var test = new DishesManager(Configuration);
-
-            var dishes = test.GetDishes(1);
-
-            foreach(var cc in dishes)
-            {
-                Console.WriteLine(cc.ToString());
-            }
+           
         }
 
     }
