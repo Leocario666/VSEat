@@ -7,11 +7,11 @@ namespace DTO
     class delivery_staff
     {
         public int id { get; }
-        public String firstname { get; }
-        public String lastname { get; }
+        public String firstname { get; set; }
+        public String lastname { get; set; }
         public int city_code { get; }
-        public String login { get; }
-        public String password { get; }
+        public String login { get; set; }
+        public String password { get; set; }
 
         public override string ToString()
         {
