@@ -150,7 +150,7 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "INSERT INTO order_dishes(order_id,dishes_id,quantity,price,delivery_staff_id) values(@order_id,@dishes_id,@quantity,@price,@delivery_staff_id);";
+                    string query = "INSERT INTO order_dishes(order_id,dishes_id,quantity,price,delivery_staff_id) values(@order_id,@dishes_id,@quantity,@price,@delivery_staff_id)";
                     SqlCommand cmd = new SqlCommand(query, cn);
 
                     cmd.Parameters.AddWithValue("@order_id", order_dishes.order_id);

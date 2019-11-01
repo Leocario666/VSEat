@@ -44,6 +44,8 @@ namespace DAL
                             ds.login = (string)dr["login"];
                             ds.password = (string)dr["password"];
                             ds.city_code = (int)dr["code"];
+
+                            results.Add(ds);
                         }
                     }
                 }
