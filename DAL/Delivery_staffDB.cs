@@ -43,7 +43,7 @@ namespace DAL
                             ds.last_name = (string)dr["last_name"];
                             ds.login = (string)dr["login"];
                             ds.password = (string)dr["password"];
-                            ds.city_code = (int)dr["code"];
+                            ds.city_code = (int)dr["city_code"];
 
                             results.Add(ds);
                         }

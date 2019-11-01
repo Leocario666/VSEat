@@ -65,7 +65,7 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "SELECT * FROM Cities WHERE code = @code";
+                    string query = "SELECT * FROM cities WHERE code = @code";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@code", code);
 
