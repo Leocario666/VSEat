@@ -150,7 +150,7 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "INSERT INTO order_dishes(order_id,dishes_id,quantity,price,delivery_staff_id) values(@order_id,@dishes_id,@quantity,@price,@delivery_staff_id)";
+                    string query = "INSERT INTO order_dishes(order_id,dishes_id,quantity,price,delivery_staff_id) values(@order_id,@dishes_id,@quantity,@price,@delivery_staff_id);";
                     SqlCommand cmd = new SqlCommand(query, cn);
 
                     cmd.Parameters.AddWithValue("@order_id", order_dishes.order_id);
@@ -159,9 +159,9 @@ namespace DAL
                     cmd.Parameters.AddWithValue("@price", order_dishes.price);
                     cmd.Parameters.AddWithValue("@delivery_staff_id", order_dishes.delivery_staff_id);
 
-
                     cn.Open();
-                                       
+
+                    cmd.ExecuteScalar();
                 }
             }
             catch (Exception e)
@@ -212,7 +212,7 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "DELETE FROM customers WHERE order_id = @order_id AND dishes_id = @dishes_id";
+                    string query = "DELETE FROM order_dishes WHERE order_id = @order_id AND dishes_id = @dishes_id";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@order_id", order_id);
                     cmd.Parameters.AddWithValue("@dishes_id", dishes_id);
