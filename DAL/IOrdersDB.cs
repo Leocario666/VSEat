@@ -10,7 +10,7 @@ namespace DAL
     {
         IConfiguration Configuration { get; }
         List<Orders> GetOrders(int idCustomer);
-        Orders GetOrder(int code);
+        Orders GetOrder(int id);
         Orders AddOrder(Orders order);
         int UpdateOrder(Orders order);
         int DeleteOrder(int id);

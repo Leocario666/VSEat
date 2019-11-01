@@ -43,7 +43,7 @@ namespace DAL
                             order.status = (string)dr["status"];
                             order.created_at = (DateTime)dr["created_at"];
                             order.delivery_time = (DateTime)dr["delivery_time"];
-                            order.customers_id = (int)dr["cusomers_id"];
+                            order.customers_id = (int)dr["customers_id"];
 
 
 
@@ -106,16 +106,13 @@ namespace DAL
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
                     string query = "INSERT INTO orders(delivery_time,customers_id) values(@delivery_time,@customers_id); SELECT SCOPE_IDENTITY()";
-                    
                     SqlCommand cmd = new SqlCommand(query, cn);
-                             
                     cmd.Parameters.AddWithValue("@delivery_time", order.delivery_time);
                     cmd.Parameters.AddWithValue("@customers_id", order.customers_id);
                    
                     cn.Open();
 
                     order.id = Convert.ToInt32(cmd.ExecuteScalar());
-
 
                 }
             }
@@ -135,11 +132,14 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "UPDATE orders Set delivery_time=@delivery_time WHERE id = @id";
+                    string query = "UPDATE orders Set delivery_time=@delivery_time, status = @status WHERE id = @id";
                     SqlCommand cmd = new SqlCommand(query, cn);
 
+                    cmd.Parameters.AddWithValue("@id", order.id);
+                    cmd.Parameters.AddWithValue("@status", order.status);
                     cmd.Parameters.AddWithValue("@delivery_time", order.delivery_time);
                     
+
 
                     cn.Open();
 
