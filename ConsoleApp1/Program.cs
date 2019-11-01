@@ -16,22 +16,19 @@ namespace ConsoleApp1
 
         static void Main(string[] args)
         {
-            var cityDB = new Order_dishesManager(Configuration);
+            var cityDB = new OrdersManager(Configuration);
 
-            var newOD = cityDB.AddOrder_dishes(new Order_dishes { order_id = 1, dishes_id = 1, quantity = 1, price = 27, delivery_staff_id = 1 });
-
-            var cc = new OrdersManager(Configuration);
+            var newOD = cityDB.AddOrder(new Orders { delivery_time=new DateTime(2018,01,01), customers_id=1 });
+         
             
-            var dd = cc.AddOrder(new Orders { delivery_time = new DateTime(2018, 02, 09) });
-            
-            var test = cityDB.GetOrders_dishes(1);
+            var test = cityDB.GetOrder(1);
 
-            foreach (var essai in test)
+            /*foreach (var essai in test)
             {
                 Console.WriteLine(essai.ToString());
             }
 
-            Console.WriteLine(cityDB.GetOrder_dishes(1,1));
+            Console.WriteLine(cityDB.GetOrder_dishes(1,1));*/
         }
 
     }
