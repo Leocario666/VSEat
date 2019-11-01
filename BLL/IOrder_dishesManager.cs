@@ -1,14 +1,15 @@
-﻿using DTO;
-using Microsoft.Extensions.Configuration;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using DAL;
+using DTO;
 
-namespace DAL
+namespace BLL
 {
-    public interface IOrder_dishesDB
+    public interface IOrder_dishesManager
     {
-        IConfiguration Configuration { get; }
+        IOrder_dishesDB HotelsDB { get; }
+
         List<Order_dishes> GetOrders_dishes(int order_id);
         List<Order_dishes> GetOrders_dishes_ds(int delivery_staff_id);
         Order_dishes GetOrder_dishes(int order_id, int dishes_id);

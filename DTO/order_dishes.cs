@@ -6,11 +6,11 @@ namespace DTO
 {
     public class Order_dishes
     {
-        public int order_id { get; }
-        public int dishes_id { get; }
-        public int quantity { get; }
-        public int delivery_staff_id { get; }
-        public float price { get; }
+        public int order_id { get; set; }
+        public int dishes_id { get; set; }
+        public int quantity { get; set; }
+        public int delivery_staff_id { get; set; }
+        public float price { get; set; }
 
         public override string ToString()
         {
