@@ -25,6 +25,7 @@ namespace DAL
                     string query = "Select * FROM dishes WHERE restaurant_id=@idRestaurant";
                     SqlCommand cmd = new SqlCommand(query, cn);
 
+                    cmd.Parameters.AddWithValue("@idRestaurant", idRestaurant);
 
                     cn.Open();
 
@@ -40,7 +41,7 @@ namespace DAL
 
                             dish.id = (int)dr["id"];
                             dish.name = (string)dr["name"];
-                            dish.price = (float)dr["price"];
+                            dish.price = Convert.ToSingle(dr["price"]);
                             dish.restaurant_id = (int)dr["restaurant_id"];
                            
 

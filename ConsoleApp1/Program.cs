@@ -15,7 +15,14 @@ namespace ConsoleApp1
 
         static void Main(string[] args)
         {
-            
+            var test = new DishesManager(Configuration);
+
+            var dishes = test.GetDishes(1);
+
+            foreach(var cc in dishes)
+            {
+                Console.WriteLine(cc.ToString());
+            }
         }
 
     }
