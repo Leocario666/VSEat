@@ -105,11 +105,11 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "INSERT INTO orders(delivery_time,customers_id) values(@created_at,@delivery_time,@customers_id); SELECT SCOPE_IDENTITY()";
+                    string query = "INSERT INTO orders(delivery_time,customers_id) values(@delivery_time,@customers_id); SELECT SCOPE_IDENTITY()";
                     SqlCommand cmd = new SqlCommand(query, cn);
 
                     
-                   
+                    
                     cmd.Parameters.AddWithValue("@delivery_time", order.delivery_time);
                     cmd.Parameters.AddWithValue("@customers_id", order.customers_id);
                    
