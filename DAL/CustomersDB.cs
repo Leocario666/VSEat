@@ -33,7 +33,7 @@ namespace DAL
                         while (dr.Read())
                         {
                             if (results == null)
-                                results = new List<Hotel>();
+                                results = new List<Customers>();
 
 
                             Hotel hotel = new Hotel();
