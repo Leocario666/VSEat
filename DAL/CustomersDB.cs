@@ -38,7 +38,7 @@ namespace DAL
 
                             Customers customer = new Customers();
 
-                            customer.id = (int)dr["idCustomer"];
+                            customer.id = (int)dr["id"];
                             customer.first_name = (string)dr["first_name"];
                             customer.last_name = (string)dr["last_name"];
                             customer.login = (string)dr["login"];
