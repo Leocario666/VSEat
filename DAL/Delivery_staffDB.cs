@@ -7,7 +7,7 @@ using DTO;
 
 namespace DAL
 {
-    public class Delivery_staffDB
+    public class Delivery_staffDB : IDelivery_staffDB
     {
         public IConfiguration Configuration { get; }
         public Delivery_staffDB(IConfiguration configuration)
@@ -15,7 +15,7 @@ namespace DAL
             Configuration = configuration;
         }
 
-        public List<Delivery_staff> GetDelivery_Staffs()
+        public List<Delivery_staff> GetDelivery_staffs()
         {
             List<Delivery_staff> results = null;
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
