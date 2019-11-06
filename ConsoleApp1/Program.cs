@@ -16,7 +16,14 @@ namespace ConsoleApp1
 
         static void Main(string[] args)
         {
-            
+            var hotelsDB = new CustomersManager(Configuration);
+
+            var hotels = CustomersDB.GetCustomers();
+
+            foreach (var hotel in hotels)
+            {
+                Console.WriteLine(hotel.ToString());
+            }
         }
 
     }

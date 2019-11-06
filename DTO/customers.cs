@@ -13,9 +13,10 @@ namespace DTO
         public int city_code { get; set; }
         public string login { get; set; }
         public string password { get; set; }
+        public string address { get; set; }
         public override string ToString()
         {
-            return $"{id}|{first_name}|{last_name}|{city_code}|{login}|{password}";
+            return $"{id}|{first_name}|{last_name}|{city_code}|{login}|{address}|{password}";
         }
     }
    
