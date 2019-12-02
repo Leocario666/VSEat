@@ -6,14 +6,13 @@ using System.Text;
 
 namespace DAL
 {
-    public interface ICustomersDB
+    public interface ICustomerDB
     {
         IConfiguration Configuration { get; }
-        List<Customers> GetCustomers();
-        Customers GetCustomer(int id);
-        Customers AddCustomer(Customers customer);
-        int UpdateCustomer(Customers customer);
-        int DeleteCustomer(int id);
+        List<Customer> GetCustomers();
+        Customer GetCustomer(int id);
+        Customer AddCustomer(Customer customer);
+       
 
 
            
