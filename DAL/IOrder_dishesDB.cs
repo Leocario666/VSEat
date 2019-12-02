@@ -14,6 +14,5 @@ namespace DAL
         Order_dishes GetOrder_dishes(int order_id, int dishes_id);
         Order_dishes AddOrder_dishes(Order_dishes order_dishes);
         int UpdateOrder_dishes(Order_dishes order_dishes);
-        int DeleteOrder_dishes(int order_id, int dishes_id);
     }
 }

@@ -7,24 +7,24 @@ using System.Data.SqlClient;
 
 namespace DAL
 {
-    public class RestaurantsDB : IRestaurantsDB
+    public class RestaurantDB : IRestaurantDB
     {
         public IConfiguration Configuration { get; }
-        public RestaurantsDB(IConfiguration configuration)
+        public RestaurantDB(IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
-        public List<Restaurants> GetRestaurants()
+        public List<Restaurant> GetRestaurants()
         {
-            List<Restaurants> results = null;
+            List<Restaurant> results = null;
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "SELECT * FROM restaurants";
+                    string query = "SELECT * FROM restaurant";
                     SqlCommand cmd = new SqlCommand(query, cn);
 
                     cn.Open();
@@ -34,14 +34,14 @@ namespace DAL
                         while (dr.Read())
                         {
                             if (results == null)
-                                results = new List<Restaurants>();
+                                results = new List<Restaurant>();
 
-                            Restaurants restaurants = new Restaurants();
+                            Restaurant restaurants = new Restaurant();
 
-                            restaurants.id = (int)dr["id"];
+                            restaurants.restaurant_Id = (int)dr["restaurant_Id"];
                             restaurants.name = (string)dr["name"];
                             restaurants.created_at = (DateTime)dr["created_at"];
-                            restaurants.city_code = (int)dr["city_code"];
+                            restaurants.cityCode = (int)dr["cityCode"];
 
                             results.Add(restaurants);
                         }
@@ -56,18 +56,18 @@ namespace DAL
             return results;
         }
 
-        public Restaurants GetRestaurant(int id)
+        public Restaurant GetRestaurant(int restaurant_Id)
         {
-            Restaurants restaurant = null;
+            Restaurant restaurant = null;
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "SELECT * FROM restaurants WHERE id = @id";
+                    string query = "SELECT * FROM restaurant WHERE restaurant_Id = @restaurant_Id";
                     SqlCommand cmd = new SqlCommand(query, cn);
-                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.Parameters.AddWithValue("@restaurant_Id", restaurant_Id);
 
 
                     cn.Open();
@@ -76,12 +76,12 @@ namespace DAL
                     {
                         if (dr.Read())
                         {
-                            restaurant = new Restaurants();
+                            restaurant = new Restaurant();
 
-                            restaurant.id = (int)dr["id"];
+                            restaurant.restaurant_Id = (int)dr["restaurant_Id"];
                             restaurant.name = (string)dr["name"];
                             restaurant.created_at = (DateTime)dr["created_at"];
-                            restaurant.city_code = (int)dr["city_code"];
+                            restaurant.cityCode = (int)dr["citCode"];
                         }
                     }
                 }
