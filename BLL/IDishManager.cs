@@ -8,9 +8,9 @@ namespace BLL
 {
     public interface IDishManager
     {
-        IDishDB DishesDb { get; }
-        List<Dishes> GetDishes(int idRestaurant);
-        Dishes GetDish(int id);
+        IDishDB DishDb { get; }
+        List<Dish> GetDishes(int idRestaurant);
+        Dish GetDish(int id);
 
     }
 }

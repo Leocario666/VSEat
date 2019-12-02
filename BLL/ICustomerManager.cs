@@ -10,11 +10,11 @@ namespace BLL
 {
     public interface ICustomerManager
     {
-        ICustomersDB CustomersDb { get; }
-        List<Customers> GetCustomers();
-        Customers GetCustomer(int id);
-        Customers AddCustomer(Customers customer);
-        int UpdateCustomer(Customers customer);
+        ICustomerDB CustomersDb { get; }
+        List<Customer> GetCustomers();
+        Customer GetCustomer(int id);
+        Customer AddCustomer(Customer customer);
+        int UpdateCustomer(Customer customer);
         int DeleteCustomer(int id);
     }
 }

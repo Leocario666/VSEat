@@ -9,21 +9,21 @@ namespace BLL
 {
     public class DishManager
     {
-        public IDishDB DishesDb { get; }
+        public IDishDB DishDb { get; }
 
         public DishManager(IConfiguration configuration)
         {
-            DishesDb = new DishDB(configuration);
+            DishDb = new DishDB(configuration);
         }
 
-        public List<Dishes> GetDishes(int idRestaurant)
+        public List<Dish> GetDishes(int idRestaurant)
         {
-            return DishesDb.GetDishes(idRestaurant);
+            return DishDb.GetDishes(idRestaurant);
         }
 
-        public Dishes GetDish(int id)
+        public Dish GetDish(int id)
         {
-            return DishesDb.GetDish(id);
+            return DishDb.GetDish(id);
         }
     }
 }
