@@ -1,9 +1,10 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿
 using System;
 using System.IO;
 using DTO;
 using BLL;
 using DAL;
+using Microsoft.Extensions.Configuration;
 
 namespace ConsoleApp1
 {
