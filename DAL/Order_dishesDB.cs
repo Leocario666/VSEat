@@ -15,7 +15,7 @@ namespace DAL
             Configuration = configuration;
         }
 
-        public List<Order_dishes> GetOrders_dishes(int order_id)
+        public List<Order_dishes> GetOrders_dishes(int order_Id)
         {
             List<Order_dishes> results = null;
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
@@ -23,10 +23,10 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "Select * FROM order_dishes WHERE order_id=@order_id";
+                    string query = "Select * FROM order_dishes WHERE order_Id=@order_Id";
                     SqlCommand cmd = new SqlCommand(query, cn);
 
-                    cmd.Parameters.AddWithValue("@order_id", order_id);
+                    cmd.Parameters.AddWithValue("@order_Id", order_Id);
 
                     cn.Open();
 
@@ -40,11 +40,11 @@ namespace DAL
 
                             Order_dishes order_dishes = new Order_dishes();
 
-                            order_dishes.order_id = (int)dr["order_id"];
-                            order_dishes.dishes_id = (int)dr["dishes_id"];
+                            order_dishes.order_Id = (int)dr["order_Id"];
+                            order_dishes.dish_Id = (int)dr["dish_Id"];
                             order_dishes.quantity = (int)dr["quantity"];
                             order_dishes.price = Convert.ToSingle(dr["price"]);
-                            order_dishes.delivery_staff_id = (int)dr["delivery_staff_id"];
+                            order_dishes.delivery_staff_Id = (int)dr["delivery_staff_Id"];
 
                             results.Add(order_dishes);
                         }
@@ -59,7 +59,7 @@ namespace DAL
             return results;
         }
 
-        public List<Order_dishes> GetOrders_dishes_ds(int delivery_staff_id)
+        public List<Order_dishes> GetOrders_dishes_ds(int delivery_staff_Id)
         {
             List<Order_dishes> results = null;
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
@@ -67,10 +67,10 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "Select * FROM order_dishes WHERE delivery_staff_id=@delivery_staff_id";
+                    string query = "Select * FROM order_dishes WHERE delivery_staff_Id=@delivery_staff_Id";
                     SqlCommand cmd = new SqlCommand(query, cn);
 
-                    cmd.Parameters.AddWithValue("@delivery_staff_id", delivery_staff_id);
+                    cmd.Parameters.AddWithValue("@delivery_staff_Id", delivery_staff_Id);
 
                     cn.Open();
 
@@ -84,11 +84,11 @@ namespace DAL
 
                             Order_dishes order_dishes = new Order_dishes();
 
-                            order_dishes.order_id = (int)dr["order_id"];
-                            order_dishes.dishes_id = (int)dr["dishes_id"];
+                            order_dishes.order_Id = (int)dr["order_Id"];
+                            order_dishes.dish_Id = (int)dr["dish_Id"];
                             order_dishes.quantity = (int)dr["quantity"];
                             order_dishes.price = Convert.ToSingle(dr["price"]);
-                            order_dishes.delivery_staff_id = (int)dr["delivery_staff_id"];
+                            order_dishes.delivery_staff_Id = (int)dr["delivery_staff_Id"];
 
                             results.Add(order_dishes);
                         }
@@ -103,7 +103,7 @@ namespace DAL
             return results;
         }
 
-        public Order_dishes GetOrder_dishes(int order_id, int dishes_id)
+        public Order_dishes GetOrder_dishes(int order_Id, int dish_Id)
         {
             Order_dishes order_dishes = null;
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
@@ -112,10 +112,10 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "SELECT * FROM order_dishes WHERE order_id = @order_id AND dishes_id = @dishes_id";
+                    string query = "SELECT * FROM order_dishes WHERE order_Id = @order_Id AND dish_Id = @dish_Id";
                     SqlCommand cmd = new SqlCommand(query, cn);
-                    cmd.Parameters.AddWithValue("@order_id", order_id);
-                    cmd.Parameters.AddWithValue("@dishes_id", dishes_id);
+                    cmd.Parameters.AddWithValue("@order_Id", order_Id);
+                    cmd.Parameters.AddWithValue("@dish_Id", dish_Id);
 
                     cn.Open();
 
@@ -125,11 +125,11 @@ namespace DAL
                         {
                             order_dishes = new Order_dishes();
 
-                            order_dishes.order_id = (int)dr["order_id"];
-                            order_dishes.dishes_id = (int)dr["dishes_id"];
+                            order_dishes.order_Id = (int)dr["order_Id"];
+                            order_dishes.dish_Id = (int)dr["dish_Id"];
                             order_dishes.quantity = (int)dr["quantity"];
                             order_dishes.price = Convert.ToSingle(dr["price"]);
-                            order_dishes.delivery_staff_id = (int)dr["delivery_staff_id"];
+                            order_dishes.delivery_staff_Id = (int)dr["delivery_staff_Id"];
                         }
                     }
                 }
@@ -150,14 +150,14 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "INSERT INTO order_dishes(order_id,dishes_id,quantity,price,delivery_staff_id) values(@order_id,@dishes_id,@quantity,@price,@delivery_staff_id);";
+                    string query = "INSERT INTO order_dishes(order_Id,dish_Id,quantity,price,delivery_staff_Id) values(@order_Id,@dish_Id,@quantity,@price,@delivery_staff_Id);";
                     SqlCommand cmd = new SqlCommand(query, cn);
 
-                    cmd.Parameters.AddWithValue("@order_id", order_dishes.order_id);
-                    cmd.Parameters.AddWithValue("@dishes_id", order_dishes.dishes_id);
+                    cmd.Parameters.AddWithValue("@order_Id", order_dishes.order_Id);
+                    cmd.Parameters.AddWithValue("@dish_Id", order_dishes.dish_Id);
                     cmd.Parameters.AddWithValue("@quantity", order_dishes.quantity);
                     cmd.Parameters.AddWithValue("@price", order_dishes.price);
-                    cmd.Parameters.AddWithValue("@delivery_staff_id", order_dishes.delivery_staff_id);
+                    cmd.Parameters.AddWithValue("@delivery_staff_Id", order_dishes.delivery_staff_Id);
 
                     cn.Open();
 
@@ -180,46 +180,20 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "UPDATE order_dishes Set quantity=@quantity, price=@price, delivery_staff_id=@delivery_staff_id WHERE order_id = @order_id AND dishes_id = @dishes_id";
+                    string query = "UPDATE order_dishes Set quantity=@quantity, price=@price, delivery_staff_Id=@delivery_staff_Id WHERE order_Id = @order_Id AND dish_Id = @dish_Id";
                     SqlCommand cmd = new SqlCommand(query, cn);
 
-                    cmd.Parameters.AddWithValue("@order_id", order_dishes.order_id);
-                    cmd.Parameters.AddWithValue("@dishes_id", order_dishes.dishes_id);
+                    cmd.Parameters.AddWithValue("@order_Id", order_dishes.order_Id);
+                    cmd.Parameters.AddWithValue("@dish_Id", order_dishes.dish_Id);
                     cmd.Parameters.AddWithValue("@quantity", order_dishes.quantity);
                     cmd.Parameters.AddWithValue("@price", order_dishes.price);
-                    cmd.Parameters.AddWithValue("@delivery_staff_id", order_dishes.delivery_staff_id);
+                    cmd.Parameters.AddWithValue("@delivery_staff_Id", order_dishes.delivery_staff_Id);
 
                     cn.Open();
 
 
                     result = cmd.ExecuteNonQuery();
 
-                }
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-
-            return result;
-        }
-
-        public int DeleteOrder_dishes(int order_id, int dishes_id)
-        {
-            int result = 0;
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
-            try
-            {
-                using (SqlConnection cn = new SqlConnection(connectionString))
-                {
-                    string query = "DELETE FROM order_dishes WHERE order_id = @order_id AND dishes_id = @dishes_id";
-                    SqlCommand cmd = new SqlCommand(query, cn);
-                    cmd.Parameters.AddWithValue("@order_id", order_id);
-                    cmd.Parameters.AddWithValue("@dishes_id", dishes_id);
-
-                    cn.Open();
-
-                    result = cmd.ExecuteNonQuery();
                 }
             }
             catch (Exception e)

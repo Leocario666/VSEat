@@ -7,25 +7,25 @@ using System.Text;
 
 namespace DAL
 {
-    public class OrdersDB : IOrdersDB
+    public class OrderDB : IOrderDB
     {
         public IConfiguration Configuration { get; }
-        public OrdersDB(IConfiguration configuration)
+        public OrderDB(IConfiguration configuration)
         {
             Configuration = configuration;
         }
-        public List<Orders> GetOrders(int idCustomer)
+        public List<Order> GetOrders(int customer_Id)
         {
-            List<Orders> results = null;
+            List<Order> results = null;
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "Select * FROM orders WHERE customers_id=@idCustomer";
+                    string query = "Select * FROM order WHERE customer_Id=@customer_Id";
                     SqlCommand cmd = new SqlCommand(query, cn);
 
-                    cmd.Parameters.AddWithValue("@idCustomer", idCustomer);
+                    cmd.Parameters.AddWithValue("@customer_Id", customer_Id);
 
                     cn.Open();
 
@@ -34,16 +34,16 @@ namespace DAL
                         while (dr.Read())
                         {
                             if (results == null)
-                                results = new List<Orders>();
+                                results = new List<Order>();
 
 
-                            Orders order = new Orders();
+                            Order order = new Order();
 
-                            order.id = (int)dr["id"];
+                            order.order_Id = (int)dr["order_Id"];
                             order.status = (string)dr["status"];
                             order.created_at = (DateTime)dr["created_at"];
                             order.delivery_time = (DateTime)dr["delivery_time"];
-                            order.customers_id = (int)dr["customers_id"];
+                            order.customer_Id = (int)dr["customer_Id"];
 
 
 
@@ -59,18 +59,18 @@ namespace DAL
 
             return results;
         }
-        public Orders GetOrder(int id)
+        public Order GetOrder(int order_Id)
         {
-            Orders order = null;
+            Order order = null;
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "SELECT * FROM orders WHERE id = @id";
+                    string query = "SELECT * FROM order WHERE order_Id = @order_Id";
                     SqlCommand cmd = new SqlCommand(query, cn);
-                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.Parameters.AddWithValue("@order_Id", order_Id);
 
 
                     cn.Open();
@@ -79,13 +79,13 @@ namespace DAL
                     {
                         if (dr.Read())
                         {
-                            order = new Orders();
+                            order = new Order();
 
-                            order.id = (int)dr["id"];
+                            order.order_Id = (int)dr["order_Id"];
                             order.status = (string)dr["status"];
                             order.created_at = (DateTime)dr["created_at"];
                             order.delivery_time = (DateTime)dr["delivery_time"];
-                            order.customers_id = (int)dr["customers_id"];
+                            order.customer_Id = (int)dr["customer_Id"];
                         }
                     }
                 }
@@ -97,7 +97,7 @@ namespace DAL
 
             return order;
         }
-        public Orders AddOrder(Orders order)
+        public Order AddOrder(Order order)
         {
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
@@ -105,14 +105,14 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "INSERT INTO orders(delivery_time,customers_id) values(@delivery_time,@customers_id); SELECT SCOPE_IDENTITY()";
+                    string query = "INSERT INTO order(delivery_time,customer_Id) values(@delivery_time,@customer_Id); SELECT SCOPE_IDENTITY()";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@delivery_time", order.delivery_time);
-                    cmd.Parameters.AddWithValue("@customers_id", order.customers_id);
+                    cmd.Parameters.AddWithValue("@customerId", order.customer_Id);
                    
                     cn.Open();
 
-                    order.id = Convert.ToInt32(cmd.ExecuteScalar());
+                    order.order_Id = Convert.ToInt32(cmd.ExecuteScalar());
 
                 }
             }
@@ -124,7 +124,7 @@ namespace DAL
             return order;
         }
 
-        public int UpdateOrder(Orders order)
+        public int UpdateOrder(Order order)
         {
             int result = 0;
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
@@ -132,13 +132,13 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "UPDATE orders Set delivery_time=@delivery_time, status = @status WHERE id = @id";
+                    string query = "UPDATE order Set delivery_time=@delivery_time, status = @status WHERE order_Id = @order_Id";
                     SqlCommand cmd = new SqlCommand(query, cn);
 
-                    cmd.Parameters.AddWithValue("@id", order.id);
+                    cmd.Parameters.AddWithValue("@order_Id", order.order_Id);
                     cmd.Parameters.AddWithValue("@status", order.status);
                     cmd.Parameters.AddWithValue("@delivery_time", order.delivery_time);
-                    
+
 
 
                     cn.Open();
@@ -146,31 +146,6 @@ namespace DAL
 
                     result = cmd.ExecuteNonQuery();
 
-                }
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-
-            return result;
-        }
-
-        public int DeleteOrder(int id)
-        {
-            int result = 0;
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
-            try
-            {
-                using (SqlConnection cn = new SqlConnection(connectionString))
-                {
-                    string query = "DELETE FROM orders WHERE id = @id";
-               
-                    SqlCommand cmd = new SqlCommand(query, cn);
-                    cmd.Parameters.AddWithValue("@id", id);
-                    cn.Open();
-
-                    result = cmd.ExecuteNonQuery();
                 }
             }
             catch (Exception e)

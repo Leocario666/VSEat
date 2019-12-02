@@ -6,7 +6,7 @@ using System.Text;
 
 namespace DAL
 {
-    public interface IDishesDB
+    public interface IDishDB
     {
         IConfiguration Configuration { get; }
         List<Dishes> GetDishes(int idRestaurant);

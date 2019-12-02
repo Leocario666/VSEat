@@ -9,11 +9,11 @@ namespace BLL
 {
     public class DishesManager
     {
-        public IDishesDB DishesDb { get; }
+        public IDishDB DishesDb { get; }
 
         public DishesManager(IConfiguration configuration)
         {
-            DishesDb = new DishesDB(configuration);
+            DishesDb = new DishDB(configuration);
         }
 
         public List<Dishes> GetDishes(int idRestaurant)

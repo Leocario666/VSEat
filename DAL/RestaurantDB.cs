@@ -1,31 +1,31 @@
-﻿using DTO;
-using Microsoft.Extensions.Configuration;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Text;
+using DTO;
+using Microsoft.Extensions.Configuration;
+using System.Data.SqlClient;
 
 namespace DAL
 {
-    public class DishesDB:IDishesDB
+    public class RestaurantDB : IRestaurantDB
     {
         public IConfiguration Configuration { get; }
-        public DishesDB(IConfiguration configuration)
+        public RestaurantDB(IConfiguration configuration)
         {
             Configuration = configuration;
         }
-        public List<Dishes> GetDishes(int idRestaurant)
+
+        public List<Restaurant> GetRestaurants()
         {
-            List<Dishes> results = null;
+            List<Restaurant> results = null;
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
+
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "Select * FROM dishes WHERE restaurant_id=@idRestaurant";
+                    string query = "SELECT * FROM restaurant";
                     SqlCommand cmd = new SqlCommand(query, cn);
-
-                    cmd.Parameters.AddWithValue("@idRestaurant", idRestaurant);
 
                     cn.Open();
 
@@ -34,19 +34,16 @@ namespace DAL
                         while (dr.Read())
                         {
                             if (results == null)
-                                results = new List<Dishes>();
+                                results = new List<Restaurant>();
 
+                            Restaurant restaurants = new Restaurant();
 
-                            Dishes dish = new Dishes();
+                            restaurants.restaurant_Id = (int)dr["restaurant_Id"];
+                            restaurants.name = (string)dr["name"];
+                            restaurants.created_at = (DateTime)dr["created_at"];
+                            restaurants.cityCode = (int)dr["cityCode"];
 
-                            dish.id = (int)dr["id"];
-                            dish.name = (string)dr["name"];
-                            dish.price = Convert.ToSingle(dr["price"]);
-                            dish.restaurant_id = (int)dr["restaurant_id"];
-                           
-
-
-                            results.Add(dish);
+                            results.Add(restaurants);
                         }
                     }
                 }
@@ -57,21 +54,20 @@ namespace DAL
             }
 
             return results;
-
         }
 
-        public Dishes GetDish(int id)
+        public Restaurant GetRestaurant(int restaurant_Id)
         {
-            Dishes dish = null;
+            Restaurant restaurant = null;
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "SELECT * FROM dishes WHERE id = @id";
+                    string query = "SELECT * FROM restaurant WHERE restaurant_Id = @restaurant_Id";
                     SqlCommand cmd = new SqlCommand(query, cn);
-                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.Parameters.AddWithValue("@restaurant_Id", restaurant_Id);
 
 
                     cn.Open();
@@ -80,12 +76,12 @@ namespace DAL
                     {
                         if (dr.Read())
                         {
-                            dish = new Dishes();
+                            restaurant = new Restaurant();
 
-                            dish.id = (int)dr["id"];
-                            dish.name = (string)dr["name"];
-                            dish.price = (float)dr["price"];
-                            dish.restaurant_id = (int)dr["restaurant_id"];
+                            restaurant.restaurant_Id = (int)dr["restaurant_Id"];
+                            restaurant.name = (string)dr["name"];
+                            restaurant.created_at = (DateTime)dr["created_at"];
+                            restaurant.cityCode = (int)dr["citCode"];
                         }
                     }
                 }
@@ -95,7 +91,7 @@ namespace DAL
                 throw e;
             }
 
-            return dish;
+            return restaurant;
         }
 
     }
