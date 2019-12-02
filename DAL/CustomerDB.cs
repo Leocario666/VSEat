@@ -9,7 +9,8 @@ namespace DAL
 {
     public class CustomerDB : ICustomerDB
     {
-        public IConfiguration Configuration { get; }
+        private string connectionString = "Server=153.109.124.35;Database=DNVSEatDB;User Id=6231db;Password=Pwd46231.;MultipleActiveResultSets=true";
+        private IConfiguration Configuration { get; }
         public CustomerDB(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -17,7 +18,7 @@ namespace DAL
         public List<Customer> GetCustomers()
         {
             List<Customer> results = null;
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+            //string connectionString = Configuration.GetConnectionString("DefaultConnection");
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
@@ -65,7 +66,7 @@ namespace DAL
         public Customer GetCustomer(int id)
         {
             Customer customer = null;
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+            //string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             try
             {
@@ -105,7 +106,7 @@ namespace DAL
 
         public Customer AddCustomer(Customer customer)
         {
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+            //string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             try
             {

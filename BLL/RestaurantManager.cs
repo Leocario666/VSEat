@@ -9,11 +9,11 @@ namespace BLL
 {
     public class RestaurantManager
     {
-        public IRestaurantDB RestaurantDB { get; }
+        private IRestaurantDB RestaurantDB { get; }
 
-        public RestaurantManager(IConfiguration configuration)
+        public RestaurantManager(IRestaurantDB restaurantDB)
         {
-            RestaurantDB = new RestaurantDB(configuration);
+            RestaurantDB = restaurantDB;
         }
 
         public List<Restaurant> GetRestaurants()

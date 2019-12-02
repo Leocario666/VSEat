@@ -7,6 +7,6 @@ namespace DTO
     public class City
     {
         public int cityCode { get; set; }
-        public String name { get; set; }
+        public string name { get; set; }
     }
 }

@@ -7,13 +7,13 @@ using System.Text;
 
 namespace BLL
 {
-    public class CustomerManager 
+    public class CustomerManager:ICustomerManager
     {
-        public ICustomerDB CustomerDb { get; }
+        private ICustomerDB CustomerDb { get; }
 
-        public CustomerManager (IConfiguration configuration)
+        public CustomerManager (ICustomerDB customerDB)
         {
-            CustomerDb = new CustomerDB(configuration);
+            CustomerDb = customerDB;
         }
 
         public List<Customer> GetCustomers()
@@ -30,8 +30,6 @@ namespace BLL
         {
             return CustomerDb.AddCustomer(customer);
         }
-
-        
 
 
     }

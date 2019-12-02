@@ -9,7 +9,8 @@ namespace DAL
 {
     public class RestaurantDB : IRestaurantDB
     {
-        public IConfiguration Configuration { get; }
+        private string connectionString = "Server=153.109.124.35;Database=DNVSEatDB;User Id=6231db;Password=Pwd46231.;MultipleActiveResultSets=true";
+        private IConfiguration Configuration { get; }
         public RestaurantDB(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -18,7 +19,7 @@ namespace DAL
         public List<Restaurant> GetRestaurants()
         {
             List<Restaurant> results = null;
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+            //string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             try
             {
@@ -59,7 +60,7 @@ namespace DAL
         public Restaurant GetRestaurant(int restaurant_Id)
         {
             Restaurant restaurant = null;
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+            //string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             try
             {

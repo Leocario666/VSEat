@@ -8,7 +8,7 @@ namespace DAL
 {
     public interface ICustomerDB
     {
-        IConfiguration Configuration { get; }
+        
         List<Customer> GetCustomers();
         Customer GetCustomer(int id);
         Customer AddCustomer(Customer customer);
