@@ -6,11 +6,11 @@ using System.Text;
 
 namespace DAL
 {
-    public interface ICitiesDB
+    public interface ICityDB
     {
         IConfiguration Configuration { get; }
-        List<Cities> GetCities();
-        Cities GetCity(int code);
+        List<City> GetCities();
+        City GetCity(int code);
 
     }
 }

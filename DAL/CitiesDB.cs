@@ -7,25 +7,25 @@ using DTO;
 
 namespace DAL
 {
-    public class CitiesDB : ICitiesDB
+    public class CityDB : ICityDB
     {
         public IConfiguration Configuration { get; }
 
-        public CitiesDB(IConfiguration configuration)
+        public CityDB(IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
-        public List<Cities> GetCities()
+        public List<City> GetCities()
         {
-            List<Cities> results = null;
+            List<City> results = null;
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "SELECT * FROM cities";
+                    string query = "SELECT * FROM city";
                     SqlCommand cmd = new SqlCommand(query, cn);
 
                     cn.Open();
@@ -35,11 +35,11 @@ namespace DAL
                         while (dr.Read())
                         {
                             if (results == null)
-                                results = new List<Cities>();
+                                results = new List<City>();
 
-                            Cities city = new Cities();
+                            City city = new City();
 
-                            city.code = (int)dr["code"];
+                            city.cityCode = (int)dr["code"];
                             city.name = (string)dr["name"];
 
                             results.Add(city);
@@ -55,17 +55,17 @@ namespace DAL
             return results;
         }
 
-        public Cities GetCity(int code)
+        public City GetCity(int code)
         {
 
-            Cities city = null;
+            City city = null;
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "SELECT * FROM cities WHERE code = @code";
+                    string query = "SELECT * FROM city WHERE cityCode = @code";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@code", code);
 
@@ -76,9 +76,9 @@ namespace DAL
                     {
                         if (dr.Read())
                         {
-                            city = new Cities();
+                            city = new City();
 
-                            city.code = (int)dr["code"];
+                            city.cityCode = (int)dr["cityCode"];
                             city.name = (string)dr["name"];
                         }
                     }
