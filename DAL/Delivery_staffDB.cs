@@ -38,12 +38,12 @@ namespace DAL
 
                             Delivery_staff ds = new Delivery_staff();
 
-                            ds.id = (int)dr["id"];
+                            ds.delivery_staff_Id = (int)dr["delivery_staff_Id"];
                             ds.first_name = (string)dr["first_name"];
                             ds.last_name = (string)dr["last_name"];
                             ds.login = (string)dr["login"];
                             ds.password = (string)dr["password"];
-                            ds.city_code = (int)dr["city_code"];
+                            ds.cityCode = (int)dr["cityCode"];
 
                             results.Add(ds);
                         }
@@ -69,7 +69,7 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "SELECT * FROM delivery_staff WHERE id = @id";
+                    string query = "SELECT * FROM delivery_staff WHERE delivery_staff_Id = @id";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@id", id);
 
@@ -82,12 +82,12 @@ namespace DAL
                         {
                             Delivery_staff = new Delivery_staff();
 
-                            Delivery_staff.id = (int)dr["id"];
+                            Delivery_staff.delivery_staff_Id = (int)dr["delivery_staff_Id"];
                             Delivery_staff.first_name = (string)dr["first_name"];
                             Delivery_staff.last_name = (string)dr["last_name"];
                             Delivery_staff.login = (string)dr["login"];
                             Delivery_staff.password = (string)dr["password"];
-                            Delivery_staff.city_code = (int)dr["city_code"];
+                            Delivery_staff.cityCode = (int)dr["cityCode"];
                         }
                     }
                 }
