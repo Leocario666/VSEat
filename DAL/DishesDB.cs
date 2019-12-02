@@ -7,22 +7,22 @@ using System.Text;
 
 namespace DAL
 {
-    public class DishesDB:IDishesDB
+    public class DishDB:IDishDB
     {
         public IConfiguration Configuration { get; }
-        public DishesDB(IConfiguration configuration)
+        public DishDB(IConfiguration configuration)
         {
             Configuration = configuration;
         }
-        public List<Dishes> GetDishes(int idRestaurant)
+        public List<Dish> GetDishes(int idRestaurant)
         {
-            List<Dishes> results = null;
+            List<Dish> results = null;
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "Select * FROM dishes WHERE restaurant_id=@idRestaurant";
+                    string query = "Select * FROM dish WHERE restaurant_Id=@idRestaurant";
                     SqlCommand cmd = new SqlCommand(query, cn);
 
                     cmd.Parameters.AddWithValue("@idRestaurant", idRestaurant);
@@ -34,15 +34,15 @@ namespace DAL
                         while (dr.Read())
                         {
                             if (results == null)
-                                results = new List<Dishes>();
+                                results = new List<Dish>();
 
 
-                            Dishes dish = new Dishes();
+                            Dish dish = new Dish();
 
-                            dish.id = (int)dr["id"];
+                            dish.dish_Id = (int)dr["dish_Id"];
                             dish.name = (string)dr["name"];
                             dish.price = Convert.ToSingle(dr["price"]);
-                            dish.restaurant_id = (int)dr["restaurant_id"];
+                            dish.restaurant_Id = (int)dr["restaurant_Id"];
                            
 
 
@@ -60,16 +60,16 @@ namespace DAL
 
         }
 
-        public Dishes GetDish(int id)
+        public Dish GetDish(int id)
         {
-            Dishes dish = null;
+            Dish dish = null;
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "SELECT * FROM dishes WHERE id = @id";
+                    string query = "SELECT * FROM dish WHERE dish_Id = @id";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@id", id);
 
@@ -80,12 +80,12 @@ namespace DAL
                     {
                         if (dr.Read())
                         {
-                            dish = new Dishes();
+                            dish = new Dish();
 
-                            dish.id = (int)dr["id"];
+                            dish.dish_Id = (int)dr["dish_Id"];
                             dish.name = (string)dr["name"];
                             dish.price = (float)dr["price"];
-                            dish.restaurant_id = (int)dr["restaurant_id"];
+                            dish.restaurant_Id = (int)dr["restaurant_Id"];
                         }
                     }
                 }

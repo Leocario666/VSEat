@@ -6,11 +6,11 @@ using System.Text;
 
 namespace DAL
 {
-    public interface IDishesDB
+    public interface IDishDB
     {
         IConfiguration Configuration { get; }
-        List<Dishes> GetDishes(int idRestaurant);
-        Dishes GetDish(int id);
+        List<Dish> GetDishes(int idRestaurant);
+        Dish GetDish(int id);
        
     }
 }
