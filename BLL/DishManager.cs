@@ -7,11 +7,11 @@ using Microsoft.Extensions.Configuration;
 
 namespace BLL
 {
-    public class DishesManager
+    public class DishManager
     {
         public IDishDB DishesDb { get; }
 
-        public DishesManager(IConfiguration configuration)
+        public DishManager(IConfiguration configuration)
         {
             DishesDb = new DishDB(configuration);
         }

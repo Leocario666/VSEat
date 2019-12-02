@@ -8,7 +8,7 @@ using System.Text;
 
 namespace BLL
 {
-    public interface ICustomersManager
+    public interface ICustomerManager
     {
         ICustomersDB CustomersDb { get; }
         List<Customers> GetCustomers();

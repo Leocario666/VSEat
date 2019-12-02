@@ -40,10 +40,5 @@ namespace BLL
         {
             return Order_dishesDB.UpdateOrder_dishes(order_dishes);
         }
-
-        public int DeleteOrder_dishes(int order_id, int dishes_id)
-        {
-            return Order_dishesDB.DeleteOrder_dishes(order_id, dishes_id);
-        }
     }
 }
