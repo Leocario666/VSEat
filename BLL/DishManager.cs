@@ -7,13 +7,13 @@ using Microsoft.Extensions.Configuration;
 
 namespace BLL
 {
-    public class DishManager
+    public class DishManager:IDishManager
     {
-        public IDishDB DishDb { get; }
+        private IDishDB DishDb { get; }
 
-        public DishManager(IConfiguration configuration)
+        public DishManager(IDishDB dishDB)
         {
-            DishDb = new DishDB(configuration);
+            DishDb = dishDB;
         }
 
         public List<Dish> GetDishes(int idRestaurant)

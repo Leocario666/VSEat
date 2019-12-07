@@ -9,6 +9,7 @@ namespace DAL
 {
     public class CityDB : ICityDB
     {
+        private string connectionString = "Server=153.109.124.35;Database=DNVSEatDB;User Id=6231db;Password=Pwd46231.;MultipleActiveResultSets=true";
         public IConfiguration Configuration { get; }
 
         public CityDB(IConfiguration configuration)
@@ -19,7 +20,7 @@ namespace DAL
         public List<City> GetCities()
         {
             List<City> results = null;
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+            //string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             try
             {
@@ -59,7 +60,7 @@ namespace DAL
         {
 
             City city = null;
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+            //string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             try
             {

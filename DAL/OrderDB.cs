@@ -9,7 +9,8 @@ namespace DAL
 {
     public class OrderDB : IOrderDB
     {
-        public IConfiguration Configuration { get; }
+        private string connectionString = "Server=153.109.124.35;Database=DNVSEatDB;User Id=6231db;Password=Pwd46231.;MultipleActiveResultSets=true";
+        private IConfiguration Configuration { get; }
         public OrderDB(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -17,7 +18,7 @@ namespace DAL
         public List<Order> GetOrders(int customer_Id)
         {
             List<Order> results = null;
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+            //string connectionString = Configuration.GetConnectionString("DefaultConnection");
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
@@ -62,7 +63,7 @@ namespace DAL
         public Order GetOrder(int order_Id)
         {
             Order order = null;
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+            //string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             try
             {
@@ -99,7 +100,7 @@ namespace DAL
         }
         public Order AddOrder(Order order)
         {
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+            //string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             try
             {
@@ -127,7 +128,7 @@ namespace DAL
         public int UpdateOrder(Order order)
         {
             int result = 0;
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+            //string connectionString = Configuration.GetConnectionString("DefaultConnection");
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))

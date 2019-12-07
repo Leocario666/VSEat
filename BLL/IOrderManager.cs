@@ -8,7 +8,7 @@ namespace BLL
 {
     public interface IOrderManager
     {
-        IOrderDB OrdersDb { get; }
+     
         List<Order> GetOrders(int idCustomer);
         Order GetOrder(int id);
         Order AddOrder(Order order);

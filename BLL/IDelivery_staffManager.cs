@@ -8,7 +8,7 @@ namespace BLL
 {
     public interface IDelivery_staffManager
     {
-        IDelivery_staffDB Delivery_staffDB { get; }
+      
 
         List<Delivery_staff> GetDelivery_staffs();
         Delivery_staff GetDelivery_staff(int id);

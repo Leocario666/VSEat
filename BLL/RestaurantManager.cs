@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace BLL
 {
-    public class RestaurantManager
+    public class RestaurantManager:IRestaurantManager
     {
         private IRestaurantDB RestaurantDB { get; }
 

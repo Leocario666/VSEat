@@ -8,14 +8,14 @@ using DTO;
 
 namespace BLL
 {
-    public class Delivery_staffManager
+    public class Delivery_staffManager:IDelivery_staffManager
     {
 
-        public IDelivery_staffDB Delivery_staffDB { get; }
+        private IDelivery_staffDB Delivery_staffDB { get; }
 
-        public Delivery_staffManager(IConfiguration configuration)
+        public Delivery_staffManager(IDelivery_staffDB delivery_StaffDB)
         {
-            Delivery_staffDB = new Delivery_staffDB(configuration);
+            Delivery_staffDB = delivery_StaffDB;
         }
 
         public List<Delivery_staff> GetDelivery_staffs()

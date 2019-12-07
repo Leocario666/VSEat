@@ -9,7 +9,8 @@ namespace DAL
 {
     public class Order_dishesDB : IOrder_dishesDB
     {
-        public IConfiguration Configuration { get; }
+        private string connectionString = "Server=153.109.124.35;Database=DNVSEatDB;User Id=6231db;Password=Pwd46231.;MultipleActiveResultSets=true";
+        private IConfiguration Configuration { get; }
         public Order_dishesDB(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -18,7 +19,7 @@ namespace DAL
         public List<Order_dishes> GetOrders_dishes(int order_Id)
         {
             List<Order_dishes> results = null;
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+            //string connectionString = Configuration.GetConnectionString("DefaultConnection");
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
@@ -62,7 +63,7 @@ namespace DAL
         public List<Order_dishes> GetOrders_dishes_ds(int delivery_staff_Id)
         {
             List<Order_dishes> results = null;
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+            //string connectionString = Configuration.GetConnectionString("DefaultConnection");
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
@@ -106,7 +107,7 @@ namespace DAL
         public Order_dishes GetOrder_dishes(int order_Id, int dish_Id)
         {
             Order_dishes order_dishes = null;
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+            //string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             try
             {
@@ -144,7 +145,7 @@ namespace DAL
 
         public Order_dishes AddOrder_dishes(Order_dishes order_dishes)
         {
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+            //string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             try
             {
@@ -175,7 +176,7 @@ namespace DAL
         public int UpdateOrder_dishes(Order_dishes order_dishes)
         {
             int result = 0;
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+            //string connectionString = Configuration.GetConnectionString("DefaultConnection");
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))

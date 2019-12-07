@@ -9,7 +9,8 @@ namespace DAL
 {
     public class DishDB:IDishDB
     {
-        public IConfiguration Configuration { get; }
+        private string connectionString = "Server=153.109.124.35;Database=DNVSEatDB;User Id=6231db;Password=Pwd46231.;MultipleActiveResultSets=true";
+        private IConfiguration Configuration { get; }
         public DishDB(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -17,7 +18,7 @@ namespace DAL
         public List<Dish> GetDishes(int idRestaurant)
         {
             List<Dish> results = null;
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+            //string connectionString = Configuration.GetConnectionString("DefaultConnection");
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
@@ -63,7 +64,7 @@ namespace DAL
         public Dish GetDish(int id)
         {
             Dish dish = null;
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+            //string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             try
             {

@@ -9,7 +9,8 @@ namespace DAL
 {
     public class Delivery_staffDB : IDelivery_staffDB
     {
-        public IConfiguration Configuration { get; }
+        private string connectionString = "Server=153.109.124.35;Database=DNVSEatDB;User Id=6231db;Password=Pwd46231.;MultipleActiveResultSets=true";
+        private IConfiguration Configuration { get; }
         public Delivery_staffDB(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -18,7 +19,7 @@ namespace DAL
         public List<Delivery_staff> GetDelivery_staffs()
         {
             List<Delivery_staff> results = null;
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+            //string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             try
             {
@@ -63,7 +64,7 @@ namespace DAL
         public Delivery_staff GetDelivery_staff(int id)
         {
             Delivery_staff Delivery_staff = null;
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+            //string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             try
             {

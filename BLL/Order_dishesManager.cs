@@ -7,13 +7,13 @@ using DTO;
 
 namespace BLL
 {
-    public class Order_dishesManager
+    public class Order_dishesManager:IOrder_dishesManager
     {
-        public IOrder_dishesDB Order_dishesDB { get; }
+        private IOrder_dishesDB Order_dishesDB { get; }
 
-        public Order_dishesManager(IConfiguration configuration)
+        public Order_dishesManager(IOrder_dishesDB order_DishesDB)
         {
-            Order_dishesDB = new Order_dishesDB(configuration);
+            Order_dishesDB = order_DishesDB;
         }
 
         public List<Order_dishes> GetOrders_dishes(int order_id)

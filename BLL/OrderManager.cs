@@ -7,13 +7,13 @@ using System.Text;
 
 namespace BLL
 {
-    public class OrderManager
+    public class OrderManager:IOrderManager
     {
-        public IOrderDB OrderDb { get; }
+        private IOrderDB OrderDb { get; }
 
-        public OrderManager(IConfiguration configuration)
+        public OrderManager(IOrderDB orderDB)
         {
-            OrderDb = new OrderDB(configuration);
+            OrderDb = orderDB;
         }
 
         public List<Order> GetOrders(int idCustomer)
