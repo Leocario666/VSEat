@@ -16,12 +16,17 @@ namespace BLL
             CustomerDb = customerDB;
         }
 
-
+        // ******************************************************************** // 
+        // Method which manages the display of one customer
+        // ******************************************************************** // 
         public Customer GetCustomer(int id)
         {
             return CustomerDb.GetCustomer(id);
         }
 
+        // ******************************************************************** // 
+        // Method which manages the adding of one customer
+        // ******************************************************************** // 
         public Customer AddCustomer(Customer customer)
         {
             return CustomerDb.AddCustomer(customer);

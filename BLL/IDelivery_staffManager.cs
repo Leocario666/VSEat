@@ -8,9 +8,7 @@ namespace BLL
 {
     public interface IDelivery_staffManager
     {
-      
-
-        List<Delivery_staff> GetDelivery_staffs();
+        // List of the methods we can use
         Delivery_staff GetDelivery_staff(int id);
     }
 }

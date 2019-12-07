@@ -15,9 +15,9 @@ namespace DAL
         {
             Configuration = configuration;
         }
-        // ******************************************************* //
-        // Method which gets a list of all Dishes
-        // ******************************************************* //
+        // ************************************************************** //
+        // Method which gets a list of all Dishes for a restaurant
+        // ************************************************************** //
         public List<Dish> GetDishes(int idRestaurant)
         {
             // Creation of the list

@@ -8,7 +8,7 @@ namespace BLL
 {
     public interface IDishManager
     {
-        
+        // List of the methods we can use 
         List<Dish> GetDishes(int idRestaurant);
         Dish GetDish(int id);
 

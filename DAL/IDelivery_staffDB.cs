@@ -9,7 +9,6 @@ namespace DAL
     public interface IDelivery_staffDB
     {
         // List of the methods we can use 
-        List<Delivery_staff> GetDelivery_staffs();
         Delivery_staff GetDelivery_staff(int id);
     }
 }

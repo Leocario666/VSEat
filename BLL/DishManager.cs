@@ -16,11 +16,17 @@ namespace BLL
             DishDb = dishDB;
         }
 
+        // ******************************************************************** // 
+        // Method which manages the display of all dishes for one restaurant
+        // ******************************************************************** // 
         public List<Dish> GetDishes(int idRestaurant)
         {
             return DishDb.GetDishes(idRestaurant);
         }
 
+        // ******************************************************************** // 
+        // Method which manages the display of one dish
+        // ******************************************************************** // 
         public Dish GetDish(int id)
         {
             return DishDb.GetDish(id);
