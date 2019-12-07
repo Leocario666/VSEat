@@ -23,9 +23,5 @@ namespace BLL
             return CityDB.GetCities();
         }
 
-        public City GetCity(int code)
-        {
-            return CityDB.GetCity(code);
-        }
     }
 }

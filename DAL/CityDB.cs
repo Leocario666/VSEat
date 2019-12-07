@@ -16,23 +16,33 @@ namespace DAL
         {
             Configuration = configuration;
         }
-
+        // ******************************************************* //
+        // Method which gets a list of all cities
+        // ******************************************************* //
         public List<City> GetCities()
         {
+            // Creation of the list
             List<City> results = null;
             //string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             try
             {
+                // Connexion to the Database
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
+                    // The query
                     string query = "SELECT * FROM city";
+                   
+                    // Save the command
                     SqlCommand cmd = new SqlCommand(query, cn);
 
+                    // Open the command
                     cn.Open();
 
+                    // Execute the command
                     using (SqlDataReader dr = cmd.ExecuteReader())
                     {
+                        // The results
                         while (dr.Read())
                         {
                             if (results == null)
@@ -52,45 +62,9 @@ namespace DAL
             {
                 throw e;
             }
-
+            // Return The list
             return results;
         }
 
-        public City GetCity(int code)
-        {
-
-            City city = null;
-            //string connectionString = Configuration.GetConnectionString("DefaultConnection");
-
-            try
-            {
-                using (SqlConnection cn = new SqlConnection(connectionString))
-                {
-                    string query = "SELECT * FROM city WHERE cityCode = @code";
-                    SqlCommand cmd = new SqlCommand(query, cn);
-                    cmd.Parameters.AddWithValue("@code", code);
-
-
-                    cn.Open();
-
-                    using (SqlDataReader dr = cmd.ExecuteReader())
-                    {
-                        if (dr.Read())
-                        {
-                            city = new City();
-
-                            city.cityCode = (int)dr["cityCode"];
-                            city.name = (string)dr["name"];
-                        }
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-
-            return city;
-        }
     }
 }

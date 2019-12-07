@@ -15,24 +15,34 @@ namespace DAL
         {
             Configuration = configuration;
         }
-
+        // ******************************************************* //
+        // Method which gets a list of Order_dishes by Id order
+        // ******************************************************* //
         public List<Order_dishes> GetOrders_dishes(int order_Id)
         {
+            // Creation of the list
             List<Order_dishes> results = null;
             //string connectionString = Configuration.GetConnectionString("DefaultConnection");
             try
             {
+                // Connexion to the Database
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
+                    // The query
                     string query = "Select * FROM order_dishes WHERE order_Id=@order_Id";
+                   
+                    // Save the command
                     SqlCommand cmd = new SqlCommand(query, cn);
 
                     cmd.Parameters.AddWithValue("@order_Id", order_Id);
 
+                    // Open the command
                     cn.Open();
 
+                    // Execute the command
                     using (SqlDataReader dr = cmd.ExecuteReader())
                     {
+                        // The results
                         while (dr.Read())
                         {
                             if (results == null)
@@ -56,27 +66,37 @@ namespace DAL
             {
                 throw e;
             }
-
+            // Return the list
             return results;
         }
-
+        // ****************************************************************** //
+        // Method which gets a list of order_dishes by id of delivery Staff
+        // ****************************************************************** //
         public List<Order_dishes> GetOrders_dishes_ds(int delivery_staff_Id)
         {
+            // Create the list
             List<Order_dishes> results = null;
             //string connectionString = Configuration.GetConnectionString("DefaultConnection");
             try
             {
+                // Connexion to the Database
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
+                    // The query
                     string query = "Select * FROM order_dishes WHERE delivery_staff_Id=@delivery_staff_Id";
+                   
+                    // Save the command
                     SqlCommand cmd = new SqlCommand(query, cn);
 
                     cmd.Parameters.AddWithValue("@delivery_staff_Id", delivery_staff_Id);
 
+                    // Open the command
                     cn.Open();
 
+                    // Execute the command
                     using (SqlDataReader dr = cmd.ExecuteReader())
                     {
+                        // The results
                         while (dr.Read())
                         {
                             if (results == null)
@@ -100,28 +120,38 @@ namespace DAL
             {
                 throw e;
             }
-
+            // Return the list
             return results;
         }
-
+        // ******************************************************* //
+        // Method which gets an Order dishes by his primary key
+        // ******************************************************* //
         public Order_dishes GetOrder_dishes(int order_Id, int dish_Id)
         {
+            // Create an object order_dishes
             Order_dishes order_dishes = null;
             //string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             try
             {
+                // Connexion to the Database
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
+                    // The query
                     string query = "SELECT * FROM order_dishes WHERE order_Id = @order_Id AND dish_Id = @dish_Id";
+                    
+                    // Save the command
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@order_Id", order_Id);
                     cmd.Parameters.AddWithValue("@dish_Id", dish_Id);
 
+                    // Open the command
                     cn.Open();
 
+                    // Execute the command
                     using (SqlDataReader dr = cmd.ExecuteReader())
                     {
+                        // The results
                         if (dr.Read())
                         {
                             order_dishes = new Order_dishes();
@@ -139,19 +169,25 @@ namespace DAL
             {
                 throw e;
             }
-
+            // Return the object
             return order_dishes;
         }
-
+        // ******************************************************* //
+        // Method which adds an order dishes
+        // ******************************************************* //
         public Order_dishes AddOrder_dishes(Order_dishes order_dishes)
         {
             //string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             try
             {
+                // Connexion to the database
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
+                    // The query
                     string query = "INSERT INTO order_dishes(order_Id,dish_Id,quantity,price,delivery_staff_Id) values(@order_Id,@dish_Id,@quantity,@price,@delivery_staff_Id);";
+                   
+                    // Save the command
                     SqlCommand cmd = new SqlCommand(query, cn);
 
                     cmd.Parameters.AddWithValue("@order_Id", order_dishes.order_Id);
@@ -160,8 +196,10 @@ namespace DAL
                     cmd.Parameters.AddWithValue("@price", order_dishes.price);
                     cmd.Parameters.AddWithValue("@delivery_staff_Id", order_dishes.delivery_staff_Id);
 
+                    // Open the command
                     cn.Open();
 
+                    // Execute the command
                     cmd.ExecuteScalar();
                 }
             }
@@ -169,19 +207,25 @@ namespace DAL
             {
                 throw e;
             }
-
+            // Return the object
             return order_dishes;
         }
-
+        // ******************************************************* //
+        // Method which updates an order dishes
+        // ******************************************************* //
         public int UpdateOrder_dishes(Order_dishes order_dishes)
         {
             int result = 0;
             //string connectionString = Configuration.GetConnectionString("DefaultConnection");
             try
             {
+                // Connexion to the Database
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
+                    // The query
                     string query = "UPDATE order_dishes Set quantity=@quantity, price=@price, delivery_staff_Id=@delivery_staff_Id WHERE order_Id = @order_Id AND dish_Id = @dish_Id";
+                   
+                    // Save the command
                     SqlCommand cmd = new SqlCommand(query, cn);
 
                     cmd.Parameters.AddWithValue("@order_Id", order_dishes.order_Id);
@@ -190,9 +234,10 @@ namespace DAL
                     cmd.Parameters.AddWithValue("@price", order_dishes.price);
                     cmd.Parameters.AddWithValue("@delivery_staff_Id", order_dishes.delivery_staff_Id);
 
+                    // Open the command
                     cn.Open();
 
-
+                    // Execute the command
                     result = cmd.ExecuteNonQuery();
 
                 }
@@ -201,7 +246,7 @@ namespace DAL
             {
                 throw e;
             }
-
+            // Return the result
             return result;
         }
 

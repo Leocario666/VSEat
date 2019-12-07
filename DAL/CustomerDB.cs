@@ -15,72 +15,34 @@ namespace DAL
         {
             Configuration = configuration;
         }
-        public List<Customer> GetCustomers()
-        {
-            List<Customer> results = null;
-            //string connectionString = Configuration.GetConnectionString("DefaultConnection");
-            try
-            {
-                using (SqlConnection cn = new SqlConnection(connectionString))
-                {
-                    string query = "Select * FROM customer";
-                    SqlCommand cmd = new SqlCommand(query, cn);
-
-
-                    cn.Open();
-
-                    using (SqlDataReader dr = cmd.ExecuteReader())
-                    {
-                        while (dr.Read())
-                        {
-                            if (results == null)
-                                results = new List<Customer>();
-
-
-                            Customer customer = new Customer();
-
-                            customer.customer_Id = (int)dr["customer_Id"];
-                            customer.first_name = (string)dr["first_name"];
-                            customer.last_name = (string)dr["last_name"];
-                            customer.login = (string)dr["login"];
-                            customer.password = (string)dr["password"];
-                            customer.address = (string)dr["address"];
-                            customer.cityCode = (int)dr["cityCode"];
-
-                            
-
-                            results.Add(customer);
-                        }
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-
-            return results;
-
-        }
-
+        // ******************************************************* //
+        // Method which gets a customer by his Id
+        // ******************************************************* //
         public Customer GetCustomer(int id)
         {
+            // Creation of an object customer
             Customer customer = null;
             //string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             try
             {
+                // Connexion to the Database
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
+                    // The query
                     string query = "SELECT * FROM customer WHERE customer_Id = @id";
+                    
+                    // Save the command
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@id", id);
 
-
+                    // Open the command
                     cn.Open();
 
+                    // Execute the command
                     using (SqlDataReader dr = cmd.ExecuteReader())
                     {
+                        // The results
                         if (dr.Read())
                         {
                             customer = new Customer();
@@ -100,19 +62,25 @@ namespace DAL
             {
                 throw e;
             }
-
+            // Return the customer
             return customer;
         }
-
+        // ******************************************************* //
+        // Method which adds a customer
+        // ******************************************************* //
         public Customer AddCustomer(Customer customer)
         {
             //string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             try
             {
+                // Connexion to the Database
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
+                    // The query
                     string query = "INSERT INTO customer(first_name,last_name,login,password,address,cityCode) values(@first_name,@last_name,@login,@password,@address,@cityCode); SELECT SCOPE_IDENTITY()";
+                    
+                    // Save the command
                     SqlCommand cmd = new SqlCommand(query, cn);
 
                     cmd.Parameters.AddWithValue("@first_name", customer.first_name);
@@ -122,9 +90,10 @@ namespace DAL
                     cmd.Parameters.AddWithValue("@address", customer.address);
                     cmd.Parameters.AddWithValue("@cityCode", customer.cityCode);
                     
-
+                    // Open the command
                     cn.Open();
 
+                    // Execute the command
                     customer.customer_Id = Convert.ToInt32(cmd.ExecuteScalar());
 
 
@@ -134,7 +103,7 @@ namespace DAL
             {
                 throw e;
             }
-
+            // Return the customer
             return customer;
         }
         

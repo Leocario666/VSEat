@@ -8,7 +8,7 @@ namespace DAL
 {
     public interface IOrder_dishesDB
     {
-
+        // List of the methods we can use
         List<Order_dishes> GetOrders_dishes(int order_id);
         List<Order_dishes> GetOrders_dishes_ds(int delivery_staff_id);
         Order_dishes GetOrder_dishes(int order_id, int dishes_id);

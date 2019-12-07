@@ -8,9 +8,8 @@ namespace DAL
 {
     public interface ICityDB
     {
-        
+        // List of the methods we can use
         List<City> GetCities();
-        City GetCity(int code);
 
     }
 }

@@ -8,9 +8,7 @@ namespace BLL
 {
     public interface ICityManager
     {
-       
 
         List<City> GetCities();
-        City GetCity(int code);
     }
 }

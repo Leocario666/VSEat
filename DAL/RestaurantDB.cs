@@ -38,7 +38,7 @@ namespace DAL
                     // Open the command
                     cn.Open();
 
-                    // Execute the reader
+                    // Execute the command
                     using (SqlDataReader dr = cmd.ExecuteReader())
                     {
                         // The results
@@ -82,14 +82,14 @@ namespace DAL
                     // The query
                     string query = "SELECT * FROM restaurant WHERE restaurant_Id = @restaurant_Id";
 
-                    // Saving the command
+                    // Save the command
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@restaurant_Id", restaurant_Id);
 
                     // Open the command
                     cn.Open();
 
-                    // Execute the reader
+                    // Execute the command
                     using (SqlDataReader dr = cmd.ExecuteReader())
                     {
                         if (dr.Read())

@@ -39,7 +39,7 @@ namespace DAL
                     // Open the command
                     cn.Open();
 
-                    // Execute the reader
+                    // Execute the command
                     using (SqlDataReader dr = cmd.ExecuteReader())
                     {
                         // The results
@@ -95,7 +95,7 @@ namespace DAL
                     // Open the command
                     cn.Open();
 
-                    // Execute the reader
+                    // Execute the command
                     using (SqlDataReader dr = cmd.ExecuteReader())
                     {
                         // The results
@@ -142,6 +142,7 @@ namespace DAL
                     // Open the command
                     cn.Open();
 
+                    // Execute the command
                     order.order_Id = Convert.ToInt32(cmd.ExecuteScalar());
 
                 }
@@ -154,7 +155,7 @@ namespace DAL
             return order;
         }
         // ******************************************************* //
-        // Method which update an order
+        // Method which updates an order
         // ******************************************************* //
         public int UpdateOrder(Order order)
         {
@@ -179,6 +180,7 @@ namespace DAL
                     // Open the command
                     cn.Open();
 
+                    // Execute the command
                     result = cmd.ExecuteNonQuery();
 
                 }

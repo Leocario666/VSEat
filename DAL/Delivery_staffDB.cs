@@ -15,23 +15,33 @@ namespace DAL
         {
             Configuration = configuration;
         }
-
+        // ******************************************************* //
+        // Method which gets a list of all delivery_Staff
+        // ******************************************************* //
         public List<Delivery_staff> GetDelivery_staffs()
         {
+            // Creation of the list
             List<Delivery_staff> results = null;
             //string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             try
             {
+                // Connexion to the Database
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
+                    // The query
                     string query = "SELECT * FROM delivery_staff";
+                   
+                    // Save the command
                     SqlCommand cmd = new SqlCommand(query, cn);
 
+                    // Open the command
                     cn.Open();
 
+                    // Execute the command
                     using (SqlDataReader dr = cmd.ExecuteReader())
                     {
+                        // The results
                         while (dr.Read())
                         {
                             if (results == null)
@@ -56,29 +66,38 @@ namespace DAL
             {
                 throw e;
             }
-
+            // Return the list
             return results;
 
         }
-
+        // ******************************************************* //
+        // Method which gets a Delivery_Staff by his Id
+        // ******************************************************* //
         public Delivery_staff GetDelivery_staff(int id)
         {
+            // Creation of an object Delivery_staff
             Delivery_staff Delivery_staff = null;
             //string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             try
             {
+                // Connexion to the Database
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
+                    // The query
                     string query = "SELECT * FROM delivery_staff WHERE delivery_staff_Id = @id";
+                    
+                    // Save the command
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@id", id);
 
-
+                    // Open the command
                     cn.Open();
 
+                    // Execute the command
                     using (SqlDataReader dr = cmd.ExecuteReader())
                     {
+                        // The results
                         if (dr.Read())
                         {
                             Delivery_staff = new Delivery_staff();
@@ -97,7 +116,7 @@ namespace DAL
             {
                 throw e;
             }
-
+            // Return the delivery_Staff
             return Delivery_staff;
         }
 

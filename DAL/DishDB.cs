@@ -15,23 +15,34 @@ namespace DAL
         {
             Configuration = configuration;
         }
+        // ******************************************************* //
+        // Method which gets a list of all Dishes
+        // ******************************************************* //
         public List<Dish> GetDishes(int idRestaurant)
         {
+            // Creation of the list
             List<Dish> results = null;
             //string connectionString = Configuration.GetConnectionString("DefaultConnection");
             try
             {
+                // Connexion to the Database
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
+                    // The query
                     string query = "Select * FROM dish WHERE restaurant_Id=@idRestaurant";
+                   
+                    // Save the command
                     SqlCommand cmd = new SqlCommand(query, cn);
 
                     cmd.Parameters.AddWithValue("@idRestaurant", idRestaurant);
 
+                    // Open the command
                     cn.Open();
 
+                    // Execute the command
                     using (SqlDataReader dr = cmd.ExecuteReader())
                     {
+                        // The results
                         while (dr.Read())
                         {
                             if (results == null)
@@ -56,29 +67,38 @@ namespace DAL
             {
                 throw e;
             }
-
+            // Return the list
             return results;
 
         }
-
+        // ******************************************************* //
+        // Method which gets a dish by his Id
+        // ******************************************************* //
         public Dish GetDish(int id)
         {
+            // Create a new object dish
             Dish dish = null;
             //string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             try
             {
+                // Connexion to the Database
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
+                    // The query
                     string query = "SELECT * FROM dish WHERE dish_Id = @id";
+                   
+                    // Save the command
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@id", id);
 
-
+                    // Open the command
                     cn.Open();
 
+                    // Execute the command 
                     using (SqlDataReader dr = cmd.ExecuteReader())
                     {
+                        // The result
                         if (dr.Read())
                         {
                             dish = new Dish();
@@ -95,7 +115,7 @@ namespace DAL
             {
                 throw e;
             }
-
+            // Return the dish
             return dish;
         }
 
