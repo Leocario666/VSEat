@@ -9,7 +9,9 @@ namespace BLL
 {
     public class RestaurantManager:IRestaurantManager
     {
-        private IRestaurantDB RestaurantDB { get; }
+        public IRestaurantDB RestaurantDB { get; }
+
+       
 
         public RestaurantManager(IRestaurantDB restaurantDB)
         {

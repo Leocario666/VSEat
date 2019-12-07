@@ -9,6 +9,7 @@ namespace BLL
     public interface IRestaurantManager
     {
         // List of the methods we can use 
+        
         List<Restaurant> GetRestaurants();
         Restaurant GetRestaurant(int id);
     }

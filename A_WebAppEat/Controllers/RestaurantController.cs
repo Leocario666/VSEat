@@ -5,16 +5,18 @@ using System.Threading.Tasks;
 using BLL;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 
 namespace A_WebAppEat.Controllers
 {
     public class RestaurantController : Controller
     {
-        public IRestaurantManager RestaurantManager { get; }
+        private IRestaurantManager RestaurantManager { get; }
         public RestaurantController(IRestaurantManager restaurantManager)
         {
             RestaurantManager = restaurantManager;
         }
+
         // GET: Restaurant
         public ActionResult Index()
         {
@@ -24,6 +26,7 @@ namespace A_WebAppEat.Controllers
         // GET: Restaurant/Details/5
         public ActionResult Details(int id)
         {
+            
             var restaurant = RestaurantManager.GetRestaurant(id);
             return View(restaurant);
         }

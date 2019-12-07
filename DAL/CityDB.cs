@@ -10,7 +10,7 @@ namespace DAL
     public class CityDB : ICityDB
     {
         private string connectionString = "Server=153.109.124.35;Database=DNVSEatDB;User Id=6231db;Password=Pwd46231.;MultipleActiveResultSets=true";
-        public IConfiguration Configuration { get; }
+        private IConfiguration Configuration { get; }
 
         public CityDB(IConfiguration configuration)
         {

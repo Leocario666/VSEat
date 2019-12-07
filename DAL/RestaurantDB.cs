@@ -99,7 +99,7 @@ namespace DAL
 
                             restaurant.restaurant_Id = (int)dr["restaurant_Id"];
                             restaurant.name = (string)dr["name"];
-                            restaurant.cityCode = (int)dr["citCode"];
+                            restaurant.cityCode = (int)dr["cityCode"];
                         }
                     }
                 }
