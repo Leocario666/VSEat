@@ -41,7 +41,6 @@ namespace DAL
 
                             restaurants.restaurant_Id = (int)dr["restaurant_Id"];
                             restaurants.name = (string)dr["name"];
-                            restaurants.created_at = (DateTime)dr["created_at"];
                             restaurants.cityCode = (int)dr["cityCode"];
 
                             results.Add(restaurants);
@@ -81,7 +80,6 @@ namespace DAL
 
                             restaurant.restaurant_Id = (int)dr["restaurant_Id"];
                             restaurant.name = (string)dr["name"];
-                            restaurant.created_at = (DateTime)dr["created_at"];
                             restaurant.cityCode = (int)dr["citCode"];
                         }
                     }
