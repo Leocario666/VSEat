@@ -15,23 +15,33 @@ namespace DAL
         {
             Configuration = configuration;
         }
-
+        // ******************************************************* //
+        // Method which gets a list of all restaurants
+        // ******************************************************* //
         public List<Restaurant> GetRestaurants()
         {
+            // Creation of the list 
             List<Restaurant> results = null;
             //string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             try
             {
+                // Connexion to the Database
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
+                    // The query
                     string query = "SELECT * FROM restaurant";
+
+                    // Save the command
                     SqlCommand cmd = new SqlCommand(query, cn);
 
+                    // Open the command
                     cn.Open();
 
+                    // Execute the reader
                     using (SqlDataReader dr = cmd.ExecuteReader())
                     {
+                        // The results
                         while (dr.Read())
                         {
                             if (results == null)
@@ -52,30 +62,39 @@ namespace DAL
             {
                 throw e;
             }
-
+            // Return the list
             return results;
         }
-
+        // ******************************************************* //
+        // Method which gets a restaurant by his ID
+        // ******************************************************* //
         public Restaurant GetRestaurant(int restaurant_Id)
         {
+            // Create an object restaurant
             Restaurant restaurant = null;
             //string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             try
             {
+                // Connexion to the Database
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
+                    // The query
                     string query = "SELECT * FROM restaurant WHERE restaurant_Id = @restaurant_Id";
+
+                    // Saving the command
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@restaurant_Id", restaurant_Id);
 
-
+                    // Open the command
                     cn.Open();
 
+                    // Execute the reader
                     using (SqlDataReader dr = cmd.ExecuteReader())
                     {
                         if (dr.Read())
                         {
+                            // The results
                             restaurant = new Restaurant();
 
                             restaurant.restaurant_Id = (int)dr["restaurant_Id"];
@@ -89,7 +108,7 @@ namespace DAL
             {
                 throw e;
             }
-
+            // Return the restaurant
             return restaurant;
         }
 
