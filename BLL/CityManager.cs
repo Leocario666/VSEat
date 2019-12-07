@@ -18,6 +18,9 @@ namespace BLL
             CityDB = cityDB;
         }
 
+        // *********************************************************** // 
+        // Method which manages the display of all cities
+        // *********************************************************** // 
         public List<City> GetCities()
         {
             return CityDB.GetCities();

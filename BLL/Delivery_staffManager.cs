@@ -18,11 +18,9 @@ namespace BLL
             Delivery_staffDB = delivery_StaffDB;
         }
 
-        public List<Delivery_staff> GetDelivery_staffs()
-        {
-            return Delivery_staffDB.GetDelivery_staffs();
-        }
-
+        // ******************************************************************** // 
+        // Method which manages the display of one delivery staff
+        // ******************************************************************** // 
         public Delivery_staff GetDelivery_staff(int id)
         {
             return Delivery_staffDB.GetDelivery_staff(id);
