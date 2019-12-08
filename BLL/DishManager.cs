@@ -9,7 +9,7 @@ namespace BLL
 {
     public class DishManager:IDishManager
     {
-        private IDishDB DishDb { get; }
+        public IDishDB DishDb { get; }
 
         public DishManager(IDishDB dishDB)
         {

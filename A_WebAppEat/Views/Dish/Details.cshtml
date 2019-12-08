@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<DTO.Dish>
 
 @{
-    ViewData["Title"] = "Plat";
+    ViewData["Title"] = "Details";
 }
 
-<h2>Plat</h2>
+<h2>Details</h2>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -44,10 +44,8 @@
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id=item.dish_Id  }) |
-                @Html.ActionLink("Details", "Details", new {  id=item.dish_Id   }) |
-                @Html.ActionLink("Delete", "Delete", new {  id=item.dish_Id   })
-                @Html.ActionLink("Plat", "Plat", new { id=item.restaurant_Id})
-               
+                @Html.ActionLink("Details", "Details", new { id=item.dish_Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.dish_Id })
             </td>
         </tr>
 }
