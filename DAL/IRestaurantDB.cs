@@ -10,7 +10,7 @@ namespace DAL
     {
         // List of the method we can use
 
-        List<Restaurant> GetRestaurants();
+        List<Restaurant> GetRestaurants(int cityCode);
         Restaurant GetRestaurant(int id);
     }
 }

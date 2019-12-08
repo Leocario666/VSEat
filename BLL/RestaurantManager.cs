@@ -21,9 +21,9 @@ namespace BLL
         // ************************************************************* // 
         // Method which manages the display of all restaurants
         // ************************************************************* // 
-        public List<Restaurant> GetRestaurants()
+        public List<Restaurant> GetRestaurants(int cityCode)
         {
-            return RestaurantDB.GetRestaurants();
+            return RestaurantDB.GetRestaurants(cityCode);
         }
 
         // ************************************************************* // 
