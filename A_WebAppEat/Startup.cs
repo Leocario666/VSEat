@@ -35,6 +35,8 @@ namespace A_WebAppEat
 
             services.AddScoped<IRestaurantManager, RestaurantManager>();
             services.AddScoped<IRestaurantDB, RestaurantDB>();
+            services.AddScoped<IDishManager, DishManager>();
+            services.AddScoped<IDishDB, DishDB>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
