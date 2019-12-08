@@ -39,14 +39,17 @@ namespace A_WebAppEat.Controllers
         public ActionResult Details(int id)
         {
 
-            
+            var restaurant = RestaurantManager.GetRestaurant(id);
 
-            DishController test = new DishController(dishManager);
-
-
-            return View(test.Details(id));
+            return View(restaurant);
         }
 
+        public ActionResult Plat(int micha)
+        {
+            var dish = dishManager.GetDishes(micha);
+
+            return View(dish);
+        }
     
         
     }

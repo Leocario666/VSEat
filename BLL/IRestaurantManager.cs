@@ -10,7 +10,7 @@ namespace BLL
     {
         // List of the methods we can use 
         
-        List<Restaurant> GetRestaurants(int cityCode);
+        List<Restaurant> GetRestaurants();
         Restaurant GetRestaurant(int id);
     }
 }

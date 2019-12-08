@@ -34,7 +34,7 @@ namespace DAL
                     // Save the command
                     SqlCommand cmd = new SqlCommand(query, cn);
 
-                    cmd.Parameters.AddWithValue("@idRestaurant", idRestaurant);
+                    
 
                     // Open the command
                     cn.Open();

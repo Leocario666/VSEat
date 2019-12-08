@@ -18,7 +18,7 @@ namespace DAL
         // ************************************************************** //
         // Method which gets a list of all restaurants for one city
         // ************************************************************** //
-        public List<Restaurant> GetRestaurants(int cityCode)
+        public List<Restaurant> GetRestaurants()
         {
             // Creation of the list 
             List<Restaurant> results = null;
@@ -30,11 +30,11 @@ namespace DAL
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
                     // The query
-                    string query = "SELECT * FROM restaurant WHERE cityCode = @cityCode";
+                    string query = "SELECT * FROM restaurant";
 
                     // Save the command
                     SqlCommand cmd = new SqlCommand(query, cn);
-
+                    
                     // Open the command
                     cn.Open();
 
