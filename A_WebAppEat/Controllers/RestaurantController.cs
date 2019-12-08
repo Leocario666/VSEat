@@ -48,16 +48,14 @@ namespace A_WebAppEat.Controllers
         }
 
 
+        //GET : Restaurant/Plat/1
         public ActionResult Plat(int id)
         {
             IDishDB dish = new DishDB(Configuration);
             IDishManager dishManager = new DishManager(dish);
 
-            
-
+           
             var dishes = dishManager.GetDishes(id);
-
-            
 
             return View(dishes);
 

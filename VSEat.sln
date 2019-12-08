@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BLL", "BLL\BLL.csproj", "{5
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DTO", "DTO\DTO.csproj", "{F2FD06E5-C907-4D2E-B98F-A87C333FA44F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "A_WebAppEat", "A_WebAppEat\A_WebAppEat.csproj", "{DB61664E-0E99-4509-95E1-EB0024D5E7FA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VSEat", "A_WebAppEat\VSEat.csproj", "{DB61664E-0E99-4509-95E1-EB0024D5E7FA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
