@@ -29,12 +29,12 @@ namespace DAL
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
                     // The query
-                    string query = "Select * FROM dish WHERE restaurant_Id=@idRestaurant";
+                    string query = "Select * FROM dish WHERE restaurant_id=@idRestaurant";
                    
                     // Save the command
                     SqlCommand cmd = new SqlCommand(query, cn);
 
-                    
+                    cmd.Parameters.AddWithValue("@idRestaurant", idRestaurant);
 
                     // Open the command
                     cn.Open();
@@ -54,7 +54,7 @@ namespace DAL
                             dish.dish_Id = (int)dr["dish_Id"];
                             dish.name = (string)dr["name"];
                             dish.price = Convert.ToSingle(dr["price"]);
-                            dish.restaurant_Id = (int)dr["restaurant_Id"];
+                            dish.restaurant_Id = (int)dr["restaurant_id"];
                            
 
 
