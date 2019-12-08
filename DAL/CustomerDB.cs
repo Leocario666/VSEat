@@ -78,13 +78,13 @@ namespace DAL
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
                     // The query
-                    string query = "INSERT INTO customer(first_name,last_name,login,password,address,cityCode) values(@first_name,@last_name,@login,@password,@address,@cityCode); SELECT SCOPE_IDENTITY()";
+                    string query = "INSERT INTO customer(first_name,last_name,login,password,address,cityCode) values(@First_name,@Last_name,@login,@password,@address,@cityCode); SELECT SCOPE_IDENTITY()";
                     
                     // Save the command
                     SqlCommand cmd = new SqlCommand(query, cn);
 
-                    cmd.Parameters.AddWithValue("@first_name", customer.first_name);
-                    cmd.Parameters.AddWithValue("@last_name", customer.last_name);
+                    cmd.Parameters.AddWithValue("@First_name", customer.first_name);
+                    cmd.Parameters.AddWithValue("@Last_name", customer.last_name);
                     cmd.Parameters.AddWithValue("@login", customer.login);
                     cmd.Parameters.AddWithValue("@password", customer.password);
                     cmd.Parameters.AddWithValue("@address", customer.address);
@@ -106,6 +106,8 @@ namespace DAL
             // Return the customer
             return customer;
         }
+
+        
         
     }
 }

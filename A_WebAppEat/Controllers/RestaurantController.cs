@@ -18,7 +18,7 @@ namespace A_WebAppEat.Controllers
         private IConfiguration Configuration { get; }
 
 
-        private IDishManager DishManager;
+        //private IDishManager DishManager;
         
 
         
@@ -33,7 +33,9 @@ namespace A_WebAppEat.Controllers
         // GET: Restaurant
         public ActionResult Index()
         {
+           
             var restaurant = RestaurantManager.GetRestaurants();
+           
             return View(restaurant);
         }
 

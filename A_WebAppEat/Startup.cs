@@ -32,7 +32,10 @@ namespace A_WebAppEat
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
+            services.AddSession();
 
+            services.AddScoped<ICustomerManager, CustomerManager>();
+            services.AddScoped<ICustomerDB, CustomerDB>();
             services.AddScoped<IRestaurantManager, RestaurantManager>();
             services.AddScoped<IRestaurantDB, RestaurantDB>();
             services.AddScoped<IDishManager, DishManager>();
@@ -56,6 +59,7 @@ namespace A_WebAppEat
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
+            app.UseSession();
 
             app.UseMvc(routes =>
             {
