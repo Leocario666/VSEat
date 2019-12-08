@@ -21,7 +21,7 @@ namespace A_WebAppEat.Controllers
         private IDishManager DishManager;
         
 
-        //private DishController dishController = new DishController(DishManager);
+        
 
         public RestaurantController(IRestaurantManager restaurantManager)
         {
