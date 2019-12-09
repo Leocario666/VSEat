@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Configuration;
+using System.Security.Claims;
 
 namespace VSEat.Controllers
 {
@@ -16,10 +17,15 @@ namespace VSEat.Controllers
     {
         private IConfiguration Configuration { get; }
         private ICustomerManager CustomerManager { get; }
+        public Customer customer_Id { get; }
+        private readonly IHttpContextAccessor _httpContextAccessor;
         public CustomerController(ICustomerManager customerManager)
         {
             CustomerManager = customerManager;
+            
         }
+
+
 
         [HttpGet]
         public ActionResult Index()
@@ -29,12 +35,19 @@ namespace VSEat.Controllers
 
        public ActionResult Index(Customer c)
         {
+            
 
             if (CustomerManager.isUserValid(c))
             {
+                //int id = CustomerManager.c;
+                var test = HttpContext.User.Identity;
                 HttpContext.Session.SetString("login", c.login);
-                HttpContext.Session.SetString("customer_id", c.customer_Id.ToString());
-                return RedirectToAction("Index", "Home", new { user = c.login });
+
+                
+                //var userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+                //var tesst = User.Identity.Name;
+                return RedirectToAction("Index", "Home", new { user = c.login});
             }
             else
             {
