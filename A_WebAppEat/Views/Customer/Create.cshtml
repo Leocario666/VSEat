@@ -1,4 +1,4 @@
-﻿@model DTO.Customer
+﻿@model VSEat.Models.Customer
 
 @{
     ViewData["Title"] = "Create";
@@ -15,7 +15,7 @@
             
             <div class="form-group">
                 <label asp-for="first_name" class="control-label"></label>
-                <input asp-for="first_name" class="form-control" />
+                <input asp-for="first_name" class="form-control" autofocus />
                 <span asp-validation-for="first_name" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -25,8 +25,14 @@
             </div>
             <div class="form-group">
                 <label asp-for="cityCode" class="control-label"></label>
-                <input asp-for="cityCode" class="form-control" />
-                <span asp-validation-for="cityCode" class="text-danger"></span>
+                
+                <select itemid="cityCode">
+                     <option value=1920>1920</option>
+                     <option value=1950>Sion</option>
+                     <option value=1974>Arbaz</option>
+                </select>
+                
+                <span asp-validation-for="cityCode" class="text-danger" ></span>
             </div>
             <div class="form-group">
                 <label asp-for="login" class="control-label"></label>

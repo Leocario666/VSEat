@@ -36,6 +36,8 @@ namespace A_WebAppEat
 
             services.AddScoped<ICustomerManager, CustomerManager>();
             services.AddScoped<ICustomerDB, CustomerDB>();
+            services.AddScoped<IDelivery_staffManager, Delivery_staffManager>();
+            services.AddScoped<IDelivery_staffDB, Delivery_staffDB>();
             services.AddScoped<IRestaurantManager, RestaurantManager>();
             services.AddScoped<IRestaurantDB, RestaurantDB>();
             services.AddScoped<IDishManager, DishManager>();
