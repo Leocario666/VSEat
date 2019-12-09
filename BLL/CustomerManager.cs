@@ -11,6 +11,10 @@ namespace BLL
     {
         private ICustomerDB CustomerDb { get; }
 
+        public bool isUserValid(Customer c)
+        {
+            return CustomerDb.isUserValid(c);
+        }
         public CustomerManager (ICustomerDB customerDB)
         {
             CustomerDb = customerDB;

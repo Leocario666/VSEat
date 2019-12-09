@@ -29,26 +29,20 @@ namespace VSEat.Controllers
 
        public ActionResult Index(Customer c)
         {
-            int cptTrue = 0;
-            ICustomerDB dish = new CustomerDB(Configuration);
-            ICustomerManager dishManager = new CustomerManager(dish);
-            var loginlist = dishManager.GetCustomersLogins();
-            foreach (string code in loginlist)
-            {
-                if (code.Equals(c.login))
-                {
-                    cptTrue++;
-                }
-            }
 
-            if (cptTrue == 1)
+            if (CustomerManager.isUserValid(c))
             {
                 HttpContext.Session.SetString("login", c.login);
+                HttpContext.Session.SetString("customer_id", c.customer_Id.ToString());
                 return RedirectToAction("Index", "Home", new { user = c.login });
-            } else
+            }
+            else
             {
                 return View();
             }
+           
+            
+        
             
         }
 
