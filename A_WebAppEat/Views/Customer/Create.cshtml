@@ -26,10 +26,12 @@
             <div class="form-group">
                 <label asp-for="cityCode" class="control-label"></label>
                 
-                <select itemid="cityCode">
-                     <option value=1920>1920</option>
-                     <option value=1950>Sion</option>
-                     <option value=1974>Arbaz</option>
+                <select asp-for="cityCode" class="form-control text-center center-block">
+                    <option value=1920>Martigny</option>
+                    <option value=1950>Sion</option>
+                    <option value=1974>Arbaz</option>
+                    <option value=3960>Sierre</option>
+                    <option value=3963>Crans-Montana</option>
                 </select>
                 
                 <span asp-validation-for="cityCode" class="text-danger" ></span>
