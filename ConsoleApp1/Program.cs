@@ -17,14 +17,16 @@ namespace ConsoleApp1
 
         static void Main(string[] args)
         {
-            /*var customersDB = new CustomerManager(Configuration);
+            ICustomerDB customerDB = new CustomerDB(Configuration);
+            ICustomerManager customerManager = new CustomerManager(customerDB);
+            Customer c = new Customer();
 
-            var customersL = customersDB.GetCustomers();
+            var customersL = customerManager.GetCustomersLogins();
 
             foreach (var customer in customersL)
             {
                 Console.WriteLine(customer.ToString());
-            }*/
+            }
         }
 
     }

@@ -17,12 +17,6 @@ namespace A_WebAppEat.Controllers
         private IRestaurantManager RestaurantManager { get; }
         private IConfiguration Configuration { get; }
 
-
-        //private IDishManager DishManager;
-        
-
-        
-
         public RestaurantController(IRestaurantManager restaurantManager)
         {
             

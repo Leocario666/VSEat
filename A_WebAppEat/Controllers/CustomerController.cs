@@ -27,10 +27,29 @@ namespace VSEat.Controllers
             return View();
         }
 
-       public ActionResult Index(DTO.Customer c)
+       public ActionResult Index(Customer c)
         {
-            HttpContext.Session.SetString("login", c.login);
-            return RedirectToAction("Index", "Home", new { user = c.login });
+            int cptTrue = 0;
+            ICustomerDB dish = new CustomerDB(Configuration);
+            ICustomerManager dishManager = new CustomerManager(dish);
+            var loginlist = dishManager.GetCustomersLogins();
+            foreach (string code in loginlist)
+            {
+                if (code.Equals(c.login))
+                {
+                    cptTrue++;
+                }
+            }
+
+            if (cptTrue == 1)
+            {
+                HttpContext.Session.SetString("login", c.login);
+                return RedirectToAction("Index", "Home", new { user = c.login });
+            } else
+            {
+                return View();
+            }
+            
         }
 
 
