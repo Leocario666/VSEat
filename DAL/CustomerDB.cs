@@ -16,6 +16,32 @@ namespace DAL
             Configuration = configuration;
         }
 
+        public bool isUserValid(Customer c)
+        {
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+                    cn.Open();
+                    string query = "SELECT * FROM customer WHERE login='" + c.login + "' and password='" + c.password + "'";
+                    SqlCommand cmd = new SqlCommand(query, cn);
+                    SqlDataReader dr = cmd.ExecuteReader();
+
+
+                    if (dr.Read())
+                    {
+                        return true;
+                    } else
+                    {
+                        return false;
+                    }
+                }
+            } catch(Exception e)
+            {
+                throw e;
+            }
+        }
+
         // ******************************************************* //
         // Method which gets all logins
         // ******************************************************* //

@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "GetRestaurants";
+    
 }
 
 <h2>Index</h2>
@@ -23,6 +24,7 @@
     </thead>
     <tbody>
 @foreach (var item in Model) {
+    
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.name)
