@@ -16,6 +16,16 @@ namespace BLL
             CustomerDb = customerDB;
         }
 
+        public List<String> GetCustomersLogins()
+        {
+            return CustomerDb.GetCustomersLogins();
+        }
+
+        public List<Customer> GetCustomersPasswords()
+        {
+            return CustomerDb.GetCustomersPasswords();
+        }
+
         // ******************************************************************** // 
         // Method which manages the display of one customer
         // ******************************************************************** // 
