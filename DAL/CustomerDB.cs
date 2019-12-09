@@ -83,6 +83,7 @@ namespace DAL
                     // Save the command
                     SqlCommand cmd = new SqlCommand(query, cn);
 
+                    
                     cmd.Parameters.AddWithValue("@First_name", customer.first_name);
                     cmd.Parameters.AddWithValue("@Last_name", customer.last_name);
                     cmd.Parameters.AddWithValue("@login", customer.login);

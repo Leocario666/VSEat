@@ -50,7 +50,7 @@ namespace DAL
 
                             City city = new City();
 
-                            city.cityCode = (int)dr["code"];
+                            city.cityCode = (int)dr["cityCode"];
                             city.name = (string)dr["name"];
 
                             results.Add(city);

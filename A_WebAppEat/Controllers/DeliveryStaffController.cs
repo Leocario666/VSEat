@@ -2,73 +2,62 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using BLL;
-using DAL;
-using DTO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.Extensions.Configuration;
 
 namespace VSEat.Controllers
 {
-    public class CustomerController : Controller
+    public class DeliveryStaffController : Controller
     {
-        private IConfiguration Configuration { get; }
-        private ICustomerManager CustomerManager { get; }
-        public CustomerController(ICustomerManager customerManager)
-        {
-            CustomerManager = customerManager;
-        }
-
         [HttpGet]
         public ActionResult Index()
         {
             return View();
         }
-
-       public ActionResult Index(DTO.Customer c)
+        // GET: DeliveryStaff
+        public ActionResult Index(DTO.Delivery_staff ds)
         {
-            HttpContext.Session.SetString("login", c.login);
-            return RedirectToAction("Index", "Home", new { user = c.login });
+            HttpContext.Session.SetString("login", ds.login);
+            return RedirectToAction("Index", "Home", new { user = ds.login });
+            
         }
 
-
-        // GET: Customer/Details/5
+        // GET: DeliveryStaff/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
+        // GET: DeliveryStaff/Create
         public ActionResult Create()
         {
             return View();
         }
-        // GET: Customer/Create
+
+        // POST: DeliveryStaff/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(DTO.Customer c)
+        public ActionResult Create(IFormCollection collection)
         {
-            ICityDB cityDB = new CityDB(Configuration);
-            ICityManager cityManager = new CityManager(cityDB);
+            try
+            {
+                // TODO: Add insert logic here
 
-            var citieslist = cityManager.GetCities();
-
-           
-            ViewBag.City = citieslist;
-            CustomerManager.AddCustomer(c);
-            return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
         }
 
-        // POST: Customer/Create
- 
-        // GET: Customer/Edit/5
+        // GET: DeliveryStaff/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: Customer/Edit/5
+        // POST: DeliveryStaff/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, IFormCollection collection)
@@ -85,13 +74,13 @@ namespace VSEat.Controllers
             }
         }
 
-        // GET: Customer/Delete/5
+        // GET: DeliveryStaff/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: Customer/Delete/5
+        // POST: DeliveryStaff/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)
