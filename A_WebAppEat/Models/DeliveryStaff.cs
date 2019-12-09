@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -7,11 +8,10 @@ namespace VSEat.Models
 {
     public class DeliveryStaff
     {
-        public int delivery_staff_Id { get; set; }
-        public string first_name { get; set; }
-        public string last_name { get; set; }
-        public int cityCode { get; set; }
+        [Required(ErrorMessage ="A login is required")]
         public string login { get; set; }
+
+        [Required(ErrorMessage = "A password is required")]
         public string password { get; set; }
     }
 }

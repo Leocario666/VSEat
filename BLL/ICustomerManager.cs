@@ -12,8 +12,7 @@ namespace BLL
     {
         // List of the methods we can use 
         bool isUserValid(Customer c);
-        List<String> GetCustomersLogins();
-        List<Customer> GetCustomersPasswords();
+       
         Customer GetCustomer(int id);
         Customer AddCustomer(Customer customer);
        

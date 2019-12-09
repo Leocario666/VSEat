@@ -19,6 +19,13 @@ namespace BLL
         }
 
         // ******************************************************************** // 
+        // Method which manages the test of the connection
+        // ******************************************************************** // 
+        public bool isUserValid(Delivery_staff ds)
+        {
+            return Delivery_staffDB.isUserValid(ds);
+        }
+        // ******************************************************************** // 
         // Method which manages the display of one delivery staff
         // ******************************************************************** // 
         public Delivery_staff GetDelivery_staff(int id)

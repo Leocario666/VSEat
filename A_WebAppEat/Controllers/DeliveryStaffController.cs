@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BLL;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,6 +10,12 @@ namespace VSEat.Controllers
 {
     public class DeliveryStaffController : Controller
     {
+        private IDelivery_staffManager DSManager { get; }
+        public DeliveryStaffController(IDelivery_staffManager ds)
+        {
+            DSManager = ds;
+        }
+
         [HttpGet]
         public ActionResult Index()
         {
@@ -17,8 +24,15 @@ namespace VSEat.Controllers
         // GET: DeliveryStaff
         public ActionResult Index(DTO.Delivery_staff ds)
         {
-            HttpContext.Session.SetString("login", ds.login);
-            return RedirectToAction("Index", "Home", new { user = ds.login });
+            if (DSManager.isUserValid(ds))
+            {
+                HttpContext.Session.SetString("login", ds.login);
+                return RedirectToAction("Index", "Home", new { user = ds.login });
+            } else
+            {
+                return View();
+            }
+            
             
         }
 
@@ -28,73 +42,6 @@ namespace VSEat.Controllers
             return View();
         }
 
-        // GET: DeliveryStaff/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: DeliveryStaff/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: DeliveryStaff/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: DeliveryStaff/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: DeliveryStaff/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: DeliveryStaff/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+       
     }
 }

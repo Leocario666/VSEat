@@ -15,7 +15,45 @@ namespace DAL
         {
             Configuration = configuration;
         }
-        
+        // ******************************************************* //
+        // Method which controls deliverer's login and password at the connection
+        // ******************************************************* //
+        public bool isUserValid(Delivery_staff ds)
+        {
+            try
+            {
+                // Connexion to the Database
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+                    // Open the command
+                    cn.Open();
+
+                    // The query 
+                    string query = "SELECT * FROM delivery_staff WHERE login='" + ds.login + "' and password='" + ds.password + "'";
+
+                    // Save the command
+                    SqlCommand cmd = new SqlCommand(query, cn);
+
+                    // Execute the command
+                    SqlDataReader dr = cmd.ExecuteReader();
+
+                    // Control if the data reader can read with the table with the given parameters
+                    if (dr.Read())
+                    {
+                        return true;    //login and password correct
+                    }
+                    else
+                    {
+                        return false;   //login or password correct
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
         // ******************************************************* //
         // Method which gets a Delivery_Staff by his Id
         // ******************************************************* //
