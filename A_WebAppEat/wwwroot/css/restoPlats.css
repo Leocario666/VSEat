@@ -26,3 +26,20 @@ p
 {
     margin-right: 45%;
 }
+
+a:hover
+{
+    text-decoration: none;
+    color: black;
+}
+
+a:active
+{
+    background-color: darkgrey;
+}
+
+a:visited
+{
+    text-decoration: none;
+    color: black;
+}

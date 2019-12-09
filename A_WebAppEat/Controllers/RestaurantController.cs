@@ -57,6 +57,12 @@ namespace A_WebAppEat.Controllers
 
         }
 
+        //GET : Restaurtant/command
+        public ActionResult Command()
+        {
+            return View();
+        }
+
 
     
         
