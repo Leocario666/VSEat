@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "Plat";
 }
-
+<link rel="stylesheet" href="~/css/restoPlats.css">
 <h2>Plats</h2>
 
 
@@ -11,18 +11,14 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.dish_Id)
+                <p>Name</p>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.name)
+                <p>Price</p>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.price)
+                <p>Quantity</p>
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.restaurant_Id)
-            </th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -30,26 +26,20 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.dish_Id)
-                </td>
-                <td>
                     @Html.DisplayFor(modelItem => item.name)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.price)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.restaurant_Id)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.dish_Id }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.dish_Id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.dish_Id })
-
-
+                    
+                    <input type="number" />
                 </td>
             </tr>
         }
     </tbody>
 </table>
-<a asp-action="Index">Back to List</a>
+<div class="bouton_conteneur">
+    <a asp-action="Index" class="back">Back to List</a>
+    <a asp-action="Index" class="command">Command</a>
+</div>
