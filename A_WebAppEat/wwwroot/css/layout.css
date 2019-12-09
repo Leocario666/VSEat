@@ -1,0 +1,19 @@
+.conteneur
+{
+    height: 70px;
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+}
+
+.logo
+{
+    width: 250px;
+    margin: auto;
+}
+
+.copyright
+{
+    width: 50%;
+    margin: auto;
+}

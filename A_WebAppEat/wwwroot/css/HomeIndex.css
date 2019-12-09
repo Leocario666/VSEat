@@ -1,15 +1,22 @@
+body
+{
+    background: url("Images/home.png") fixed no-repeat top center;
+    background-color: black;
+}
+
 h1 
 {
     font-weight: bold;
     width: 30%;
+    margin-left: 150px;
 }
 
-.login
-{
+.login {
     padding-top: 10px;
+    margin-right: 150px;
     width: 100px;
     text-align: right;
-    font-size: 22px; 
+    font-size: 22px;
     font-weight: bold;
 }
 
@@ -39,12 +46,3 @@ header
     margin-top: 500px;
 }
 
-.foot
-{
-    height: 70px;
-    background-color: white;
-}
-
-.logo
-{
-}
