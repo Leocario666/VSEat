@@ -8,6 +8,7 @@ namespace WebApplication2.Models
 {
     public class Restaurant
     {
+
         public int restaurant_Id { get; set; }
         public string name { get; set; }
         public int cityCode { get; set; }

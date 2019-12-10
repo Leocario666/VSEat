@@ -10,12 +10,25 @@ namespace BLL
 {
     public class Delivery_staffManager:IDelivery_staffManager
     {
-
+        public string login { get; }
         private IDelivery_staffDB Delivery_staffDB { get; }
 
         public Delivery_staffManager(IDelivery_staffDB delivery_StaffDB)
         {
             Delivery_staffDB = delivery_StaffDB;
+        }
+
+        // ******************************************************************** // 
+        // Method which manages the test of the connection
+        // ******************************************************************** // 
+        public bool isUserValid(Delivery_staff ds)
+        {
+            return Delivery_staffDB.isUserValid(ds);
+        }
+
+        public List<Delivery_staff> GetDelivery_staffs()
+        {
+            return Delivery_staffDB.GetDelivery_staffs();
         }
 
         // ******************************************************************** // 

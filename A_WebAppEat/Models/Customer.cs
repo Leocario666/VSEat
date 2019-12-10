@@ -24,6 +24,7 @@ namespace VSEat.Models
         [DisplayName("NPA")]
         public int cityCode { get; set; }
 
+
         [Required(ErrorMessage = "A login is resquired")]  // Error message
         public string login { get; set; }
 

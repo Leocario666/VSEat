@@ -2,99 +2,74 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BLL;
+using DAL;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 
 namespace VSEat.Controllers
 {
     public class DeliveryStaffController : Controller
     {
+        private IDelivery_staffManager DSManager { get; }
+        private IConfiguration Configuration { get; }
+        public int IdLog { get; set; }
+        private string pseudo;
+        public DeliveryStaffController(IDelivery_staffManager ds)
+        {
+            DSManager = ds;
+        }
+
         [HttpGet]
         public ActionResult Index()
         {
             return View();
         }
         // GET: DeliveryStaff
-        public ActionResult Index(DTO.Delivery_staff ds)
+        public ActionResult Index(DTO.Delivery_staff ds) 
         {
-            HttpContext.Session.SetString("login", ds.login);
-            return RedirectToAction("Index", "Home", new { user = ds.login });
+            if (DSManager.isUserValid(ds))
+            {
+                HttpContext.Session.SetString("login", ds.login);
+
+                var allDeliverer = DSManager.GetDelivery_staffs();
+
+                foreach (var deliverer in allDeliverer)
+                {
+                    if (ds.login == deliverer.login)
+                    {
+                        IdLog = deliverer.delivery_staff_Id;
+                        
+                        pseudo = deliverer.login;
+                        
+                    }
+                }
+
+                return RedirectToAction("Details", "DeliveryStaff", new { id = IdLog } );
+            } else
+            {
+                return View();
+            }
+            
             
         }
 
+        
+
         // GET: DeliveryStaff/Details/5
+        [HttpGet]
         public ActionResult Details(int id)
         {
-            return View();
+            IOrder_dishesDB order_Dishes = new Order_dishesDB(Configuration);
+            IOrder_dishesManager odm = new Order_dishesManager(order_Dishes);
+
+
+            
+            var od = odm.GetOrders_dishes_ds(id);
+            return View(od);
         }
 
-        // GET: DeliveryStaff/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: DeliveryStaff/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: DeliveryStaff/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: DeliveryStaff/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: DeliveryStaff/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: DeliveryStaff/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+       
     }
 }

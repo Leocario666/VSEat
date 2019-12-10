@@ -11,24 +11,20 @@ namespace BLL
     {
         private ICustomerDB CustomerDb { get; }
 
-        public bool isUserValid(Customer c)
-        {
-            return CustomerDb.isUserValid(c);
-        }
+       
         public CustomerManager (ICustomerDB customerDB)
         {
             CustomerDb = customerDB;
         }
 
-        public List<String> GetCustomersLogins()
+        // ******************************************************************** // 
+        // Method which manages the test of the connection
+        // ******************************************************************** // 
+        public bool isUserValid(Customer c)
         {
-            return CustomerDb.GetCustomersLogins();
+            return CustomerDb.isUserValid(c);
         }
 
-        public List<Customer> GetCustomersPasswords()
-        {
-            return CustomerDb.GetCustomersPasswords();
-        }
 
         // ******************************************************************** // 
         // Method which manages the display of one customer
@@ -36,6 +32,11 @@ namespace BLL
         public Customer GetCustomer(int id)
         {
             return CustomerDb.GetCustomer(id);
+        }
+
+        public List<Customer> GetCustomers()
+        {
+            return CustomerDb.GetCustomers();
         }
 
         // ******************************************************************** // 
