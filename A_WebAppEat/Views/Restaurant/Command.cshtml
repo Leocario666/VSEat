@@ -2,19 +2,11 @@
 @{
     ViewData["Title"] = "Command";
 }
+    <link rel="stylesheet" href="~/css/command.css">
+    <h2>Thank you for your command</h2>
 
-<link rel="stylesheet" href="~/css/command.css">
-<h2>Command</h2>
+    <p>A deliverer will come to your house to bring you your dish</p>
 
-<p>Votre commande :</p>
+    <p>Vous devrez lui payer : ...CHF</p>
 
-<!--afficher la liste de la commande-->
-
-<p>Price : </p>
-<!--afficher le prix-->
-
-<p>At what time do you want to be delivered ?</p>
-
-<!--insérez la date-->
-
-<a asp-action="FinishCommand" class="command">finish the command</a>
+<a href="@Url.Action("Index", "Home")" class="command">Back to the home page</a>

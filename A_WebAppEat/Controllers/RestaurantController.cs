@@ -63,12 +63,5 @@ namespace A_WebAppEat.Controllers
             return View();
         }
 
-        //GET : Restaurant/FinishCommand
-        public ActionResult FinishCommand()
-        {
-            return View();
-        }
-
-
     }
 }

@@ -51,6 +51,8 @@ a
     font-size: 22px;
     text-decoration: none;
     color: black;
+    width: 25%;
+    height: auto;
 }
 
 a:hover, a:active, a:visited

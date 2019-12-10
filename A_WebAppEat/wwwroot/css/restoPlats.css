@@ -1,4 +1,4 @@
-p 
+.gras
 {
     font-weight: bold;
 }
@@ -7,6 +7,7 @@ p
 {
     display: flex;
     justify-content: space-between;
+    margin-bottom: 30px;
 }
 
 .back, .command {
@@ -42,4 +43,15 @@ a:visited
 {
     text-decoration: none;
     color: black;
+}
+
+.time
+{
+    margin-top: 30px;
+    margin-bottom: 50px;
+}
+
+label
+{
+    font-weight: 100;
 }
