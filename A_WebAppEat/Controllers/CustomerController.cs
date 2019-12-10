@@ -18,6 +18,7 @@ namespace VSEat.Controllers
         private IConfiguration Configuration { get; }
         private ICustomerManager CustomerManager { get; }
         private int id;
+        private string pseudo;
         public Customer customer_Id { get; }
         
         public CustomerController(ICustomerManager customerManager)
@@ -50,6 +51,7 @@ namespace VSEat.Controllers
                     if(c.login == customer.login)
                     {
                         id = customer.customer_Id;
+                        pseudo = customer.login;
                     }
                 }
                 

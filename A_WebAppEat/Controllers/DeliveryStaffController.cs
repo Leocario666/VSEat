@@ -3,15 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BLL;
+using DAL;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 
 namespace VSEat.Controllers
 {
     public class DeliveryStaffController : Controller
     {
         private IDelivery_staffManager DSManager { get; }
-        private int id;
+        private IConfiguration Configuration { get; }
+        public int IdLog { get; set; }
+        private string pseudo;
         public DeliveryStaffController(IDelivery_staffManager ds)
         {
             DSManager = ds;
@@ -23,7 +27,7 @@ namespace VSEat.Controllers
             return View();
         }
         // GET: DeliveryStaff
-        public ActionResult Index(DTO.Delivery_staff ds)
+        public ActionResult Index(DTO.Delivery_staff ds) 
         {
             if (DSManager.isUserValid(ds))
             {
@@ -35,11 +39,14 @@ namespace VSEat.Controllers
                 {
                     if (ds.login == deliverer.login)
                     {
-                        id = deliverer.delivery_staff_Id;
+                        IdLog = deliverer.delivery_staff_Id;
+                        
+                        pseudo = deliverer.login;
+                        
                     }
                 }
 
-                return RedirectToAction("Index", "Home", new { user = id });
+                return RedirectToAction("Details", "DeliveryStaff", new { id = IdLog } );
             } else
             {
                 return View();
@@ -48,10 +55,19 @@ namespace VSEat.Controllers
             
         }
 
+        
+
         // GET: DeliveryStaff/Details/5
+        [HttpGet]
         public ActionResult Details(int id)
         {
-            return View();
+            IOrder_dishesDB order_Dishes = new Order_dishesDB(Configuration);
+            IOrder_dishesManager odm = new Order_dishesManager(order_Dishes);
+
+
+            
+            var od = odm.GetOrders_dishes_ds(id);
+            return View(od);
         }
 
        

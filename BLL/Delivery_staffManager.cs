@@ -10,7 +10,7 @@ namespace BLL
 {
     public class Delivery_staffManager:IDelivery_staffManager
     {
-
+        public string login { get; }
         private IDelivery_staffDB Delivery_staffDB { get; }
 
         public Delivery_staffManager(IDelivery_staffDB delivery_StaffDB)
