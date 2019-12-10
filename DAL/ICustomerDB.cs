@@ -12,6 +12,8 @@ namespace DAL
         bool isUserValid(Customer c);
     
         Customer GetCustomer(int id);
+
+        List<Customer> GetCustomers();
         Customer AddCustomer(Customer customer);
        
 

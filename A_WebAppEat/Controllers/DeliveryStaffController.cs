@@ -11,6 +11,7 @@ namespace VSEat.Controllers
     public class DeliveryStaffController : Controller
     {
         private IDelivery_staffManager DSManager { get; }
+        private int id;
         public DeliveryStaffController(IDelivery_staffManager ds)
         {
             DSManager = ds;
@@ -27,7 +28,18 @@ namespace VSEat.Controllers
             if (DSManager.isUserValid(ds))
             {
                 HttpContext.Session.SetString("login", ds.login);
-                return RedirectToAction("Index", "Home", new { user = ds.login });
+
+                var allDeliverer = DSManager.GetDelivery_staffs();
+
+                foreach (var deliverer in allDeliverer)
+                {
+                    if (ds.login == deliverer.login)
+                    {
+                        id = deliverer.delivery_staff_Id;
+                    }
+                }
+
+                return RedirectToAction("Index", "Home", new { user = id });
             } else
             {
                 return View();

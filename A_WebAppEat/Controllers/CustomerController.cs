@@ -17,8 +17,9 @@ namespace VSEat.Controllers
     {
         private IConfiguration Configuration { get; }
         private ICustomerManager CustomerManager { get; }
+        private int id;
         public Customer customer_Id { get; }
-        private readonly IHttpContextAccessor _httpContextAccessor;
+        
         public CustomerController(ICustomerManager customerManager)
         {
             CustomerManager = customerManager;
@@ -39,15 +40,20 @@ namespace VSEat.Controllers
 
             if (CustomerManager.isUserValid(c))
             {
-                //int id = CustomerManager.c;
-                var test = HttpContext.User.Identity;
-                HttpContext.Session.SetString("login", c.login);
-
                 
-                //var userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-
-                //var tesst = User.Identity.Name;
-                return RedirectToAction("Index", "Home", new { user = c.login});
+               
+                HttpContext.Session.SetString("login", c.login);
+                var allCustomer = CustomerManager.GetCustomers();
+                
+                foreach(var customer in allCustomer)
+                {
+                    if(c.login == customer.login)
+                    {
+                        id = customer.customer_Id;
+                    }
+                }
+                
+                return RedirectToAction("Index", "Home", new { user = id.ToString()});
             }
             else
             {
@@ -63,6 +69,7 @@ namespace VSEat.Controllers
         // GET: Customer/Details/5
         public ActionResult Details(int id)
         {
+            
             return View();
         }
 

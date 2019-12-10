@@ -54,6 +54,60 @@ namespace DAL
             }
         }
 
+        // ************************************************************** //
+        // Method which gets a list of all deliverers
+        // ************************************************************** //
+        public List<Delivery_staff> GetDelivery_staffs()
+        {
+            // Creation of the list 
+            List<Delivery_staff> results = null;
+            //string connectionString = Configuration.GetConnectionString("DefaultConnection");
+
+            try
+            {
+                // Connexion to the Database
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+                    // The query
+                    string query = "SELECT * FROM delivery_staff";
+
+                    // Save the command
+                    SqlCommand cmd = new SqlCommand(query, cn);
+
+                    // Open the command
+                    cn.Open();
+
+                    // Execute the command
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        // The results
+                        while (dr.Read())
+                        {
+                            if (results == null)
+                                results = new List<Delivery_staff>();
+
+                            Delivery_staff ds = new Delivery_staff();
+
+                            ds.delivery_staff_Id = (int)dr["delivery_staff_Id"];
+                            ds.first_name = (string)dr["first_name"];
+                            ds.last_name = (string)dr["last_name"];
+                            ds.login = (string)dr["login"];
+                            ds.password = (string)dr["password"];
+                            ds.cityCode = (int)dr["cityCode"];
+
+                            results.Add(ds);
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            // Return the list
+            return results;
+        }
+
         // ******************************************************* //
         // Method which gets a Delivery_Staff by his Id
         // ******************************************************* //

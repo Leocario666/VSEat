@@ -43,7 +43,7 @@ namespace A_WebAppEat
             services.AddScoped<IDishManager, DishManager>();
             services.AddScoped<IDishDB, DishDB>();
 
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 

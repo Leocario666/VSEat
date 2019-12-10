@@ -16,7 +16,7 @@ namespace DAL
             Configuration = configuration;
         }
         // ************************************************************** //
-        // Method which gets a list of all restaurants for one city
+        // Method which gets a list of all restaurants
         // ************************************************************** //
         public List<Restaurant> GetRestaurants()
         {

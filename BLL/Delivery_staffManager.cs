@@ -25,6 +25,12 @@ namespace BLL
         {
             return Delivery_staffDB.isUserValid(ds);
         }
+
+        public List<Delivery_staff> GetDelivery_staffs()
+        {
+            return Delivery_staffDB.GetDelivery_staffs();
+        }
+
         // ******************************************************************** // 
         // Method which manages the display of one delivery staff
         // ******************************************************************** // 

@@ -11,5 +11,6 @@ namespace DAL
         // List of the methods we can use 
         bool isUserValid(Delivery_staff ds);
         Delivery_staff GetDelivery_staff(int id);
+        List<Delivery_staff> GetDelivery_staffs();
     }
 }

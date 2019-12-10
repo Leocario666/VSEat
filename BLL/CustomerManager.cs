@@ -34,6 +34,11 @@ namespace BLL
             return CustomerDb.GetCustomer(id);
         }
 
+        public List<Customer> GetCustomers()
+        {
+            return CustomerDb.GetCustomers();
+        }
+
         // ******************************************************************** // 
         // Method which manages the adding of one customer
         // ******************************************************************** // 

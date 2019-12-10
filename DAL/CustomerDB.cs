@@ -52,7 +52,60 @@ namespace DAL
             }
         }
 
-       
+        // ************************************************************** //
+        // Method which gets a list of all customers
+        // ************************************************************** //
+        public List<Customer> GetCustomers()
+        {
+            // Creation of the list 
+            List<Customer> results = null;
+            //string connectionString = Configuration.GetConnectionString("DefaultConnection");
+
+            try
+            {
+                // Connexion to the Database
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+                    // The query
+                    string query = "SELECT * FROM customer";
+
+                    // Save the command
+                    SqlCommand cmd = new SqlCommand(query, cn);
+
+                    // Open the command
+                    cn.Open();
+
+                    // Execute the command
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        // The results
+                        while (dr.Read())
+                        {
+                            if (results == null)
+                                results = new List<Customer>();
+
+                            Customer customer = new Customer();
+
+                            customer.customer_Id = (int)dr["customer_Id"];
+                            customer.first_name = (string)dr["first_name"];
+                            customer.last_name = (string)dr["last_name"];
+                            customer.login = (string)dr["login"];
+                            customer.password = (string)dr["password"];
+                            customer.address = (string)dr["address"];
+                            customer.cityCode = (int)dr["cityCode"];
+
+                            results.Add(customer);
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            // Return the list
+            return results;
+        }
 
         // ******************************************************* //
         // Method which gets a customer by his Id
