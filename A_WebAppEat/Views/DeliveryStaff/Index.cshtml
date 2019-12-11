@@ -5,9 +5,9 @@
     ViewData["Title"] = "Index";
 }
 
-<h2>Index</h2>
+<h2>Deliverer login</h2>
 
-<h4>Login</h4>
+
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -24,7 +24,8 @@
                 <span asp-validation-for="password" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Register" class="btn btn-default" />
+                <a href="@Url.Action("Index", "Customer")" class="btn btn-default">I am a customer</a>
             </div>
         </form>
     </div>
