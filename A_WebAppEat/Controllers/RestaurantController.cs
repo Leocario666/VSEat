@@ -14,6 +14,7 @@ namespace A_WebAppEat.Controllers
 {
     public class RestaurantController : Controller
     {
+        private IOrderManager orderManager { get; }
         private IRestaurantManager RestaurantManager { get; }
         private IConfiguration Configuration { get; }
 
@@ -50,11 +51,19 @@ namespace A_WebAppEat.Controllers
             IDishDB dish = new DishDB(Configuration);
             IDishManager dishManager = new DishManager(dish);
 
-           
+
             var dishes = dishManager.GetDishes(id);
 
             return View(dishes);
 
+        }
+
+        [HttpPost]
+        public ActionResult Plat(DTO.Order o)
+        {
+
+            orderManager.AddOrder(o);
+            return RedirectToAction(nameof(Command));
         }
 
         //GET : Restaurtant/command
