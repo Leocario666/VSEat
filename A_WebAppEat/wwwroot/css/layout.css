@@ -6,14 +6,20 @@
     justify-content: space-between;
 }
 
-.logo
+.logo 
 {
-    width: 250px;
+    width: 300px;
+    margin: auto;
+}
+
+.names
+{
+    width: 300px;
     margin: auto;
 }
 
 .copyright
 {
-    width: 50%;
+    width: 300px;
     margin: auto;
 }

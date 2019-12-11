@@ -15,6 +15,7 @@ namespace A_WebAppEat.Controllers
     public class RestaurantController : Controller
     {
         private IRestaurantManager RestaurantManager { get; }
+        private IOrderManager OrderManager { get; }
         private IConfiguration Configuration { get; }
 
         public RestaurantController(IRestaurantManager restaurantManager)
@@ -57,7 +58,14 @@ namespace A_WebAppEat.Controllers
 
         }
 
-        //GET : Restaurtant/command
+        [HttpPost]
+        public ActionResult Plat(DTO.Order o)
+        {
+
+            OrderManager.AddOrder(o);
+            return RedirectToAction(nameof(Command));
+        }
+
         public ActionResult Command()
         {
             return View();
