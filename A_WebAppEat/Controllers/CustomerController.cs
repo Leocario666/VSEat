@@ -16,15 +16,15 @@ namespace VSEat.Controllers
     public class CustomerController : Controller
     {
         private IConfiguration Configuration { get; }
-        private ICustomerManager CustomerManager { get; }
-        public int id;
+        private ICustomerManager CustomerManager { get; set; }
+        public int id { get; set; }
         private string pseudo;
-        public Customer customer_Id { get; }
+       
         
         public CustomerController(ICustomerManager customerManager)
         {
             CustomerManager = customerManager;
-            
+            int id = this.id;
         }
 
 
@@ -37,12 +37,8 @@ namespace VSEat.Controllers
 
        public ActionResult Index(Customer c)
         {
-            
-
             if (CustomerManager.isUserValid(c))
             {
-                
-               
                 HttpContext.Session.SetString("login", c.login);
                 var allCustomer = CustomerManager.GetCustomers();
                 
@@ -51,6 +47,7 @@ namespace VSEat.Controllers
                     if(c.login == customer.login)
                     {
                         id = customer.customer_Id;
+                        this.id = id;
                         pseudo = customer.login;
                     }
                 }
@@ -61,22 +58,21 @@ namespace VSEat.Controllers
             {
                 return View();
             }
-           
-            
-        
-            
         }
 
-        [HttpGet]
+
+       
+
+        
         // GET: Customer/Details/5
         public ActionResult Details(int id)
         {
             IOrderDB order = new OrderDB(Configuration);
             IOrderManager om = new OrderManager(order);
 
-            var OM = om.GetOrders(id);
+            var test = om.GetOrders(id);
 
-            return View(OM);
+            return View(test);
         }
 
         public ActionResult Create()
