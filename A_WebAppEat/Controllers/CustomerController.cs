@@ -17,7 +17,7 @@ namespace VSEat.Controllers
     {
         private IConfiguration Configuration { get; }
         private ICustomerManager CustomerManager { get; }
-        private int id;
+        public int id;
         private string pseudo;
         public Customer customer_Id { get; }
         
@@ -67,12 +67,16 @@ namespace VSEat.Controllers
             
         }
 
-
+        [HttpGet]
         // GET: Customer/Details/5
         public ActionResult Details(int id)
         {
-            
-            return View();
+            IOrderDB order = new OrderDB(Configuration);
+            IOrderManager om = new OrderManager(order);
+
+            var OM = om.GetOrders(id);
+
+            return View(OM);
         }
 
         public ActionResult Create()

@@ -44,6 +44,8 @@ namespace A_WebAppEat
             services.AddScoped<IDishDB, DishDB>();
             services.AddScoped<IOrder_dishesManager, Order_dishesManager>();
             services.AddScoped<IOrder_dishesDB, Order_dishesDB>();
+            services.AddScoped<IOrderManager, OrderManager>();
+            services.AddScoped<IOrderDB, OrderDB>();
             
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }

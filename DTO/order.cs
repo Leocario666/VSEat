@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Microsoft.Extensions.Configuration;
 
 namespace DTO
 {
     // Object Order
     public class Order
     {
+       
         public int order_Id { get; set; }
         public string status { get; set; }
         public DateTime created_at { get; set; }
