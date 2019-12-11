@@ -18,9 +18,9 @@ namespace DAL
         // ******************************************************* //
         // Method which gets a list of orders by his Customer Id
         // ******************************************************* //
-        public List<Order> GetOrders(int customer_Id)
+        public List<Order> GetOrders(int idCustomer)
         {
-            // Creation of the list 
+            // Create the list
             List<Order> results = null;
             //string connectionString = Configuration.GetConnectionString("DefaultConnection");
             try
@@ -29,12 +29,12 @@ namespace DAL
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
                     // The query
-                    string query = "Select * FROM order WHERE customer_Id=@customer_Id";
+                    string query = "Select * FROM [order] WHERE customer_Id=@idCustomer";
 
-                    // Saving the command
+                    // Save the command
                     SqlCommand cmd = new SqlCommand(query, cn);
 
-                    cmd.Parameters.AddWithValue("@customer_Id", customer_Id);
+                    cmd.Parameters.AddWithValue("@idCustomer", idCustomer);
 
                     // Open the command
                     cn.Open();
@@ -56,8 +56,6 @@ namespace DAL
                             order.created_at = (DateTime)dr["created_at"];
                             order.delivery_time = (DateTime)dr["delivery_time"];
                             order.customer_Id = (int)dr["customer_Id"];
-
-
 
                             results.Add(order);
                         }
@@ -86,7 +84,7 @@ namespace DAL
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
                     // The query
-                    string query = "SELECT * FROM order WHERE order_Id = @order_Id";
+                    string query = "SELECT * FROM [order] WHERE order_Id = @order_Id";
 
                     // Save the command
                     SqlCommand cmd = new SqlCommand(query, cn);
@@ -132,7 +130,7 @@ namespace DAL
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
                     // The query
-                    string query = "INSERT INTO order(delivery_time,customer_Id) values(@delivery_time,@customer_Id); SELECT SCOPE_IDENTITY()";
+                    string query = "INSERT INTO [order](delivery_time,customer_Id) values(@delivery_time,@customer_Id); SELECT SCOPE_IDENTITY()";
                    
                     // Save the command
                     SqlCommand cmd = new SqlCommand(query, cn);
@@ -167,7 +165,7 @@ namespace DAL
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
                     // The query
-                    string query = "UPDATE order Set delivery_time=@delivery_time, status = @status WHERE order_Id = @order_Id";
+                    string query = "UPDATE [order] Set delivery_time=@delivery_time, status = @status WHERE order_Id = @order_Id";
                    
                     // Save the command
                     SqlCommand cmd = new SqlCommand(query, cn);
