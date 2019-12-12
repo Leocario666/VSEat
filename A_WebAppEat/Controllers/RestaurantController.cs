@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using BLL;
 using DAL;
-
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -14,8 +13,8 @@ namespace A_WebAppEat.Controllers
 {
     public class RestaurantController : Controller
     {
+        private IOrderManager orderManager { get; }
         private IRestaurantManager RestaurantManager { get; }
-        private IOrderManager OrderManager { get; }
         private IConfiguration Configuration { get; }
 
         public RestaurantController(IRestaurantManager restaurantManager)
@@ -51,7 +50,7 @@ namespace A_WebAppEat.Controllers
             IDishDB dish = new DishDB(Configuration);
             IDishManager dishManager = new DishManager(dish);
 
-           
+
             var dishes = dishManager.GetDishes(id);
 
             return View(dishes);
@@ -62,10 +61,11 @@ namespace A_WebAppEat.Controllers
         public ActionResult Plat(DTO.Order o)
         {
 
-            OrderManager.AddOrder(o);
+            orderManager.AddOrder(o);
             return RedirectToAction(nameof(Command));
         }
 
+        //GET : Restaurtant/command
         public ActionResult Command()
         {
             return View();

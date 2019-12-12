@@ -1,25 +1,21 @@
-.conteneur
-{
+.conteneur {
     height: 70px;
     background-color: white;
     display: flex;
     justify-content: space-between;
 }
 
-.logo 
-{
+.logo {
     width: 300px;
     margin: auto;
 }
 
-.names
-{
+.names {
     width: 300px;
     margin: auto;
 }
 
-.copyright
-{
+.copyright {
     width: 300px;
     margin: auto;
 }
