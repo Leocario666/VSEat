@@ -21,12 +21,12 @@ namespace ConsoleApp1
             ICustomerManager customerManager = new CustomerManager(customerDB);
             Customer c = new Customer();
 
-            var customersL = customerManager.GetCustomersLogins();
+            /*var customersL = customerManager.GetCustomersLogins();
 
             foreach (var customer in customersL)
             {
                 Console.WriteLine(customer.ToString());
-            }
+            }*/
         }
 
     }

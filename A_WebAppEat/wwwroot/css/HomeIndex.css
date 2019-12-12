@@ -11,7 +11,7 @@ h1
     margin-left: 150px;
 }
 
-header
+.titre
 {
     display: flex;
     justify-content: space-between;
@@ -37,7 +37,7 @@ header
     margin-top: 500px;
 }
 
-a
+.a
 {
     font-size: 22px;
     text-decoration: none;

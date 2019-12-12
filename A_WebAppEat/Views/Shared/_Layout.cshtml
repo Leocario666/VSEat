@@ -1,4 +1,5 @@
 ﻿<!DOCTYPE html>
+@using Microsoft.AspNetCore.Http;
 <html>
 <head>
     <meta charset="utf-8" />
@@ -27,7 +28,21 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">VSEat</a>
-                <a asp-area="" asp-controller="Customer" asp-action="Details" class="navbar-brand">Account</a>
+            </div>
+
+            <div class="navbar-collapse collapse">
+                <div class="container">
+                    <div class="nav navbar-nav navbar-right">
+                        @if (Context.Session.GetString("login") != "Aucun customer n'est log" && Context.Session.GetString("login") != null) // A customer is loged ?
+                        {
+                        <a asp-area="" asp-controller="Customer" asp-action="Details" class="navbar-brand">My Account</a>
+                        }
+                        else
+                        {
+                            <a asp-area="" asp-controller="Customer" asp-action="Details" class="navbar-brand">Login</a>
+                        }
+                    </div>
+                </div>
             </div>
         </div>
     </nav>
