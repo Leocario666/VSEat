@@ -32,6 +32,14 @@ namespace BLL
             return OrderDb.GetOrder(id);
         }
 
+        // ****************************************************************************** // 
+        // Method which manages the display of all Orders for one delivery staff 
+        // ****************************************************************************** // 
+        public List<Order> GetOrders_ds(int delivery_staff_id)
+        {
+            return OrderDb.GetOrders_ds(delivery_staff_id);
+        }
+
         // ************************************************************* // 
         // Method which manages the adding of one order
         // ************************************************************* // 

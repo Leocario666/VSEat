@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using BLL;
 using DAL;
+using DTO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -61,13 +62,25 @@ namespace VSEat.Controllers
         [HttpGet]
         public ActionResult Details(int id)
         {
-            IOrder_dishesDB order_Dishes = new Order_dishesDB(Configuration);
-            IOrder_dishesManager odm = new Order_dishesManager(order_Dishes);
+            IOrderDB order = new OrderDB(Configuration);
+            IOrderManager odm = new OrderManager(order);
 
 
             
-            var od = odm.GetOrders_dishes_ds(id);
+            var od = odm.GetOrders_ds(id);
             return View(od);
+        }
+
+        public ActionResult Delivered(int id)
+        {
+            IOrderDB order = new OrderDB(Configuration);
+            IOrderManager odm = new OrderManager(order);
+
+            var od = odm.GetOrder(id);
+            od.status = "delivered";
+            odm.UpdateOrder(od);
+
+            return View();
         }
 
        

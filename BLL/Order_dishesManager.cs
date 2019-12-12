@@ -24,13 +24,7 @@ namespace BLL
             return Order_dishesDB.GetOrders_dishes(order_id);
         }
 
-        // ****************************************************************************** // 
-        // Method which manages the display of all Order dishes for one delivery staff 
-        // ****************************************************************************** // 
-        public List<Order_dishes> GetOrders_dishes_ds(int delivery_staff_id)
-        {
-            return Order_dishesDB.GetOrders_dishes_ds(delivery_staff_id);
-        }
+        
 
         // ************************************************************* // 
         // Method which manages the display of one Order dishes

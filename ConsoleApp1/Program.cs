@@ -21,12 +21,14 @@ namespace ConsoleApp1
             ICustomerManager customerManager = new CustomerManager(customerDB);
             Customer c = new Customer();
 
-            /*var customersL = customerManager.GetCustomersLogins();
+            IOrderDB orderDB = new OrderDB(Configuration);
+            IOrderManager orderManager = new OrderManager(orderDB);
 
-            foreach (var customer in customersL)
-            {
-                Console.WriteLine(customer.ToString());
-            }*/
+            var od = orderManager.GetOrder(2);
+
+            od.status = "bruuuh";
+            orderManager.UpdateOrder(od);
+            
         }
 
     }
