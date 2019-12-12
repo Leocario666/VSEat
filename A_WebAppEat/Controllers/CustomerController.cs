@@ -48,6 +48,7 @@ namespace VSEat.Controllers
                     {
                         id = customer.customer_Id;
                         this.id = id;
+                        HttpContext.Session.SetInt32("id", id);
                         pseudo = customer.login;
                     }
                 }
@@ -65,11 +66,11 @@ namespace VSEat.Controllers
 
         
         // GET: Customer/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details()
         {
             IOrderDB order = new OrderDB(Configuration);
             IOrderManager om = new OrderManager(order);
-
+            var id = (int)HttpContext.Session.GetInt32("id");
             var test = om.GetOrders(id);
 
             return View(test);
