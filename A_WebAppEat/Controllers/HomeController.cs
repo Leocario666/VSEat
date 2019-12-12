@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using A_WebAppEat.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace A_WebAppEat.Controllers
 {
@@ -12,28 +13,15 @@ namespace A_WebAppEat.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            if ((string)HttpContext.Session.GetString("login") != "Aucun customer n'est log" && (string)HttpContext.Session.GetString("login") != null) // Need authentification
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Index", "Customer");
+            }
         }
-
-        public IActionResult About()
-        {
-            ViewData["Message"] = "Your application description page.";
-
-            return View();
-        }
-
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

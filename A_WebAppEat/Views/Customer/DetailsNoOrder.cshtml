@@ -1,0 +1,11 @@
+﻿@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Hello @ViewBag.login</h2>
+
+<p>You have no orders in progress</p>
+
+
+<a href="@Url.Action("CustomerTransition", "Customer")" class="btn btn-default">Logout</a>
+<a href="@Url.Action("Index", "Home")" class="btn btn-default">Back to home page</a>

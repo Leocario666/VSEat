@@ -18,7 +18,7 @@ namespace VSEat.Controllers
         private IConfiguration Configuration { get; }
         private ICustomerManager CustomerManager { get; set; }
         public int id { get; set; }
-        private string pseudo;
+        public string login { get; set; }
        
         
         public CustomerController(ICustomerManager customerManager)
@@ -35,6 +35,13 @@ namespace VSEat.Controllers
             return View();
         }
 
+       public ActionResult CustomerTransition()
+        {
+            HttpContext.Session.SetInt32("id", 0);
+            HttpContext.Session.SetString("login", "Aucun customer n'est log");
+            return RedirectToAction("Index", "Customer");
+        }
+
        public ActionResult Index(Customer c)
         {
             if (CustomerManager.isUserValid(c))
@@ -47,9 +54,11 @@ namespace VSEat.Controllers
                     if(c.login == customer.login)
                     {
                         id = customer.customer_Id;
+                        login = customer.login;
                         this.id = id;
+                        this.login = login;
                         HttpContext.Session.SetInt32("id", id);
-                        pseudo = customer.login;
+                        HttpContext.Session.SetString("login", login);
                     }
                 }
                 
@@ -68,18 +77,42 @@ namespace VSEat.Controllers
         // GET: Customer/Details/5
         public ActionResult Details()
         {
-            IOrderDB order = new OrderDB(Configuration);
-            IOrderManager om = new OrderManager(order);
-            var id = (int)HttpContext.Session.GetInt32("id");
-            var test = om.GetOrders(id);
+            if ((string)HttpContext.Session.GetString("login") != "Aucun customer n'est log" && (string)HttpContext.Session.GetString("login") != null) // A customer is loged ?
+            {
+                ViewBag.login = HttpContext.Session.GetString("login");
+                IOrderDB order = new OrderDB(Configuration);
+                IOrderManager om = new OrderManager(order);
+                var id = (int)HttpContext.Session.GetInt32("id");
+                var test = om.GetOrders(id);
 
-            return View(test);
+                if (test == null)
+                {
+                    return RedirectToAction("DetailsNoOrder", "Customer", new { user = id.ToString() });
+
+                }
+                else
+                {
+                    return View(test); // Return the Details view
+                }
+            }
+            else
+            {
+                return RedirectToAction("Index", "Customer"); // return to the login page
+            }
+            
+        }
+
+        public ActionResult DetailsNoOrder()
+        {
+            ViewBag.login = HttpContext.Session.GetString("login");
+            return View();
         }
 
         public ActionResult Create()
         {
             return View();
         }
+
         // GET: Customer/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
