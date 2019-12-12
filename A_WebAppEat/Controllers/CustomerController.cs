@@ -44,6 +44,7 @@ namespace VSEat.Controllers
 
        public ActionResult Index(Customer c)
         {
+           
             if (CustomerManager.isUserValid(c))
             {
                 HttpContext.Session.SetString("login", c.login);

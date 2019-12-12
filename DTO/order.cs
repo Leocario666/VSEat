@@ -11,8 +11,10 @@ namespace DTO
        
         public int order_Id { get; set; }
         public string status { get; set; }
+        public float totalPrice { get; set; }
         public DateTime created_at { get; set; }
         public DateTime delivery_time { get; set; }
         public int customer_Id { get; set; }
+        public int delivery_staff_Id { get; set; }
     }
 }

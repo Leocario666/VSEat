@@ -1,4 +1,4 @@
-﻿@model IEnumerable<DTO.Order_dishes>
+﻿@model IEnumerable<DTO.Order>
 
 @{
     ViewData["Title"] = "Details";
@@ -15,18 +15,22 @@
             <th>
                 @Html.DisplayNameFor(model => model.order_Id)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.dish_Id)
+            <th >
+                @Html.DisplayNameFor(model => model.status)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.quantity)
+                @Html.DisplayNameFor(model => model.totalPrice)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.delivery_staff_Id)
+                @Html.DisplayNameFor(model => model.created_at)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.price)
+                @Html.DisplayNameFor(model => model.delivery_time)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.customer_Id)
+            </th>
+            
             <th></th>
         </tr>
     </thead>
@@ -37,19 +41,23 @@
                 @Html.DisplayFor(modelItem => item.order_Id)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.dish_Id)
+                @Html.DisplayFor(modelItem => item.status)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.quantity)
+                @Html.DisplayFor(modelItem => item.totalPrice)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.delivery_staff_Id)
+                @Html.DisplayFor(modelItem => item.created_at)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.price)
+                @Html.DisplayFor(modelItem => item.delivery_time)
             </td>
             <td>
-   
+                @Html.DisplayFor(modelItem => item.customer_Id)
+            </td>
+            
+            <td>
+                @Html.ActionLink("Order delivered", "Delivered", new { id = item.order_Id })
             </td>
         </tr>
 }
