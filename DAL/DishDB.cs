@@ -29,7 +29,7 @@ namespace DAL
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
                     // The query
-                    string query = "Select * FROM dish WHERE restaurant_id=@idRestaurant";
+                    string query = "Select * FROM dish WHERE restaurant_id=@idRestaurant ORDER BY name ASC";
                    
                     // Save the command
                     SqlCommand cmd = new SqlCommand(query, cn);
