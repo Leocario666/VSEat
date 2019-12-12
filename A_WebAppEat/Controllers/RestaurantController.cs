@@ -7,7 +7,7 @@ using DAL;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
-
+using VSEat.Models;
 
 namespace A_WebAppEat.Controllers
 {
@@ -52,23 +52,47 @@ namespace A_WebAppEat.Controllers
 
 
             var dishes = dishManager.GetDishes(id);
+            HttpContext.Session.SetInt32("idResto", id);
 
             return View(dishes);
 
         }
 
-        [HttpPost]
-        public ActionResult Plat(DTO.Order o)
-        {
-
-            orderManager.AddOrder(o);
-            return RedirectToAction(nameof(Command));
-        }
-
         //GET : Restaurtant/command
-        public ActionResult Command()
+        public ActionResult Command(string carbonra, string steak, DateTime deliveryTime)
         {
-            return View();
+            IDishDB dish = new DishDB(Configuration);
+            IDishManager dishManager = new DishManager(dish);
+
+            List<Dish_Order> dishlist = null;
+            List<DTO.Dish> plat = dishManager.GetDishes((int)HttpContext.Session.GetInt32("idResto"));
+            List <string> s = new List<string>();
+            s.Add(carbonra);
+            s.Add(steak);
+
+            int x = 0;
+            int quantitytemp;
+            float pricetemp;
+            float priceGeneral = 0;
+            Dish_Order order = null;
+            foreach(DTO.Dish d in plat)
+            {
+                order.Dish_Id = d.dish_Id;
+                order.Name = d.name;
+                order.Price = d.price;
+                pricetemp = d.price;
+                order.Quantity = Int32.Parse(s.ElementAt(x));
+                quantitytemp = Int32.Parse(s.ElementAt(x));
+                order.totalPrice = quantitytemp * pricetemp;
+                priceGeneral += quantitytemp * pricetemp;
+                pricetemp = d.price;
+                x++;
+            }
+
+                
+
+
+            return View(priceGeneral);
         }
 
     }
