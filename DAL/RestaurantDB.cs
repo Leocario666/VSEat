@@ -30,7 +30,7 @@ namespace DAL
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
                     // The query
-                    string query = "SELECT * FROM restaurant";
+                    string query = "SELECT * FROM restaurant ORDER BY cityCode ASC, name ASC";
 
                     // Save the command
                     SqlCommand cmd = new SqlCommand(query, cn);

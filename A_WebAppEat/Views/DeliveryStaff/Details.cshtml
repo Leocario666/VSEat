@@ -15,7 +15,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.order_Id)
             </th>
-            <th>
+            <th >
                 @Html.DisplayNameFor(model => model.status)
             </th>
             <th>
@@ -30,9 +30,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.customer_Id)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.delivery_staff_Id)
-            </th>
+            
             <th></th>
         </tr>
     </thead>
@@ -57,11 +55,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.customer_Id)
             </td>
+            
             <td>
-                @Html.DisplayFor(modelItem => item.delivery_staff_Id)
-            </td>
-            <td>
-                @Html.ActionLink("C'est très le test", "Delivered", new { id = item.order_Id })
+                @Html.ActionLink("Order delivered", "Delivered", new { id = item.order_Id })
             </td>
         </tr>
 }

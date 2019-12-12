@@ -135,7 +135,7 @@ namespace DAL
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
                     // The query
-                    string query = "Select * FROM [order] WHERE delivery_staff_Id=@delivery_staff_Id";
+                    string query = "Select * FROM [order] WHERE delivery_staff_Id=@delivery_staff_Id ORDER BY status DESC, delivery_time ASC";
 
                     // Save the command
                     SqlCommand cmd = new SqlCommand(query, cn);
