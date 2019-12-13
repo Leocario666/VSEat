@@ -177,8 +177,60 @@ namespace DAL
             // Return the list
             return results;
         }
+        // ************************************************************** //
+        // Method which gets a list of all orders
+        // ************************************************************** //
+        public List<Order> GetOrders()
+        {
+            // Creation of the list 
+            List<Order> results = null;
+            //string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
+            try
+            {
+                // Connexion to the Database
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+                    // The query
+                    string query = "SELECT * FROM [order]";
 
+                    // Save the command
+                    SqlCommand cmd = new SqlCommand(query, cn);
+
+                    // Open the command
+                    cn.Open();
+
+                    // Execute the command
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        // The results
+                        while (dr.Read())
+                        {
+                            if (results == null)
+                                results = new List<Order>();
+
+                            Order order = new Order();
+
+                            order.order_Id = (int)dr["order_Id"];
+                            order.status = (string)dr["status"];
+                            order.totalPrice = Convert.ToSingle(dr["totalPrice"]);
+                            order.created_at = (DateTime)dr["created_at"];
+                            order.delivery_time = (string)dr["delivery_time"];
+                            order.customer_Id = (int)dr["customer_Id"];
+                            order.delivery_staff_Id = (int)dr["delivery_staff_Id"];
+
+                            results.Add(order);
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            // Return the list
+            return results;
+        }
         // ******************************************************* //
         // Method which adds an order
         // ******************************************************* //

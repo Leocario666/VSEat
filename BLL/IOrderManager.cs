@@ -12,6 +12,7 @@ namespace BLL
         List<Order> GetOrders(int idCustomer);
         List<Order> GetOrders_ds(int delivery_staff_Id);
         Order GetOrder(int id);
+        List<Order> GetOrders();
         int AddOrder(Order order);
         int UpdateOrder(Order order);
     }

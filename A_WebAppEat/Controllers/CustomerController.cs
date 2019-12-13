@@ -83,8 +83,14 @@ namespace VSEat.Controllers
                 ViewBag.login = HttpContext.Session.GetString("login");
                 IOrderDB order = new OrderDB(Configuration);
                 IOrderManager om = new OrderManager(order);
+                IDelivery_staffDB dsDB = new Delivery_staffDB(Configuration);
+                IDelivery_staffManager dsM = new Delivery_staffManager(dsDB);
                 var id = (int)HttpContext.Session.GetInt32("id");
                 var ordersList = om.GetOrders(id);
+                var allOrders = om.GetOrders();
+                ViewData["AllOrders"] = allOrders;
+                var allStaff = dsM.GetDelivery_staffs();
+                ViewData["AllStaffs"] = allStaff;
 
                 if (ordersList == null)
                 {

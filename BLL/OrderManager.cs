@@ -41,6 +41,14 @@ namespace BLL
         }
 
         // ************************************************************* // 
+        // Method which manages the display of all orders
+        // ************************************************************* // 
+        public List<Order> GetOrders()
+        {
+            return OrderDb.GetOrders();
+        }
+
+        // ************************************************************* // 
         // Method which manages the adding of one order
         // ************************************************************* // 
         public int AddOrder(Order order)

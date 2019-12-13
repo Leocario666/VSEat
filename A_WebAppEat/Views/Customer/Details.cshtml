@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Details";
+    IEnumerable<DTO.Delivery_staff> staffs = ViewData["AllStaffs"] as IEnumerable<DTO.Delivery_staff>;
 }
 
 <h2>Hello @ViewBag.login</h2>
@@ -9,7 +10,6 @@
     <table class="table">
         <thead>
             <tr>
-
                 <th>
                     Status
                 </th>
@@ -19,15 +19,17 @@
                 <th>
                     Delivery time
                 </th>
-
+                <th>
+                    Deliverer in charge
+                </th>
 
             </tr>
         </thead>
         <tbody>
             @foreach (var item in Model)
             {
+                string name = "";
                 <tr>
-
                     <td>
                         @Html.DisplayFor(modelItem => item.status)
                     </td>
@@ -37,7 +39,17 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.delivery_time)
                     </td>
-
+                    <td>
+                        @foreach(var staff in staffs)
+                        {
+                            if (item.delivery_staff_Id == staff.delivery_staff_Id)
+                            {
+                                name = staff.first_name +" "+ staff.last_name;
+                            }
+                            
+                        }
+                        @name
+                    </td>
                 </tr>
             }
         </tbody>
