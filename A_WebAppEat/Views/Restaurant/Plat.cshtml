@@ -5,7 +5,12 @@
 }
 <link rel="stylesheet" href="~/css/restoPlats.css">
 <h2>Plats</h2>
+@{ 
+    var x = "un";
+    var name = "plat";
+    var nameconcat = "coucou";
 
+}
 
 <table class="table">
     <thead>
@@ -24,6 +29,7 @@
     <tbody>
         @foreach (var item in Model)
         {
+            nameconcat += x;
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.name)
@@ -32,7 +38,7 @@
                     @Html.DisplayFor(modelItem => item.price)
                 </td>
                 <td>
-                    <input type="number" min="0" max="20" value="0" name="@item.name"/>
+                    <input type="number" min="0" max="20" value="0" name="@nameconcat"/>
                 </td>
             </tr>
         }

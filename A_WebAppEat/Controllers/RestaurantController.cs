@@ -59,7 +59,7 @@ namespace A_WebAppEat.Controllers
         }
 
         //GET : Restaurtant/command
-        public ActionResult Command(string carbonra, string steak, DateTime deliveryTime)
+        public ActionResult Command(string platun, string platunun, DateTime deliveryTime)
         {
             IDishDB dish = new DishDB(Configuration);
             IDishManager dishManager = new DishManager(dish);
@@ -67,8 +67,8 @@ namespace A_WebAppEat.Controllers
             List<Dish_Order> dishlist = null;
             List<DTO.Dish> plat = dishManager.GetDishes((int)HttpContext.Session.GetInt32("idResto"));
             List <string> s = new List<string>();
-            s.Add(carbonra);
-            s.Add(steak);
+            s.Add(platun);
+            s.Add(platunun);
 
             int x = 0;
             int quantitytemp;
@@ -85,7 +85,7 @@ namespace A_WebAppEat.Controllers
                 quantitytemp = Int32.Parse(s.ElementAt(x));
                 order.totalPrice = quantitytemp * pricetemp;
                 priceGeneral += quantitytemp * pricetemp;
-                pricetemp = d.price;
+                dishlist.Add(order);
                 x++;
             }
 
