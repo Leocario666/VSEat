@@ -29,9 +29,10 @@ namespace A_WebAppEat.Controllers
         // GET: Restaurant
         public ActionResult Index()
         {
-           
+            ICityDB cityDB = new CityDB(Configuration);
+            ICityManager cityManager = new CityManager(cityDB);
             var restaurant = RestaurantManager.GetRestaurants();
-           
+            ViewData["Cities"] = cityManager.GetCities();
             return View(restaurant);
         }
 
