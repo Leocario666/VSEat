@@ -15,6 +15,7 @@ namespace A_WebAppEat.Controllers
     public class RestaurantController : Controller
     {
         private IOrderManager orderManager { get; }
+        private IOrder_dishesManager order_dishesManager { get; }
         private IRestaurantManager RestaurantManager { get; }
         private IConfiguration Configuration { get; }
 
@@ -59,14 +60,21 @@ namespace A_WebAppEat.Controllers
 
         }
 
-        [HttpGet]
-        //GET : Restaurtant/command
-        public ActionResult Command(string platun, string platunun, DateTime deliveryTime)
+        [HttpPost]
+        //POST : Restaurtant/command
+        public ActionResult Command()
         {
+            string platun = Request.Form["platun"];
+            string platunun = Request.Form["platunun"];
+            string deliveryTime = Request.Form["deliveryTime"];
             IDishDB dish = new DishDB(Configuration);
+            IOrderDB orderdb = new OrderDB(Configuration);
+            IOrder_dishesDB orderddb = new Order_dishesDB(Configuration);
             IDishManager dishManager = new DishManager(dish);
+            IOrderManager orderManager = new OrderManager(orderdb);
+            IOrder_dishesManager order_DishesManager = new Order_dishesManager(orderddb);
 
-            List<Dish_Order> dishlist = null;
+            List<Dish_Order> dishlist = new List<Dish_Order>();
             List<Dish> plat = dishManager.GetDishes((int)HttpContext.Session.GetInt32("idResto"));
             List <string> s = new List<string>();
             s.Add(platun);
@@ -91,10 +99,30 @@ namespace A_WebAppEat.Controllers
                 x++;
             }
 
-                
+            ViewBag.prix = priceGeneral;
 
+            if(priceGeneral != 0)
+            {
+                Order ikse = new Order();
+                ikse.delivery_time = deliveryTime;
+                ikse.totalPrice = priceGeneral;
+                ikse.customer_Id = (int)HttpContext.Session.GetInt32("id");
+                ikse.delivery_staff_Id = 1;
 
-            return View(priceGeneral);
+                var orderaiedi = orderManager.AddOrder(ikse);
+                Order_dishes order_dishes_ = new Order_dishes();
+
+                foreach (Dish_Order disho in dishlist)
+                {
+                    order_dishes_.order_Id = orderaiedi;
+                    order_dishes_.dish_Id = disho.Dish_Id;
+                    order_dishes_.quantity = disho.Quantity;
+                    order_dishes_.price = disho.totalPrice;
+                    order_DishesManager.AddOrder_dishes(order_dishes_);
+                }
+            }
+
+            return View();
         }
 
     }

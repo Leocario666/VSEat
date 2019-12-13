@@ -43,7 +43,7 @@ namespace BLL
         // ************************************************************* // 
         // Method which manages the adding of one order
         // ************************************************************* // 
-        public Order AddOrder(Order order)
+        public int AddOrder(Order order)
         {
             return OrderDb.AddOrder(order);
         }

@@ -55,7 +55,7 @@ namespace DAL
                             order.status = (string)dr["status"];
                             order.totalPrice = Convert.ToSingle(dr["totalPrice"]);
                             order.created_at = (DateTime)dr["created_at"];
-                            order.delivery_time = (DateTime)dr["delivery_time"];
+                            order.delivery_time = (string)dr["delivery_time"];
                             order.customer_Id = (int)dr["customer_Id"];
                             order.delivery_staff_Id = (int)dr["delivery_staff_Id"];
 
@@ -107,7 +107,7 @@ namespace DAL
                             order.status = (string)dr["status"];
                             order.totalPrice = Convert.ToSingle(dr["totalPrice"]);
                             order.created_at = (DateTime)dr["created_at"];
-                            order.delivery_time = (DateTime)dr["delivery_time"];
+                            order.delivery_time = (string)dr["delivery_time"];
                             order.customer_Id = (int)dr["customer_Id"];
                             order.delivery_staff_Id = (int)dr["delivery_staff_Id"];
                         }
@@ -161,7 +161,7 @@ namespace DAL
                             order.status = (string)dr["status"];
                             order.totalPrice = Convert.ToSingle(dr["totalPrice"]);
                             order.created_at = (DateTime)dr["created_at"];
-                            order.delivery_time = (DateTime)dr["delivery_time"];
+                            order.delivery_time = (string)dr["delivery_time"];
                             order.customer_Id = (int)dr["customer_Id"];
                             order.delivery_staff_Id = (int)dr["delivery_staff_Id"];
 
@@ -182,7 +182,7 @@ namespace DAL
         // ******************************************************* //
         // Method which adds an order
         // ******************************************************* //
-        public Order AddOrder(Order order)
+        public int AddOrder(Order order)
         {
             //string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
@@ -214,7 +214,7 @@ namespace DAL
                 throw e;
             }
             // Return the order
-            return order;
+            return order.order_Id;
         }
         // ******************************************************* //
         // Method which updates an order
@@ -229,14 +229,13 @@ namespace DAL
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
                     // The query
-                    string query = "UPDATE [order] Set delivery_time=@delivery_time, status = @status WHERE order_Id = @order_Id";
+                    string query = "UPDATE [order] Set status = @status WHERE order_Id = @order_Id";
                    
                     // Save the command
                     SqlCommand cmd = new SqlCommand(query, cn);
 
                     cmd.Parameters.AddWithValue("@order_Id", order.order_Id);
                     cmd.Parameters.AddWithValue("@status", order.status);
-                    cmd.Parameters.AddWithValue("@delivery_time", order.delivery_time);
                     
 
 

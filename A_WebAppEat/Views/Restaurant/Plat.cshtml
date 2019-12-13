@@ -1,56 +1,68 @@
 ﻿@model IEnumerable<DTO.Dish>
 
-@{
+
+@{ 
     ViewData["Title"] = "Plat";
 }
 <link rel="stylesheet" href="~/css/restoPlats.css">
 <h2>Plats</h2>
-@{ 
+@{
     var x = "un";
-    var name = "plat";
-    var nameconcat = "coucou";
+    var nameconcat = "plat";
+
+}
+@using (Html.BeginForm())
+{
+    <table class="table">
+        <thead>
+            <tr class="gras">
+                <th>
+                    <p>Name</p>
+                </th>
+                <th>
+                    <p>Price</p>
+                </th>
+                <th>
+                    <p>Quantity</p>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                nameconcat += x;
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.price)
+                    </td>
+                    <td>
+                        <select name="@nameconcat" id="@nameconcat">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                        </select>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="time">
+        <label>At what time do you want to be delivered (between 11:00 and 22:45) ? </label>
+        <input type="time" min="11:00" max="22:30" step="900" name="deliveryTime" id="deliveryTime" />
+    </div>
+
+    <div class="bouton_conteneur">
+        <a asp-action="Index" class="back">Back to List</a>
+        <input asp-action="Command" type="submit" name="Command" />
+    </div>
 
 }
 
-<table class="table">
-    <thead>
-        <tr class="gras">
-            <th>
-                <p>Name</p>
-            </th>
-            <th>
-                <p>Price</p>
-            </th>
-            <th>
-                <p>Quantity</p>
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            nameconcat += x;
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.price)
-                </td>
-                <td>
-                    <input type="number" min="0" max="20" value="0" name="@nameconcat"/>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
-
-<div class="time">
-    <label>At what time do you want to be delivered (between 11:00 and 22:45) ? </label>
-    <input type="time" min="11:00" max="22:30" step="900" />
-</div>
-
-<div class="bouton_conteneur">
-    <a asp-action="Index" class="back">Back to List</a>
-    <a href="@Url.Action("Command", "Restaurant")">Command</a>
-</div>
