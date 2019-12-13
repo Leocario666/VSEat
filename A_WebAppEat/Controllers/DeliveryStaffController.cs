@@ -64,7 +64,10 @@ namespace VSEat.Controllers
         {
             IOrderDB order = new OrderDB(Configuration);
             IOrderManager odm = new OrderManager(order);
-
+            ICustomerDB customer = new CustomerDB(Configuration);
+            ICustomerManager cm = new CustomerManager(customer);
+            var customerlist = cm.GetCustomers();
+            ViewData["Customers"] = customerlist;
             
             
             var od = odm.GetOrders_ds(id);

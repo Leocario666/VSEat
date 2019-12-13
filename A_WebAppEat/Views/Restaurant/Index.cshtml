@@ -2,7 +2,7 @@
 
 @{
     ViewData["Title"] = "GetRestaurants";
-    
+    IEnumerable<DTO.City> cities = ViewData["Cities"] as IEnumerable<DTO.City>;
 }
 <style>
     p 
@@ -28,14 +28,21 @@
     </thead>
     <tbody>
 @foreach (var item in Model) {
-    
+    string citystring = "";
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.cityCode)
-            </td>
+                @foreach (var city in cities)
+                {
+                    if (item.cityCode == city.cityCode)
+                    {
+                        citystring = city.name;
+                    }
+                }
+                        @citystring
+                    </td>
             <td>
                 @Html.ActionLink("Afficher les plats du restaurant","Plat", new { id=item.restaurant_Id})
             </td>
