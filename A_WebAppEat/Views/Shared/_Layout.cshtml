@@ -33,14 +33,18 @@
             <div class="navbar-collapse collapse">
                 <div class="container">
                     <div class="nav navbar-nav navbar-right">
-                        @if (Context.Session.GetString("login") != "Aucun customer n'est log" && Context.Session.GetString("login") != null) // A customer is loged ?
+                        @if (Context.Session.GetString("nameDL") == "Aucun DL n'est log" && Context.Session.GetString("nameDL") == null)
                         {
-                        <a asp-area="" asp-controller="Customer" asp-action="Details" class="navbar-brand">My Account</a>
+                            @if (Context.Session.GetString("login") != "Aucun customer n'est log" && Context.Session.GetString("login") != null) // A customer is loged ?
+                            {
+                                <a asp-area="" asp-controller="Customer" asp-action="Details" class="navbar-brand">My Account</a>
+                            }
+                            else
+                            {
+                                <a asp-area="" asp-controller="Customer" asp-action="Details" class="navbar-brand">Login</a>
+                            }
                         }
-                        else
-                        {
-                            <a asp-area="" asp-controller="Customer" asp-action="Details" class="navbar-brand">Login</a>
-                        }
+
                     </div>
                 </div>
             </div>

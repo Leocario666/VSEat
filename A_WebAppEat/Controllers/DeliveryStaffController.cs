@@ -42,6 +42,7 @@ namespace VSEat.Controllers
                     {
                         IdLog = deliverer.delivery_staff_Id;
                         HttpContext.Session.SetInt32("idDL", IdLog);
+                        HttpContext.Session.SetString("nameDL", deliverer.login);
                         pseudo = deliverer.login;
                         
                     }
@@ -73,7 +74,7 @@ namespace VSEat.Controllers
             var citylist = cityman.GetCities();
             ViewData["City"] = citylist;
 
-
+            ViewBag.nameDL = HttpContext.Session.GetString("nameDL");
             var od = odm.GetOrders_ds(id);
 
             List<Order> odtrie = new List<Order>();
