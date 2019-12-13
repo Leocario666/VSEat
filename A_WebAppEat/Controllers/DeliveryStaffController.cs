@@ -66,12 +66,27 @@ namespace VSEat.Controllers
             IOrderManager odm = new OrderManager(order);
             ICustomerDB customer = new CustomerDB(Configuration);
             ICustomerManager cm = new CustomerManager(customer);
+            ICityDB citydb = new CityDB(Configuration);
+            ICityManager cityman = new CityManager(citydb);
             var customerlist = cm.GetCustomers();
             ViewData["Customers"] = customerlist;
-            
-            
+            var citylist = cityman.GetCities();
+            ViewData["City"] = citylist;
+
+
             var od = odm.GetOrders_ds(id);
-            return View(od);
+
+            List<Order> odtrie = new List<Order>();
+
+            foreach(Order o in od)
+            {
+                if(o.status.Equals("non delivery"))
+                {
+                    odtrie.Add(o);
+                }
+            }
+
+            return View(odtrie);
         }
 
         public ActionResult Delivered(int id)

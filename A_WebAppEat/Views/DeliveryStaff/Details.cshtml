@@ -3,6 +3,7 @@
 @{
     ViewData["Title"] = "Details";
     IEnumerable<DTO.Customer> customers = ViewData["Customers"] as IEnumerable<DTO.Customer>;
+    IEnumerable<DTO.City> cities = ViewData["City"] as IEnumerable<DTO.City>;
 }
 
 <h2>Details</h2>
@@ -29,15 +30,22 @@
                 Delivery time
             </th>
             <th>
-                Customer's name
+                Address
+            </th>
+            <th>
+                Zipcode
+            </th>
+            <th>
+                Ville
             </th>
             
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-    string name = "";
+@foreach (var item in Model)
+{
+    string citystring = "";
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.order_Id)
@@ -55,14 +63,20 @@
                 @Html.DisplayFor(modelItem => item.delivery_time)
             </td>
             <td>
-                @foreach(var customer in customers)
+                @ViewBag.adresse
+            </td>
+            <td>
+                @ViewBag.zipCode
+            </td>
+            <td>
+                @foreach (var city in cities)
                 {
-                    if(item.customer_Id == customer.customer_Id)
+                    if (@ViewBag.zipCode == city.cityCode)
                     {
-                        name = customer.last_name;
+                        citystring = city.name;
                     }
                 }
-                @name
+                @citystring
             </td>
             
             <td>
