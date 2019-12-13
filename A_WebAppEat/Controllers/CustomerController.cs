@@ -84,16 +84,16 @@ namespace VSEat.Controllers
                 IOrderDB order = new OrderDB(Configuration);
                 IOrderManager om = new OrderManager(order);
                 var id = (int)HttpContext.Session.GetInt32("id");
-                var test = om.GetOrders(id);
+                var ordersList = om.GetOrders(id);
 
-                if (test == null)
+                if (ordersList == null)
                 {
                     return RedirectToAction("DetailsNoOrder", "Customer", new { user = id.ToString() });
 
                 }
                 else
                 {
-                    return View(test); // Return the Details view
+                    return View(ordersList); // Return the Details view
                 }
             }
             else
