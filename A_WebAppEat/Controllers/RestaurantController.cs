@@ -66,6 +66,8 @@ namespace A_WebAppEat.Controllers
         {
             string platun = Request.Form["platun"];
             string platunun = Request.Form["platunun"];
+            string platununun = Request.Form["platununun"];
+            string platunununun = Request.Form["platunununun"];
             string deliveryTime = Request.Form["deliveryTime"];
             IDishDB dish = new DishDB(Configuration);
             IOrderDB orderdb = new OrderDB(Configuration);
@@ -79,6 +81,14 @@ namespace A_WebAppEat.Controllers
             List <string> s = new List<string>();
             s.Add(platun);
             s.Add(platunun);
+            if(platununun != null)
+            {
+                s.Add(platununun);
+            }
+            if(platunununun != null)
+            {
+                s.Add(platunununun);
+            }
 
             int x = 0;
             int quantitytemp;
@@ -118,7 +128,10 @@ namespace A_WebAppEat.Controllers
                     order_dishes_.dish_Id = disho.Dish_Id;
                     order_dishes_.quantity = disho.Quantity;
                     order_dishes_.price = disho.totalPrice;
-                    order_DishesManager.AddOrder_dishes(order_dishes_);
+                    if(order_dishes_.quantity != 0)
+                    {
+                        order_DishesManager.AddOrder_dishes(order_dishes_);
+                    }
                 }
             }
 

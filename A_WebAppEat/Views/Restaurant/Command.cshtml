@@ -2,11 +2,21 @@
 @{
     ViewData["Title"] = "Command";
 }
-    <link rel="stylesheet" href="~/css/command.css">
+<link rel="stylesheet" href="~/css/command.css">
+
+@if (ViewBag.prix != 0)
+{
     <h2>Thank you for your command</h2>
 
     <p>A deliverer will come to your house to bring you your dish</p>
 
     <p>you will have to pay him : @ViewBag.prix CHF</p>
+}
+else
+{
+    <h2>An error has occurred</h2>
+    <p>You must choose at least one dish in your order</p>
+}
+
 
 <a href="@Url.Action("Index", "Home")" class="command">Back to the home page</a>
