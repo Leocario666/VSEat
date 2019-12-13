@@ -78,7 +78,7 @@ namespace VSEat.Controllers
         // GET: Customer/Details/5
         public ActionResult Details()
         {
-            if ((string)HttpContext.Session.GetString("login") != "Aucun customer n'est log" && (string)HttpContext.Session.GetString("login") != null) // A customer is loged ?
+            if ((string)HttpContext.Session.GetString("login") != "Aucun customer n'est log" && (string)HttpContext.Session.GetString("login") != null) // A customer is logged ?
             {
                 ViewBag.login = HttpContext.Session.GetString("login");
                 IOrderDB order = new OrderDB(Configuration);

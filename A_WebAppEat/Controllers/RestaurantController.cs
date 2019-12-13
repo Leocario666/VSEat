@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using BLL;
 using DAL;
+using DTO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -58,6 +59,7 @@ namespace A_WebAppEat.Controllers
 
         }
 
+        [HttpGet]
         //GET : Restaurtant/command
         public ActionResult Command(string platun, string platunun, DateTime deliveryTime)
         {
@@ -65,7 +67,7 @@ namespace A_WebAppEat.Controllers
             IDishManager dishManager = new DishManager(dish);
 
             List<Dish_Order> dishlist = null;
-            List<DTO.Dish> plat = dishManager.GetDishes((int)HttpContext.Session.GetInt32("idResto"));
+            List<Dish> plat = dishManager.GetDishes((int)HttpContext.Session.GetInt32("idResto"));
             List <string> s = new List<string>();
             s.Add(platun);
             s.Add(platunun);
@@ -74,8 +76,8 @@ namespace A_WebAppEat.Controllers
             int quantitytemp;
             float pricetemp;
             float priceGeneral = 0;
-            Dish_Order order = null;
-            foreach(DTO.Dish d in plat)
+            Dish_Order order = new Dish_Order();
+            foreach(Dish d in plat)
             {
                 order.Dish_Id = d.dish_Id;
                 order.Name = d.name;
