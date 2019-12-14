@@ -1,0 +1,13 @@
+﻿
+@{
+    ViewData["Title"] = "error";
+}
+
+<h2>We are sorry</h2>
+
+<p>
+    No delivery person is available in @ViewBag.ville for @ViewBag.heure <br />
+    You can either change restaurants or change the delivery time
+</p>
+
+<a href="@Url.Action("Index", "Home")" class="command">Back to the home page</a>
