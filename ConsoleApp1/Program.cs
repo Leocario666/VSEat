@@ -21,13 +21,10 @@ namespace ConsoleApp1
             ICustomerManager customerManager = new CustomerManager(customerDB);
             Customer c = new Customer();
 
-            IOrderDB orderDB = new OrderDB(Configuration);
-            IOrderManager orderManager = new OrderManager(orderDB);
-
-            var od = orderManager.GetOrder(2);
-
-            od.status = "bruuuh";
-            orderManager.UpdateOrder(od);
+            DateTime test = DateTime.Now;
+            int hour = (int) test.Hour;
+            int minutes = hour * 60 + test.;
+            Console.WriteLine(minutes);
             
         }
 

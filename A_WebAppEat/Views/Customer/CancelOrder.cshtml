@@ -1,0 +1,60 @@
+﻿@model DTO.Order
+
+@{
+    ViewData["Title"] = "CancelOrder";
+}
+
+<h2>CancelOrder</h2>
+
+<h4>Order</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="CancelOrder">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="order_Id" class="control-label"></label>
+                <input asp-for="order_Id" class="form-control" />
+                <span asp-validation-for="order_Id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="status" class="control-label"></label>
+                <input asp-for="status" class="form-control" />
+                <span asp-validation-for="status" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="totalPrice" class="control-label"></label>
+                <input asp-for="totalPrice" class="form-control" />
+                <span asp-validation-for="totalPrice" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="created_at" class="control-label"></label>
+                <input asp-for="created_at" class="form-control" />
+                <span asp-validation-for="created_at" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="delivery_time" class="control-label"></label>
+                <input asp-for="delivery_time" class="form-control" />
+                <span asp-validation-for="delivery_time" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="customer_Id" class="control-label"></label>
+                <input asp-for="customer_Id" class="form-control" />
+                <span asp-validation-for="customer_Id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="delivery_staff_Id" class="control-label"></label>
+                <input asp-for="delivery_staff_Id" class="form-control" />
+                <span asp-validation-for="delivery_staff_Id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

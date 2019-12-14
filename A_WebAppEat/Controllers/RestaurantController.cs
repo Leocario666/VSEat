@@ -54,6 +54,7 @@ namespace A_WebAppEat.Controllers
             IDishManager dishManager = new DishManager(dish);
 
 
+
             var dishes = dishManager.GetDishes(id);
             HttpContext.Session.SetInt32("idResto", id);
 

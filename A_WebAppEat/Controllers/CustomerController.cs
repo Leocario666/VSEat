@@ -145,6 +145,7 @@ namespace VSEat.Controllers
             ICityDB cityDB = new CityDB(Configuration);
             ICityManager cityManager = new CityManager(cityDB);
 
+
             var citieslist = cityManager.GetCities();
 
 
@@ -153,35 +154,34 @@ namespace VSEat.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        // POST: Customer/Create
-
-        // GET: Customer/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult DishesInOrder(int id)
         {
-            return View();
+            IDishDB dish = new DishDB(Configuration);
+            IDishManager dishManager = new DishManager(dish);
+
+            IOrder_dishesDB order_Dishes = new Order_dishesDB(Configuration);
+            IOrder_dishesManager odm = new Order_dishesManager(order_Dishes);
+
+            var allDishes = dishManager.GetAllDishes();
+            ViewData["AllDishes"] = allDishes;
+
+
+            var orderDishes = odm.GetOrders_dishes(id);
+            return View(orderDishes);
         }
 
-        // POST: Customer/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
+       
 
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Customer/Delete/5
-        public ActionResult Delete(int id)
+        
+        public ActionResult CancelOrder(int id)
         {
-            return View();
+            var id1 = (int)HttpContext.Session.GetInt32("id");
+            IOrderDB order = new OrderDB(Configuration);
+            IOrderManager odm = new OrderManager(order);
+            var od = odm.GetOrder(id);
+            od.status = "canceled";
+            odm.UpdateOrder(od);
+            return RedirectToAction("Details", "Customer", new { user = id1.ToString() });
         }
 
         // POST: Customer/Delete/5

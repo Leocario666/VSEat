@@ -1,0 +1,60 @@
+﻿@model IEnumerable<DTO.Order_dishes>
+
+@{
+    ViewData["Title"] = "DishesInOrder";
+    IEnumerable<DTO.Dish> dishes = ViewData["AllDishes"] as IEnumerable<DTO.Dish>;
+}
+    <link rel="stylesheet" href="~/css/command.css">
+<h2>DishesInOrder</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Order number
+            </th>
+            <th>
+                Dish
+            </th>
+            <th>
+                Quantity
+            </th>
+            <th>
+                Price
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+    string name = "";
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.order_Id)
+            </td>
+            <td>
+                @foreach(var dish in dishes)
+                {
+                    if(dish.dish_Id == item.dish_Id)
+                    {
+                        name = dish.name;
+                    }
+                }
+                @name
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.quantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.price)
+            </td>
+            
+        </tr>
+}
+    </tbody>
+</table>
+
+<a href="@Url.Action("Details", "Customer",new { id = ViewBag.login })" class="command">Back to the orders list</a>
