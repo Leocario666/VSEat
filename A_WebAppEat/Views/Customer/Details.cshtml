@@ -18,6 +18,9 @@
     <thead>
         <tr>
             <th>
+                N° Order
+            </th>
+            <th>
                 Status
             </th>
             <th>
@@ -50,6 +53,9 @@
                 string name = "";
                 string restaurantName = "";
         <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.order_Id)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.status)
             </td>
@@ -118,6 +124,9 @@
     <thead>
         <tr>
             <th>
+                N° Order
+            </th>
+            <th>
                 Status
             </th>
             <th>
@@ -142,14 +151,12 @@
         {
             if (item.status != "non delivery")
             {
-                int hour = 0;
-                int minute = 0;
-                DateTime mtn = DateTime.Now;
-                int minutesNow = mtn.Hour * 60 + mtn.Minute;
-                int minutesDelivery_time = 0;
                 string name = "";
                 string restaurantName = "";
         <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.order_Id)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.status)
             </td>
@@ -196,17 +203,7 @@
                 @restaurantName
             </td>
             <td>
-                @{
-
-                    hour = Int32.Parse(item.delivery_time.Substring(0, 2));
-                    minute = Int32.Parse(item.delivery_time.Substring(3, 2));
-                    minutesDelivery_time = hour * 60 + minute;
-                }
-                @Html.ActionLink("Afficher les plats de votre commande", "DishesInOrder", new { id = item.order_Id }) |
-                @if (minutesDelivery_time - minutesNow >= 300 || minutesDelivery_time < minutesNow)
-                {
-                    @Html.ActionLink("Cancel order", "CancelOrder", new { id = item.order_Id })
-                }
+                @Html.ActionLink("Dish details", "DishesInOrder", new { id = item.order_Id })
             </td>
         </tr>
             }

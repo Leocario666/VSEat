@@ -60,6 +60,8 @@ namespace VSEat.Controllers
                         this.login = login;
                         HttpContext.Session.SetInt32("id", id);
                         HttpContext.Session.SetString("login", login);
+                        HttpContext.Session.SetString("prenom", customer.first_name);
+                        HttpContext.Session.SetString("nom", customer.last_name);
                     }
                 }
 
@@ -175,15 +177,30 @@ namespace VSEat.Controllers
         
         public ActionResult CancelOrder(int id)
         {
-            var id1 = (int)HttpContext.Session.GetInt32("id");
-            IOrderDB order = new OrderDB(Configuration);
-            IOrderManager odm = new OrderManager(order);
-            var od = odm.GetOrder(id);
-            od.status = "canceled";
-            odm.UpdateOrder(od);
-            return RedirectToAction("Details", "Customer", new { user = id1.ToString() });
+            string idString = id.ToString();
+            HttpContext.Session.SetString("idOrderCancel", idString);
+            return View();
         }
 
+        public ActionResult TransitionCancel ()
+        {
+            string retour = Request.Form["retour"];
+
+            string forTest = HttpContext.Session.GetString("idOrderCancel") + HttpContext.Session.GetString("prenom") + HttpContext.Session.GetString("nom");
+
+            if (retour.Equals(forTest))
+            {
+                IOrderDB order = new OrderDB(Configuration);
+                IOrderManager odm = new OrderManager(order);
+                var od = odm.GetOrder(Int32.Parse(HttpContext.Session.GetString("idOrderCancel")));
+                od.status = "canceled";
+                odm.UpdateOrder(od);
+            }
+
+            var id1 = (int)HttpContext.Session.GetInt32("id");
+            return RedirectToAction("Details", "Customer", new { user = id1.ToString() });
+
+        }
         // POST: Customer/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]

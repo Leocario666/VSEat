@@ -21,10 +21,10 @@ namespace ConsoleApp1
             ICustomerManager customerManager = new CustomerManager(customerDB);
             Customer c = new Customer();
 
-            DateTime test = DateTime.Now;
+           /* DateTime test = DateTime.Now;
             int hour = (int) test.Hour;
             int minutes = hour * 60 + test.;
-            Console.WriteLine(minutes);
+            Console.WriteLine(minutes);*/
             
         }
 
