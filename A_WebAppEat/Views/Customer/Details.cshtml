@@ -10,28 +10,34 @@
 
 <h2>Hello @ViewBag.login</h2>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    Status
-                </th>
-                <th>
-                    Created at
-                </th>
-                <th>
-                    Delivery time
-                </th>
-                <th>
-                    Deliverer in charge
-                </th>
-                <th>
-                    Restaurant
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
+
+<a href="@Url.Action("CustomerTransition", "Customer")" class="btn btn-default">Logout</a>
+<a href="@Url.Action("Index", "Home")" class="btn btn-default">Back to home page</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Status
+            </th>
+            <th>
+                Created at
+            </th>
+            <th>
+                Delivery time
+            </th>
+            <th>
+                Deliverer in charge
+            </th>
+            <th>
+                Restaurant
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            if (item.status == "non delivery")
             {
                 string name = "";
                 string restaurantName = "";
@@ -46,28 +52,28 @@
                         @Html.DisplayFor(modelItem => item.delivery_time)
                     </td>
                     <td>
-                        @foreach(var staff in staffs)
+                        @foreach (var staff in staffs)
                         {
                             if (item.delivery_staff_Id == staff.delivery_staff_Id)
                             {
-                                name = staff.first_name +" "+ staff.last_name;
+                                name = staff.first_name + " " + staff.last_name;
                             }
-                            
+
                         }
                         @name
                     </td>
                     <td>
-                        @foreach(var od in order_Dishes)
+                        @foreach (var od in order_Dishes)
                         {
-                            if(item.order_Id == od.order_Id)
+                            if (item.order_Id == od.order_Id)
                             {
-                                foreach(var dish in dishes)
+                                foreach (var dish in dishes)
                                 {
                                     if (dish.dish_Id == od.dish_Id)
                                     {
-                                        foreach(var resto in restaurants)
+                                        foreach (var resto in restaurants)
                                         {
-                                            if(dish.restaurant_Id == resto.restaurant_Id)
+                                            if (dish.restaurant_Id == resto.restaurant_Id)
                                             {
                                                 restaurantName = resto.name;
                                             }
@@ -80,8 +86,82 @@
                     </td>
                 </tr>
             }
-        </tbody>
-    </table>
+        }
+    </tbody>
+</table>
 
-<a href="@Url.Action("CustomerTransition", "Customer")" class="btn btn-default">Logout</a>
-<a href="@Url.Action("Index", "Home")" class="btn btn-default">Back to home page</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Status
+            </th>
+            <th>
+                Created at
+            </th>
+            <th>
+                Delivery time
+            </th>
+            <th>
+                Deliverer in charge
+            </th>
+            <th>
+                Restaurant
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            if (item.status != "non delivery")
+            {
+                string name = "";
+                string restaurantName = "";
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.status)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.created_at)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.delivery_time)
+                    </td>
+                    <td>
+                        @foreach (var staff in staffs)
+                        {
+                            if (item.delivery_staff_Id == staff.delivery_staff_Id)
+                            {
+                                name = staff.first_name + " " + staff.last_name;
+                            }
+
+                        }
+                        @name
+                    </td>
+                    <td>
+                        @foreach (var od in order_Dishes)
+                        {
+                            if (item.order_Id == od.order_Id)
+                            {
+                                foreach (var dish in dishes)
+                                {
+                                    if (dish.dish_Id == od.dish_Id)
+                                    {
+                                        foreach (var resto in restaurants)
+                                        {
+                                            if (dish.restaurant_Id == resto.restaurant_Id)
+                                            {
+                                                restaurantName = resto.name;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        @restaurantName
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
