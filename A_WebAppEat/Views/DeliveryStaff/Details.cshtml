@@ -29,14 +29,9 @@
                 Delivery time
             </th>
             <th>
-                Address
+                Delivery address
             </th>
-            <th>
-                Zipcode
-            </th>
-            <th>
-                Ville
-            </th>
+        
             
             <th></th>
         </tr>
@@ -44,7 +39,10 @@
     <tbody>
 @foreach (var item in Model)
 {
-    string citystring = "";
+    string fullAddress = "";
+    string address = "";
+    string cityName = "";
+    string cityNPA = "";
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.order_Id)
@@ -62,20 +60,25 @@
                 @Html.DisplayFor(modelItem => item.delivery_time)
             </td>
             <td>
-                @ViewBag.adresse
-            </td>
-            <td>
-                @ViewBag.zipCode
-            </td>
-            <td>
-                @foreach (var city in cities)
+                @foreach(var cust in customers)
                 {
-                    if (@ViewBag.zipCode == city.cityCode)
+                    if (cust.customer_Id == item.customer_Id)
                     {
-                        citystring = city.name;
+                        address = cust.address;
+                        foreach(var city in cities)
+                        {
+                            if(cust.cityCode == city.cityCode)
+                            {
+                                cityName = city.name;
+                                cityNPA = city.cityCode.ToString();
+                                fullAddress = address + " " + cityNPA + " " + cityName;
+                            }
+                        }
                     }
+
                 }
-                @citystring
+
+                @fullAddress
             </td>
             
             <td>
