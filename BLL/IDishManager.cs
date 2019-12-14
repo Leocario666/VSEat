@@ -10,6 +10,7 @@ namespace BLL
     {
         // List of the methods we can use 
         List<Dish> GetDishes(int idRestaurant);
+        List<Dish> GetAllDishes();
         Dish GetDish(int id);
 
     }

@@ -17,7 +17,7 @@ namespace DAL
         }
         // ******************************************************* //
         // Method which gets a list of Order_dishes by Id order
-        // *******************************************************  //
+        // ******************************************************* //
         public List<Order_dishes> GetOrders_dishes(int order_Id)
         {
             // Creation of the list
@@ -118,6 +118,58 @@ namespace DAL
             }
             // Return the object
             return order_dishes;
+        }
+
+        // ************************************************************** //
+        // Method which gets a list of all order_dishes
+        // ************************************************************** //
+        public List<Order_dishes> GetAllOrders_dishes()
+        {
+            // Creation of the list 
+            List<Order_dishes> results = null;
+            //string connectionString = Configuration.GetConnectionString("DefaultConnection");
+
+            try
+            {
+                // Connexion to the Database
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+                    // The query
+                    string query = "SELECT * FROM order_dishes";
+
+                    // Save the command
+                    SqlCommand cmd = new SqlCommand(query, cn);
+
+                    // Open the command
+                    cn.Open();
+
+                    // Execute the command
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        // The results
+                        while (dr.Read())
+                        {
+                            if (results == null)
+                                results = new List<Order_dishes>();
+
+                            Order_dishes order_dishes = new Order_dishes();
+
+                            order_dishes.order_Id = (int)dr["order_Id"];
+                            order_dishes.dish_Id = (int)dr["dish_Id"];
+                            order_dishes.quantity = (int)dr["quantity"];
+                            order_dishes.price = Convert.ToSingle(dr["price"]);
+
+                            results.Add(order_dishes);
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            // Return the list
+            return results;
         }
         // ******************************************************* //
         // Method which adds an order dishes
