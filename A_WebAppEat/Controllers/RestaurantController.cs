@@ -73,9 +73,12 @@ namespace A_WebAppEat.Controllers
             IDishDB dish = new DishDB(Configuration);
             IOrderDB orderdb = new OrderDB(Configuration);
             IOrder_dishesDB orderddb = new Order_dishesDB(Configuration);
+            IDelivery_staffDB dldb = new Delivery_staffDB(Configuration);
             IDishManager dishManager = new DishManager(dish);
             IOrderManager orderManager = new OrderManager(orderdb);
             IOrder_dishesManager order_DishesManager = new Order_dishesManager(orderddb);
+            IDelivery_staffManager dlmanager = new Delivery_staffManager(dldb);
+
 
             List<Dish_Order> dishlist = new List<Dish_Order>();
             List<Dish> plat = dishManager.GetDishes((int)HttpContext.Session.GetInt32("idResto"));
@@ -95,9 +98,10 @@ namespace A_WebAppEat.Controllers
             int quantitytemp;
             float pricetemp;
             float priceGeneral = 0;
-            Dish_Order order = new Dish_Order();
+            
             foreach(Dish d in plat)
             {
+                Dish_Order order = new Dish_Order();
                 order.Dish_Id = d.dish_Id;
                 order.Name = d.name;
                 order.Price = d.price;
@@ -118,13 +122,30 @@ namespace A_WebAppEat.Controllers
                 ikse.delivery_time = deliveryTime;
                 ikse.totalPrice = priceGeneral;
                 ikse.customer_Id = (int)HttpContext.Session.GetInt32("id");
-                ikse.delivery_staff_Id = 1;
+                //ikse.delivery_staff_Id = 1;
+
+                var dslist = dlmanager.GetDelivery_staffs();
+                int idDs = -1;
+
+                foreach(Delivery_staff ds in dslist)
+                {
+                    if(ds.cityCode == 1974)
+                    {
+                        var isbusy = false;
+                        if (isbusy == false)
+                        {
+                            idDs = ds.delivery_staff_Id;
+                        }
+                    }
+                }
+
+                ikse.delivery_staff_Id = idDs;
 
                 var orderaiedi = orderManager.AddOrder(ikse);
-                Order_dishes order_dishes_ = new Order_dishes();
 
                 foreach (Dish_Order disho in dishlist)
                 {
+                    Order_dishes order_dishes_ = new Order_dishes();
                     order_dishes_.order_Id = orderaiedi;
                     order_dishes_.dish_Id = disho.Dish_Id;
                     order_dishes_.quantity = disho.Quantity;
