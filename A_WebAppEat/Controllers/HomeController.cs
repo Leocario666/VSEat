@@ -13,22 +13,7 @@ namespace A_WebAppEat.Controllers
     {
         public IActionResult Index()
         {
-            if(HttpContext.Session.GetString("nameDL") != "Aucun DL n'est log" && HttpContext.Session.GetString("nameDL") != null)
-            {
-                return RedirectToAction("Details", "DeliveryStaff");
-            }
-            else
-            {
-                if (HttpContext.Session.GetString("login") != "Aucun customer n'est log" && HttpContext.Session.GetString("login") != null) // Need authentification
-                {
-                    return View();
-                }
-                else
-                {
-                    return RedirectToAction("Index", "Customer");
-                }
-            }
-            
+            return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

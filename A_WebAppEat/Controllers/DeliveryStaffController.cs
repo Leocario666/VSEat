@@ -28,7 +28,7 @@ namespace VSEat.Controllers
             return View();
         }
         // GET: DeliveryStaff
-        public ActionResult Index(DTO.Delivery_staff ds) 
+        public ActionResult Index(DTO.Delivery_staff ds)
         {
             if (DSManager.isUserValid(ds))
             {
@@ -42,22 +42,22 @@ namespace VSEat.Controllers
                     {
                         IdLog = deliverer.delivery_staff_Id;
                         HttpContext.Session.SetInt32("idDL", IdLog);
-                        HttpContext.Session.SetString("nameDL", deliverer.login);
                         pseudo = deliverer.login;
-                        
+                        HttpContext.Session.SetString("nameDL", pseudo);
                     }
                 }
 
-                return RedirectToAction("Details", "DeliveryStaff", new { id = IdLog } );
-            } else
+                return RedirectToAction("Details", "DeliveryStaff", new { id = IdLog });
+            }
+            else
             {
                 return View();
             }
-            
-            
+
+
         }
 
-        
+
 
         // GET: DeliveryStaff/Details/5
         [HttpGet]
@@ -79,9 +79,9 @@ namespace VSEat.Controllers
 
             List<Order> odtrie = new List<Order>();
 
-            foreach(Order o in od)
+            foreach (Order o in od)
             {
-                if(o.status.Equals("non delivery"))
+                if (o.status.Equals("non delivery"))
                 {
                     odtrie.Add(o);
                 }
@@ -104,6 +104,6 @@ namespace VSEat.Controllers
             return View(idDL);
         }
 
-       
+
     }
 }

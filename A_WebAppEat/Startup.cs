@@ -46,7 +46,7 @@ namespace A_WebAppEat
             services.AddScoped<IOrder_dishesDB, Order_dishesDB>();
             services.AddScoped<IOrderManager, OrderManager>();
             services.AddScoped<IOrderDB, OrderDB>();
-            
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
@@ -68,11 +68,12 @@ namespace A_WebAppEat
             app.UseCookiePolicy();
             app.UseSession();
 
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Customer}/{action=Index}/{id?}");
+                    template: "{controller=Customer}/{action=Transition}/{id?}");
             });
         }
     }

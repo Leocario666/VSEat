@@ -19,8 +19,8 @@ namespace VSEat.Controllers
         private ICustomerManager CustomerManager { get; set; }
         public int id { get; set; }
         public string login { get; set; }
-       
-        
+
+
         public CustomerController(ICustomerManager customerManager)
         {
             CustomerManager = customerManager;
@@ -35,24 +35,24 @@ namespace VSEat.Controllers
             return View();
         }
 
-       public ActionResult CustomerTransition()
+        public ActionResult CustomerTransition()
         {
             HttpContext.Session.SetInt32("id", 0);
             HttpContext.Session.SetString("login", "Aucun customer n'est log");
             return RedirectToAction("Index", "Customer");
         }
 
-       public ActionResult Index(Customer c)
+        public ActionResult Index(Customer c)
         {
-           
+
+
             if (CustomerManager.isUserValid(c))
             {
-                HttpContext.Session.SetString("login", c.login);
                 var allCustomer = CustomerManager.GetCustomers();
-                
-                foreach(var customer in allCustomer)
+
+                foreach (var customer in allCustomer)
                 {
-                    if(c.login == customer.login)
+                    if (c.login == customer.login)
                     {
                         id = customer.customer_Id;
                         login = customer.login;
@@ -62,8 +62,8 @@ namespace VSEat.Controllers
                         HttpContext.Session.SetString("login", login);
                     }
                 }
-                
-                return RedirectToAction("Index", "Home", new { user = id.ToString()});
+
+                return RedirectToAction("Index", "Home", new { user = id.ToString() });
             }
             else
             {
@@ -71,10 +71,15 @@ namespace VSEat.Controllers
             }
         }
 
+        public ActionResult Transition()
+        {
+            HttpContext.Session.SetString("login", "Aucun customer n'est log");
+            HttpContext.Session.SetString("nameDL", "Aucun DL n'est log");
+            return RedirectToAction("Index", "Customer");
+        }
 
-       
 
-        
+
         // GET: Customer/Details/5
         public ActionResult Details()
         {
@@ -106,7 +111,7 @@ namespace VSEat.Controllers
             {
                 return RedirectToAction("Index", "Customer"); // return to the login page
             }
-            
+
         }
 
         public ActionResult DetailsNoOrder()
@@ -130,14 +135,14 @@ namespace VSEat.Controllers
 
             var citieslist = cityManager.GetCities();
 
-           
+
             ViewBag.City = citieslist;
             CustomerManager.AddCustomer(c);
             return RedirectToAction(nameof(Index));
         }
 
         // POST: Customer/Create
- 
+
         // GET: Customer/Edit/5
         public ActionResult Edit(int id)
         {
