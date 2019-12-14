@@ -26,17 +26,19 @@ namespace A_WebAppEat.Controllers
             
         }
 
-        // GET: Restaurant
+        //List of all restaurants
         public ActionResult Index()
         {
             ICityDB cityDB = new CityDB(Configuration);
             ICityManager cityManager = new CityManager(cityDB);
+
+            //creation of a ViewData for the display
             var restaurant = RestaurantManager.GetRestaurants();
             ViewData["Cities"] = cityManager.GetCities();
-            return View(restaurant);
+            return View(restaurant); //return the list of all restaurants
         }
 
-
+        /*
         // GET: Restaurant/Details/5
         public ActionResult Details(int id)
         {
@@ -44,10 +46,10 @@ namespace A_WebAppEat.Controllers
             var restaurant = RestaurantManager.GetRestaurant(id);
 
             return View(restaurant);
-        }
+        }*/
 
 
-        //GET : Restaurant/Plat/1
+        //Display the list of dishes of a restaurant
         public ActionResult Plat(int id)
         {
             IDishDB dish = new DishDB(Configuration);
@@ -56,7 +58,7 @@ namespace A_WebAppEat.Controllers
 
 
             var dishes = dishManager.GetDishes(id);
-            HttpContext.Session.SetInt32("idResto", id);
+            HttpContext.Session.SetInt32("idResto", id); //setting a session for the command action
 
             return View(dishes);
 
@@ -255,6 +257,7 @@ namespace A_WebAppEat.Controllers
             return RedirectToAction("error", "Restaurant");
         }
 
+        //Error page if no deliverer is available
         public ActionResult error()
         {
             return View();

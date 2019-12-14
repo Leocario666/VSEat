@@ -5,7 +5,7 @@
     IEnumerable<DTO.Customer> customers = ViewData["Customers"] as IEnumerable<DTO.Customer>;
     IEnumerable<DTO.City> cities = ViewData["City"] as IEnumerable<DTO.City>;
 }
-
+<!--Orders to deliver -->
 <h2>Details</h2>
 
 <h3>Hello @ViewBag.nameDL</h3>
@@ -71,7 +71,7 @@
                             {
                                 cityName = city.name;
                                 cityNPA = city.cityCode.ToString();
-                                fullAddress = address + " " + cityNPA + " " + cityName;
+                                fullAddress = address + " " + cityNPA + " " + cityName; //Concat the full customer adress
                             }
                         }
                     }

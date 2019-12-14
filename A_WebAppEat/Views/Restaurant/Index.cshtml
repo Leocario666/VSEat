@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<DTO.Restaurant>
-
+<!-- List of all restaurants-->
 @{
     ViewData["Title"] = "GetRestaurants";
     IEnumerable<DTO.City> cities = ViewData["Cities"] as IEnumerable<DTO.City>;
@@ -35,7 +35,7 @@
             </td>
             <td>
                 @foreach (var city in cities)
-                {
+                { //Get the City name according to the city code
                     if (item.cityCode == city.cityCode)
                     {
                         citystring = city.name;

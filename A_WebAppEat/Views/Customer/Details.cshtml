@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<DTO.Order>
-
+<!-- Get all the ViewData created in CustomerController-->
 @{
     ViewData["Title"] = "Details";
     IEnumerable<DTO.Delivery_staff> staffs = ViewData["AllStaffs"] as IEnumerable<DTO.Delivery_staff>;
@@ -8,12 +8,14 @@
     IEnumerable<DTO.Restaurant> restaurants = ViewData["AllRestaurants"] as IEnumerable<DTO.Restaurant>;
 }
 
+<!--Display the login of the current customer-->
 <h2>Hello @ViewBag.login</h2>
 
-
+<!--Logging off and home page-->
 <a href="@Url.Action("CustomerTransition", "Customer")" class="btn btn-default">Logout</a>
 <a href="@Url.Action("Index", "Home")" class="btn btn-default">Back to home page</a>
 
+<!--Display only the non delivery order(s)-->
 <table class="table">
     <thead>
         <tr>
@@ -43,83 +45,84 @@
     <tbody>
         @foreach (var item in Model)
         {
+
             if (item.status == "non delivery")
             {
                 int hour = 0;
                 int minute = 0;
-                DateTime mtn = DateTime.Now;
-                int minutesNow = mtn.Hour * 60 + mtn.Minute;
-                int minutesDelivery_time = 0;
+                DateTime mtn = DateTime.Now; //Current time
+                int minutesNow = mtn.Hour * 60 + mtn.Minute; //Current time in minutes
+                int minutesDelivery_time = 0; //Delivery time in minutes
                 string name = "";
                 string restaurantName = "";
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.order_Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.status)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.created_at)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.delivery_time)
-            </td>
-            <td>
-                @foreach (var staff in staffs)
-                {
-                    if (item.delivery_staff_Id == staff.delivery_staff_Id)
-                    {
-                        name = staff.first_name + " " + staff.last_name;
-                    }
-
-                }
-                @name
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.totalPrice)
-            </td>
-            <td>
-                @foreach (var od in order_Dishes)
-                {
-                    if (item.order_Id == od.order_Id)
-                    {
-                        foreach (var dish in dishes)
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.order_Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.status)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.created_at)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.delivery_time)
+                    </td>
+                    <td>
+                        @foreach (var staff in staffs)
                         {
-                            if (dish.dish_Id == od.dish_Id)
+                            if (item.delivery_staff_Id == staff.delivery_staff_Id)
                             {
-                                foreach (var resto in restaurants)
+                                name = staff.first_name + " " + staff.last_name;
+                            }
+
+                        }
+                        @name
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.totalPrice)
+                    </td>
+                    <td>
+                        @foreach (var od in order_Dishes)
+                        {
+                            if (item.order_Id == od.order_Id)
+                            {
+                                foreach (var dish in dishes)
                                 {
-                                    if (dish.restaurant_Id == resto.restaurant_Id)
+                                    if (dish.dish_Id == od.dish_Id)
                                     {
-                                        restaurantName = resto.name;
+                                        foreach (var resto in restaurants)
+                                        {
+                                            if (dish.restaurant_Id == resto.restaurant_Id)
+                                            {
+                                                restaurantName = resto.name;
+                                            }
+                                        }
                                     }
                                 }
                             }
                         }
-                    }
-                }
-                @restaurantName
-            </td>
-            <td>
-                @{
+                        @restaurantName
+                    </td>
+                    <td>
+                        @{
 
-                    hour = Int32.Parse(item.delivery_time.Substring(0, 2));
-                    minute = Int32.Parse(item.delivery_time.Substring(3, 2));
-                    minutesDelivery_time = hour * 60 + minute;
-                }
-                @Html.ActionLink("Afficher les plats de votre commande", "DishesInOrder", new { id = item.order_Id }) |
-                @if (minutesDelivery_time - minutesNow >= 300 || minutesDelivery_time < minutesNow)
-                {
-                    @Html.ActionLink("Cancel order", "CancelOrder", new { id = item.order_Id })
-                }
-            </td>
-        </tr>
+                            hour = Int32.Parse(item.delivery_time.Substring(0, 2)); //Conversion to Int for the hour part of the delivery time
+                            minute = Int32.Parse(item.delivery_time.Substring(3, 2)); //Conversion to Int for the minute part of the delivery
+                            minutesDelivery_time = hour * 60 + minute;
+                        }
+                        @Html.ActionLink("Afficher les plats de votre commande", "DishesInOrder", new { id = item.order_Id }) |
+                        @if (minutesDelivery_time - minutesNow >= 300 || minutesDelivery_time < minutesNow)
+                        {   //Propose the cancel option if the delivery time is below 3 hours or is another day
+                            @Html.ActionLink("Cancel order", "CancelOrder", new { id = item.order_Id })
+                        }
+                    </td>
+                </tr>
             }
         }
     </tbody>
 </table>
-
+<!--Display only the delivered/canceled order(s)-->
 <table class="table">
     <thead>
         <tr>
@@ -153,59 +156,59 @@
             {
                 string name = "";
                 string restaurantName = "";
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.order_Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.status)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.created_at)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.delivery_time)
-            </td>
-            <td>
-                @foreach (var staff in staffs)
-                {
-                    if (item.delivery_staff_Id == staff.delivery_staff_Id)
-                    {
-                        name = staff.first_name + " " + staff.last_name;
-                    }
-
-                }
-                @name
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.totalPrice)
-            </td>
-            <td>
-                @foreach (var od in order_Dishes)
-                {
-                    if (item.order_Id == od.order_Id)
-                    {
-                        foreach (var dish in dishes)
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.order_Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.status)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.created_at)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.delivery_time)
+                    </td>
+                    <td>
+                        @foreach (var staff in staffs)
                         {
-                            if (dish.dish_Id == od.dish_Id)
+                            if (item.delivery_staff_Id == staff.delivery_staff_Id)
                             {
-                                foreach (var resto in restaurants)
+                                name = staff.first_name + " " + staff.last_name;
+                            }
+
+                        }
+                        @name
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.totalPrice)
+                    </td>
+                    <td>
+                        @foreach (var od in order_Dishes)
+                        {
+                            if (item.order_Id == od.order_Id)
+                            {
+                                foreach (var dish in dishes)
                                 {
-                                    if (dish.restaurant_Id == resto.restaurant_Id)
+                                    if (dish.dish_Id == od.dish_Id)
                                     {
-                                        restaurantName = resto.name;
+                                        foreach (var resto in restaurants)
+                                        {
+                                            if (dish.restaurant_Id == resto.restaurant_Id)
+                                            {
+                                                restaurantName = resto.name;
+                                            }
+                                        }
                                     }
                                 }
                             }
                         }
-                    }
-                }
-                @restaurantName
-            </td>
-            <td>
-                @Html.ActionLink("Dish details", "DishesInOrder", new { id = item.order_Id })
-            </td>
-        </tr>
+                        @restaurantName
+                    </td>
+                    <td>
+                        @Html.ActionLink("Dish details", "DishesInOrder", new { id = item.order_Id })
+                    </td>
+                </tr>
             }
         }
     </tbody>

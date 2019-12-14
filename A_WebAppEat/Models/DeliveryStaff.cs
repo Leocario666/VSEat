@@ -8,10 +8,10 @@ namespace VSEat.Models
 {
     public class DeliveryStaff
     {
-        [Required(ErrorMessage ="A login is required")]
+        [Required(ErrorMessage ="A login is required")] //Error message
         public string login { get; set; }
 
-        [Required(ErrorMessage = "A password is required")]
+        [Required(ErrorMessage = "A password is required")] //Error message
         public string password { get; set; }
     }
 }

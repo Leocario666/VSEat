@@ -4,7 +4,7 @@
 @{
     ViewData["Title"] = "Index";
 }
-
+<!--Deliverer login page-->
 <h2>Deliverer login</h2>
 
 
@@ -23,6 +23,7 @@
                 <input asp-for="password" class="form-control" type="password" />
                 <span asp-validation-for="password" class="text-danger"></span>
             </div>
+            <!--Switch to customer login page-->
             <div class="form-group">
                 <input type="submit" value="Login" class="btn btn-default" />
                 <a href="@Url.Action("Index", "Customer")" class="btn btn-default">I am a customer</a>

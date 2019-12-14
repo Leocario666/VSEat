@@ -6,7 +6,7 @@
 
 <h2>Customer login</h2>
 
-
+<!-- Login page-->
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -22,6 +22,7 @@
                 <input asp-for="password" class="form-control" type="password" />
                 <span asp-validation-for="password" class="text-danger"></span>
             </div>
+            <!-- Switch to deliverer login page-->
             <div class="form-group">
                 <input type="submit" value="Login" class="btn btn-default" />
                 <a href="@Url.Action("Create", "Customer")" class="btn btn-default">Register</a>
