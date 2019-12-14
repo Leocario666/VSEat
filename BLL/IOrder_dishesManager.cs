@@ -13,6 +13,7 @@ namespace BLL
         
         Order_dishes GetOrder_dishes(int order_id, int dishes_id);
         Order_dishes AddOrder_dishes(Order_dishes order_dishes);
+        List<Order_dishes> GetAllOrders_dishes();
         int UpdateOrder_dishes(Order_dishes order_dishes);
     }
 }

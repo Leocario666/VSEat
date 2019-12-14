@@ -71,6 +71,58 @@ namespace DAL
             return results;
 
         }
+
+        // ************************************************************** //
+        // Method which gets a list of all restaurants
+        // ************************************************************** //
+        public List<Dish> GetAllDishes()
+        {
+            // Creation of the list 
+            List<Dish> results = null;
+            //string connectionString = Configuration.GetConnectionString("DefaultConnection");
+
+            try
+            {
+                // Connexion to the Database
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+                    // The query
+                    string query = "SELECT * FROM dish";
+
+                    // Save the command
+                    SqlCommand cmd = new SqlCommand(query, cn);
+
+                    // Open the command
+                    cn.Open();
+
+                    // Execute the command
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        // The results
+                        while (dr.Read())
+                        {
+                            if (results == null)
+                                results = new List<Dish>();
+
+                            Dish dish = new Dish();
+
+                            dish.dish_Id = (int)dr["dish_Id"];
+                            dish.name = (string)dr["name"];
+                            dish.price = Convert.ToSingle(dr["price"]);
+                            dish.restaurant_Id = (int)dr["restaurant_id"];
+                            results.Add(dish);
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            // Return the list
+            return results;
+        }
+
         // ******************************************************* //
         // Method which gets a dish by his Id
         // ******************************************************* //

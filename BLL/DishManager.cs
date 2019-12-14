@@ -24,6 +24,11 @@ namespace BLL
             return DishDb.GetDishes(idRestaurant);
         }
 
+        public List<Dish> GetAllDishes()
+        {
+            return DishDb.GetAllDishes();
+        }
+
         // ******************************************************************** // 
         // Method which manages the display of one dish
         // ******************************************************************** // 

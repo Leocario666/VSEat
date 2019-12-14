@@ -90,12 +90,24 @@ namespace VSEat.Controllers
                 IOrderManager om = new OrderManager(order);
                 IDelivery_staffDB dsDB = new Delivery_staffDB(Configuration);
                 IDelivery_staffManager dsM = new Delivery_staffManager(dsDB);
+                IDishDB dish = new DishDB(Configuration);
+                IDishManager dishManager = new DishManager(dish);
+                IOrder_dishesDB order_Dishes = new Order_dishesDB(Configuration);
+                IOrder_dishesManager odm = new Order_dishesManager(order_Dishes);
+                IRestaurantDB restaurant = new RestaurantDB(Configuration);
+                IRestaurantManager restaurantManager = new RestaurantManager(restaurant);
                 var id = (int)HttpContext.Session.GetInt32("id");
                 var ordersList = om.GetOrders(id);
                 var allOrders = om.GetOrders();
                 ViewData["AllOrders"] = allOrders;
                 var allStaff = dsM.GetDelivery_staffs();
                 ViewData["AllStaffs"] = allStaff;
+                var allDishes = dishManager.GetAllDishes();
+                ViewData["AllDishes"] = allDishes;
+                var allOrderDishes = odm.GetAllOrders_dishes();
+                ViewData["AllOrderDishes"] = allOrderDishes;
+                var allRestaurants = restaurantManager.GetRestaurants();
+                ViewData["AllRestaurants"] = allRestaurants;
 
                 if (ordersList == null)
                 {

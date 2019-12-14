@@ -35,6 +35,14 @@ namespace BLL
         }
 
         // ************************************************************* // 
+        // Method which manages the display of all orders_dishes
+        // ************************************************************* // 
+        public List<Order_dishes> GetAllOrders_dishes()
+        {
+            return Order_dishesDB.GetAllOrders_dishes();
+        }
+
+        // ************************************************************* // 
         // Method which manages the adding of one order dishes
         // ************************************************************* // 
         public Order_dishes AddOrder_dishes(Order_dishes order_dishes)

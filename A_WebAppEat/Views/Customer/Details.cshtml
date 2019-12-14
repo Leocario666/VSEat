@@ -3,6 +3,9 @@
 @{
     ViewData["Title"] = "Details";
     IEnumerable<DTO.Delivery_staff> staffs = ViewData["AllStaffs"] as IEnumerable<DTO.Delivery_staff>;
+    IEnumerable<DTO.Dish> dishes = ViewData["AllDishes"] as IEnumerable<DTO.Dish>;
+    IEnumerable<DTO.Order_dishes> order_Dishes = ViewData["AllOrderDishes"] as IEnumerable<DTO.Order_dishes>;
+    IEnumerable<DTO.Restaurant> restaurants = ViewData["AllRestaurants"] as IEnumerable<DTO.Restaurant>;
 }
 
 <h2>Hello @ViewBag.login</h2>
@@ -22,13 +25,16 @@
                 <th>
                     Deliverer in charge
                 </th>
-
+                <th>
+                    Restaurant
+                </th>
             </tr>
         </thead>
         <tbody>
             @foreach (var item in Model)
             {
                 string name = "";
+                string restaurantName = "";
                 <tr>
                     <td>
                         @Html.DisplayFor(modelItem => item.status)
@@ -49,6 +55,28 @@
                             
                         }
                         @name
+                    </td>
+                    <td>
+                        @foreach(var od in order_Dishes)
+                        {
+                            if(item.order_Id == od.order_Id)
+                            {
+                                foreach(var dish in dishes)
+                                {
+                                    if (dish.dish_Id == od.dish_Id)
+                                    {
+                                        foreach(var resto in restaurants)
+                                        {
+                                            if(dish.restaurant_Id == resto.restaurant_Id)
+                                            {
+                                                restaurantName = resto.name;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        @restaurantName
                     </td>
                 </tr>
             }
