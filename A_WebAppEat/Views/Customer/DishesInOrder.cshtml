@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<DTO.Order_dishes>
-
+    <link rel="stylesheet" href="~/css/PourTous.css" />
 @{
     ViewData["Title"] = "DishesInOrder";
     IEnumerable<DTO.Dish> dishes = ViewData["AllDishes"] as IEnumerable<DTO.Dish>;
@@ -57,4 +57,5 @@
     </tbody>
 </table>
 
-<a href="@Url.Action("Details", "Customer",new { id = ViewBag.login })" class="command">Back to the orders list</a>
+<a href="@Url.Action("Details", "Customer",new { id = ViewBag.login })" class="btn btn-default">Back to the orders list</a>
+<hr />

@@ -1,5 +1,5 @@
 ﻿@model VSEat.Models.Customer
-
+<link rel="stylesheet" href="~/css/PourTous.css" />
 @{
     ViewData["Title"] = "Index";
 }
@@ -29,11 +29,11 @@
                 <a href="@Url.Action("Index", "DeliveryStaff")" class="btn btn-default">I am a deliverer</a>
             </div>
 
-          
+
         </form>
     </div>
 </div>
-
+<hr />
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

@@ -1,5 +1,5 @@
 ﻿@model DTO.Order
-
+    <link rel="stylesheet" href="~/css/PourTous.css"/>
 @{
     ViewData["Title"] = "CancelOrder";
 }
@@ -9,8 +9,9 @@
 <!--Form that will ask the user to complete the following field-->
 @using (Html.BeginForm())
 {
-<label>To cancel your order, please, insert the number of the order and your Forname Name Like the example : </label>
+<label>To cancel your order, please, insert the number of the order (@ViewBag.idOrder) and your Forname Name Like the example : </label>
     <input type="text" name="retour" id="retour" placeholder="Ex : 21JohnSmith" required />
 
-    <input asp-action="TransitionCancel" type="submit" name="Cancel Order" />
+    <input asp-action="TransitionCancel" type="submit" name="Cancel Order" class="btn btn-default"/>
 }
+<hr />

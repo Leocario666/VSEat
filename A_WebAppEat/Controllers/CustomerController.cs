@@ -195,6 +195,7 @@ namespace VSEat.Controllers
         //Ask the customer: the order number, his forname and lastname
         public ActionResult CancelOrder(int id)
         {
+            ViewBag.idOrder = id;
             string idString = id.ToString();
             HttpContext.Session.SetString("idOrderCancel", idString);
             return View(); //Will redirect to TransitionCancel()

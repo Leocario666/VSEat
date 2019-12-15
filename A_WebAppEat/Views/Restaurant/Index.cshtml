@@ -1,15 +1,11 @@
 ﻿@model IEnumerable<DTO.Restaurant>
 <!-- List of all restaurants-->
+    <link rel="stylesheet" href="~/css/RestoIndex.css">
+    <link rel="stylesheet" href="~/css/PourTous.css" />
 @{
     ViewData["Title"] = "GetRestaurants";
     IEnumerable<DTO.City> cities = ViewData["Cities"] as IEnumerable<DTO.City>;
 }
-<style>
-    p 
-    {
-        font-weight: bold;
-    }
-</style>
 
 
 <h2>Index</h2>
@@ -18,10 +14,10 @@
     <thead>
         <tr>
             <th>
-                <p>Name</p>
+                <p class="p">Name</p>
             </th>
             <th>
-                <p>Ville</p>
+                <p class="p">Ville</p>
             </th>
             <th></th>
         </tr>
@@ -29,7 +25,7 @@
     <tbody>
 @foreach (var item in Model) {
     string citystring = "";
-        <tr>
+        <tr class="boutons">
             <td>
                 @Html.DisplayFor(modelItem => item.name)
             </td>
@@ -43,10 +39,11 @@
                 }
                         @citystring
                     </td>
-            <td>
-                @Html.ActionLink("Afficher les plats du restaurant","Plat", new { id=item.restaurant_Id})
+            <td class="btn btn-default">
+                @Html.ActionLink("Dishes of Restaurant","Plat", new { id=item.restaurant_Id})
             </td>
         </tr>
 }
     </tbody>
 </table>
+<hr />

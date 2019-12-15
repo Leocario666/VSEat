@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<DTO.Order>
+<link rel="stylesheet" href="~/css/PourTous.css" />
 <!-- Get all the ViewData created in CustomerController-->
 @{
     ViewData["Title"] = "Details";
@@ -104,14 +105,15 @@
                         }
                         @restaurantName
                     </td>
-                    <td>
+                    <td class="btn btn-default">
+                        @Html.ActionLink("Dish Details", "DishesInOrder", new { id = item.order_Id })
+                    </td>
+                    <td class="btn btn-default">
                         @{
-
                             hour = Int32.Parse(item.delivery_time.Substring(0, 2)); //Conversion to Int for the hour part of the delivery time
                             minute = Int32.Parse(item.delivery_time.Substring(3, 2)); //Conversion to Int for the minute part of the delivery
                             minutesDelivery_time = hour * 60 + minute;
                         }
-                        @Html.ActionLink("Afficher les plats de votre commande", "DishesInOrder", new { id = item.order_Id }) |
                         @if (minutesDelivery_time - minutesNow >= 300 || minutesDelivery_time < minutesNow)
                         {   //Propose the cancel option if the delivery time is below 3 hours or is another day
                             @Html.ActionLink("Cancel order", "CancelOrder", new { id = item.order_Id })
@@ -205,7 +207,7 @@
                         }
                         @restaurantName
                     </td>
-                    <td>
+                    <td class="btn btn-default">
                         @Html.ActionLink("Dish details", "DishesInOrder", new { id = item.order_Id })
                     </td>
                 </tr>
@@ -213,3 +215,4 @@
         }
     </tbody>
 </table>
+<hr />

@@ -1,5 +1,5 @@
 ﻿@model VSEat.Models.Customer
-
+    <link rel="stylesheet" href="~/css/PourTous.css" />
 @{
     ViewData["Title"] = "Create";
 }
@@ -58,7 +58,7 @@
         </form>
     </div>
 </div>
-
+<hr />
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<DTO.Order>
-
+    <link rel="stylesheet" href="~/css/PourTous.css" />
 @{
     ViewData["Title"] = "Details";
     IEnumerable<DTO.Customer> customers = ViewData["Customers"] as IEnumerable<DTO.Customer>;
@@ -81,10 +81,11 @@
                 @fullAddress
             </td>
             
-            <td>
+            <td class="btn btn-default">
                 @Html.ActionLink("Order delivered", "Delivered", new { id = item.order_Id })
             </td>
         </tr>
 }
     </tbody>
 </table>
+<hr />

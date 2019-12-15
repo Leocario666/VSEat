@@ -15,9 +15,9 @@ namespace DAL
         {
             Configuration = configuration;
         }
-        // ******************************************************* //
+        // ************************************************************************** //
         // Method which controls customer's login and password at the connection
-        // ******************************************************* //
+        // ************************************************************************** //
         public bool isUserValid(Customer c)
         {
             try

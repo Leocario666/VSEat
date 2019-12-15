@@ -18,6 +18,7 @@
     </environment>
 </head>
 <body>
+    <!--Header-->
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -31,11 +32,11 @@
                 {
                     if (Context.Session.GetString("login") != "Aucun customer n'est log") // Need authentification
                     {
-                        <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">VSEat</a>
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">VSEat</a>
                     }
                     else
                     {
-                        <a asp-area="" asp-controller="Customer" asp-action="Index" class="navbar-brand">VSEat</a>
+                <a asp-area="" asp-controller="Customer" asp-action="Index" class="navbar-brand">VSEat</a>
                     }
                 }
 
@@ -48,18 +49,18 @@
                     <div class="nav navbar-nav navbar-right">
                         @if (Context.Session.GetString("nameDL") == "Aucun DL n'est log")// Si on est pas log en temps que delivery staff
                         {
-                            @if (Context.Session.GetString("login") != "Aucun customer n'est log") // Un customer est log
+                        @if (Context.Session.GetString("login") != "Aucun customer n'est log") // Un customer est log
                             {
-                                <a asp-area="" asp-controller="Customer" asp-action="Details" class="navbar-brand">My Account</a>
+                        <a asp-area="" asp-controller="Customer" asp-action="Details" class="navbar-brand">My Account</a>
                             }
                             else //Personne n'est log
                             {
-                                <a asp-area="" asp-controller="Customer" asp-action="Index" class="navbar-brand">Login</a>
+                        <a asp-area="" asp-controller="Customer" asp-action="Index" class="navbar-brand">Login</a>
                             }
                         }
                         else
                         {
-                            <a asp-area="" asp-controller="Customer" asp-action="Transition" class="navbar-brand">Logout</a>
+                        <a asp-area="" asp-controller="Customer" asp-action="Transition" class="navbar-brand">Logout</a> 
                         }
 
                     </div>
@@ -67,11 +68,10 @@
             </div>
         </div>
     </nav>
-
+    <!--footer-->
     <div>
         @RenderBody()
-        <hr />
-        <footer>
+        <footer class="navbar-fixed-bottom">
             <div class="conteneur">
                 <p class="copyright">&copy; 2019 - VS Eat</p>
                 <p class="names">Nicolas Constantin and Diogo D'Almeida</p>

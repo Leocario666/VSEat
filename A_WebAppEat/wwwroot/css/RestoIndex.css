@@ -1,0 +1,10 @@
+.p
+{
+    font-weight: bold;
+}
+
+.boutons, .bouton:hover, .bouton:active, .bouton:visited
+{
+    color: black;
+    text-decoration: none;
+}
