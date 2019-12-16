@@ -71,18 +71,38 @@ namespace VSEat.Controllers
         {
             //creation of multiple variables to check conditions and for the display
             IOrderDB order = new OrderDB(Configuration);
-            IOrderManager odm = new OrderManager(order);
+            IOrderManager om = new OrderManager(order);
             ICustomerDB customer = new CustomerDB(Configuration);
             ICustomerManager cm = new CustomerManager(customer);
             ICityDB citydb = new CityDB(Configuration);
             ICityManager cityman = new CityManager(citydb);
+            IDelivery_staffDB dsDB = new Delivery_staffDB(Configuration);
+            IDelivery_staffManager dsM = new Delivery_staffManager(dsDB);
+            IDishDB dish = new DishDB(Configuration);
+            IDishManager dishManager = new DishManager(dish);
+            IOrder_dishesDB order_Dishes = new Order_dishesDB(Configuration);
+            IOrder_dishesManager odm = new Order_dishesManager(order_Dishes);
+            IRestaurantDB restaurant = new RestaurantDB(Configuration);
+            IRestaurantManager restaurantManager = new RestaurantManager(restaurant);
+           
+            //Creations of multiple ViewData for the display
             var customerlist = cm.GetCustomers();
             ViewData["Customers"] = customerlist;
             var citylist = cityman.GetCities();
             ViewData["City"] = citylist;
+            var allOrders = om.GetOrders();
+            ViewData["AllOrders"] = allOrders;
+            var allStaff = dsM.GetDelivery_staffs();
+            ViewData["AllStaffs"] = allStaff;
+            var allDishes = dishManager.GetAllDishes();
+            ViewData["AllDishes"] = allDishes;
+            var allOrderDishes = odm.GetAllOrders_dishes();
+            ViewData["AllOrderDishes"] = allOrderDishes;
+            var allRestaurants = restaurantManager.GetRestaurants();
+            ViewData["AllRestaurants"] = allRestaurants;
 
             ViewBag.nameDL = HttpContext.Session.GetString("nameDL");
-            var od = odm.GetOrders_ds(id); //Get all orders according to the deliverer's id
+            var od = om.GetOrders_ds(id); //Get all orders according to the deliverer's id
 
             List<Order> odtrie = new List<Order>();
             //Creation of a list which will only contain the non delivery order(s)

@@ -4,6 +4,10 @@
     ViewData["Title"] = "Details";
     IEnumerable<DTO.Customer> customers = ViewData["Customers"] as IEnumerable<DTO.Customer>;
     IEnumerable<DTO.City> cities = ViewData["City"] as IEnumerable<DTO.City>;
+    IEnumerable<DTO.Delivery_staff> staffs = ViewData["AllStaffs"] as IEnumerable<DTO.Delivery_staff>;
+    IEnumerable<DTO.Dish> dishes = ViewData["AllDishes"] as IEnumerable<DTO.Dish>;
+    IEnumerable<DTO.Order_dishes> order_Dishes = ViewData["AllOrderDishes"] as IEnumerable<DTO.Order_dishes>;
+    IEnumerable<DTO.Restaurant> restaurants = ViewData["AllRestaurants"] as IEnumerable<DTO.Restaurant>;
 }
 <!--Orders to deliver -->
 <h2>Details</h2>
@@ -29,6 +33,9 @@
                 Delivery time
             </th>
             <th>
+                Restaurant
+            </th>
+            <th>
                 Delivery address
             </th>
         
@@ -43,6 +50,7 @@
     string address = "";
     string cityName = "";
     string cityNPA = "";
+    string restaurantName = "";
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.order_Id)
@@ -58,6 +66,28 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.delivery_time)
+            </td>
+            <td>
+                @foreach (var od in order_Dishes)
+                {
+                    if (item.order_Id == od.order_Id)
+                    {
+                        foreach (var dish in dishes)
+                        {
+                            if (dish.dish_Id == od.dish_Id)
+                            {
+                                foreach (var resto in restaurants)
+                                {
+                                    if (dish.restaurant_Id == resto.restaurant_Id)
+                                    {
+                                        restaurantName = resto.name;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                @restaurantName
             </td>
             <td>
                 @foreach(var cust in customers)
