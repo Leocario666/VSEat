@@ -114,7 +114,7 @@
                 minute = Int32.Parse(item.delivery_time.Substring(3, 2)); //Conversion to Int for the minute part of the delivery
                 minutesDelivery_time = hour * 60 + minute;
             }
-            @if (minutesDelivery_time - minutesNow >= 300 || minutesDelivery_time < minutesNow)
+            @if (minutesDelivery_time - minutesNow >= 180 || minutesDelivery_time < minutesNow)
             {   //Propose the cancel option if the delivery time is below 3 hours or is another day
                 <td class="btn btn-default">
                     @Html.ActionLink("Cancel order", "CancelOrder", new { id = item.order_Id })
