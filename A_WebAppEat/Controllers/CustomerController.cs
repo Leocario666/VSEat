@@ -40,7 +40,6 @@ namespace VSEat.Controllers
         {
             HttpContext.Session.SetInt32("id", 0);
             HttpContext.Session.SetString("login", "Aucun customer n'est log");
-            HttpContext.Session.SetString("nameDL", "Aucun DL n'est log");
             return RedirectToAction("Index", "Customer");
         }
         //Login page for a customer
